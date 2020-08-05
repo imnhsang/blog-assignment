@@ -1,4 +1,4 @@
-# simple_social_network
+# blog_assignment
 #### Full Name: Nguyen Hoang Sang (Leo Nguyen)
 #### Date of Birth: Aug 16, 1998
 #### Email: im.nhsang@gmail.com
