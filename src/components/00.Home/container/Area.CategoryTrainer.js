@@ -50,6 +50,9 @@ const AreaCategoryTrainer = () => {
 	]
 	return (
 		<div className='area-category-trainer row flex-direction-column align-items-center'>
+			<p className='title-area'>
+				GAIN ACESS TO A NETWORK OF TOP TRAINERS
+			</p>
 			<div className='row'>
 				{categories.map((e, inx) => (
 					<ItemCategoryTrainer

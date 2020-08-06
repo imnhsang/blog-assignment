@@ -13,7 +13,7 @@ const AreaProcessWork = () => {
 	]
 	return (
 		<div className='process-work'>
-			<p className='title text-align-center'>HOW LOREM4SKILL WORKS?</p>
+			<p className='title-area text-align-center'>HOW LOREM4SKILL WORKS?</p>
 			<div className='process row'>
 				{processes.map((e, inx) => (
 					<ItemProcess key={inx} name={e.name} title={e.title} />

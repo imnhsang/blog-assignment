@@ -7,10 +7,10 @@ import './Area.Item.SingleService.scss'
 const AreaItemSingleService = ({ name, title }) => {
 	return (
 		<div className='single-service col-md-12 col-xl-6 col-3 row'>
-			<div className=' col-md-2 col-2'>
+			<div className='icon-service'>
 				<Icon color='grey' size='big' name={name} />
 			</div>
-			<div className='content col-md-10 col-8'>
+			<div className='content'>
 				<div className='title'>{title}</div>
 				<div className='description'>
 					Lorem ipsum dolor sit amet consect adipisicing elit. Necessi
