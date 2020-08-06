@@ -1,0 +1,49 @@
+@import 'src/assets/styles/colors';
+
+.area-service {
+	padding: 90px 100px;
+	color: $blue-black;
+	background: $blue-white;
+	.title-area {
+		padding:0 200px;
+		letter-spacing: 1.5px;
+		font-size: 1.75rem;
+		margin-bottom: 4rem;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.area-service {
+		.title-area{
+			padding:0 100px;
+		}
+		.services {
+			.single-service:first-child,
+			.single-service:nth-child(2) {
+				margin-bottom: 2.5rem;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.area-service {
+		padding: 60px 70px;
+		.services {
+			.single-service {
+				margin-bottom: 2.5rem;
+			}
+			.single-service:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.area-service {		padding: 50px;
+		.title-area{
+			padding:0;
+		}
+	}
+}
