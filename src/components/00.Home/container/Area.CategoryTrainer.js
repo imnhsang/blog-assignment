@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ItemCategoryTrainer from 'components/00.Home/presentational/Area.Item.CategoryTrainer'
-import Button from 'components/00.Home/presentational/Button.TransparentArrowDown'
+import Button from 'components/00.Home/presentational/Button.Transparent.ArrowDown'
 
 import './Area.CategoryTrainer.scss'
 
@@ -50,7 +50,7 @@ const AreaCategoryTrainer = () => {
 	]
 	return (
 		<div className='area-category-trainer row flex-direction-column align-items-center'>
-			<p className='title-area'>
+			<p className='title-area text-align-center'>
 				GAIN ACESS TO A NETWORK OF TOP TRAINERS
 			</p>
 			<div className='row'>

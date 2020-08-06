@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Icon } from 'semantic-ui-react'
 
-import './Button.TransparentArrowDown.scss'
+import './Button.Transparent.ArrowDown.scss'
 
 const ButtonTransparentArrowDown = ({ text }) => {
 	return (

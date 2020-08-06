@@ -5,17 +5,17 @@
 	color: $blue-black;
 	background: $blue-white;
 	.title-area {
-		padding:0 200px;
+		padding: 0 200px;
 		letter-spacing: 1.5px;
-		font-size: 1.75rem;
-		margin-bottom: 4rem;
+		font-size: 1.5rem;
+		margin-bottom: 3.5rem;
 	}
 }
 
 @media screen and (max-width: 1200px) {
 	.area-service {
-		.title-area{
-			padding:0 100px;
+		.title-area {
+			padding: 0 5rem;
 		}
 		.services {
 			.single-service:first-child,
@@ -41,9 +41,16 @@
 }
 
 @media screen and (max-width: 576px) {
-	.area-service {		padding: 50px;
-		.title-area{
-			padding:0;
+	.area-service {
+		padding: 40px 30px;
+		.title-area {
+			padding: 0;
+		}
+		.services {
+			.single-service:first-child,
+			.single-service:nth-child(2) {
+				margin-bottom: 2rem;
+			}
 		}
 	}
 }
