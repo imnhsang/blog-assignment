@@ -1,0 +1,44 @@
+@import 'src/assets/styles/colors';
+
+.process-work {
+	padding: 90px 100px;
+	color: $blue-black;
+	background: $blue-white;
+	.title {
+		letter-spacing: 1.5px;
+		font-weight: 700;
+		font-size: 1.375rem;
+		margin-bottom: 3rem;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.process-work {
+		.process {
+			.single-service:first-child,
+			.single-service:nth-child(2) {
+				margin-bottom: 2.5rem;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.process-work {
+		padding: 60px 70px;
+		.process {
+			.single-service {
+				margin-bottom: 2.5rem;
+			}
+			.single-service:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.process-work {
+		padding: 50px;
+	}
+}

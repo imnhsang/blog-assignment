@@ -1,0 +1,42 @@
+@import 'src/assets/styles/colors';
+.area-category-trainer {
+	padding: 90px 120px;
+	color: $blue-black;
+	.title {
+		letter-spacing: 1.5px;
+		font-weight: 700;
+		font-size: 1.375rem;
+		margin-bottom: 3rem;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.area-category-trainer {
+		.process {
+			.single-category-trainer:first-child,
+			.single-category-trainer:nth-child(2) {
+				margin-bottom: 2.5rem;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.area-category-trainer {
+		padding: 60px 70px;
+		.process {
+			.single-category-trainer {
+				margin-bottom: 2.5rem;
+			}
+			.single-category-trainer:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.area-category-trainer {
+		padding: 50px;
+	}
+}

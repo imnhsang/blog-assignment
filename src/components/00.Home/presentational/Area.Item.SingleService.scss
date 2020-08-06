@@ -1,0 +1,15 @@
+@import 'src/assets/styles/colors';
+
+.single-service {
+	.title {
+		color: $blue-black;
+		font-weight: 700;
+		margin-bottom: 1.25rem !important;
+		font-size: 1.25rem !important;
+	}
+	.description {
+		color: #767676;
+		font-size: 1.25rem;
+		line-height: 2.25rem;
+	}
+}
