@@ -50,10 +50,10 @@ const AreaCategoryTrainer = () => {
 	]
 	return (
 		<div className='area-category-trainer row flex-direction-column align-items-center'>
-			<p className='title-area text-align-center'>
+			<p className='area-category-trainer__title text-align-center'>
 				GAIN ACESS TO A NETWORK OF TOP TRAINERS
 			</p>
-			<div className='row'>
+			<div className='row area-category-trainer__list-category'>
 				{categories.map((e, inx) => (
 					<ItemCategoryTrainer
 						name={e.name}

@@ -12,9 +12,9 @@ const WelcomeCompany = () => {
 			className='area-welcome'
 			style={{ backgroundImage: `url(${welcomeBackground})` }}
 		>
-			<div className='area-welcome--content'>
-				<p className='area-welcome--content--title'>Hire the Best Corporate Trainer or Coach for Your Business</p>
-				<p className='area-welcome--content--subscription'>
+			<div className='area-welcome__content'>
+				<p className='area-welcome__content__title'>Hire the Best Corporate Trainer or Coach for Your Business</p>
+				<p className='area-welcome__content__subscription'>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, iusto minima. Veritatis molestiae architecto autem nihil ab dolores blanditiis doloribus.
 				</p>
 				<Button name='FIND BEST TRAINER'/>

@@ -1,18 +1,18 @@
 @import 'src/assets/stylesheets/variables';
 
 .single-service {
-	.icon-service {
+	&__icon {
 		padding-right: 1.25rem;
 	}
-	.content {
+	&__content {
 		width: calc(100% - 90px);
-		.title {
+		&__title {
 			color: $blue-black;
 			font-weight: 700;
 			margin-bottom: 1.25rem !important;
 			font-size: 1.25rem !important;
 		}
-		.description {
+		&__description {
 			color: #767676;
 			font-size: 1.25rem;
 			line-height: 2.25rem;
@@ -22,15 +22,12 @@
 
 @media screen and (max-width: 320px) {
 	.single-service {
-
-		.content {
-		
-			.title {
+		&__content {
+			&__title {
 				font-size: 1.125rem !important;
 				margin-bottom: 1rem !important;
 			}
-			.description {
-
+			&__description {
 				font-size: 1.125rem;
 				line-height: 2rem;
 			}

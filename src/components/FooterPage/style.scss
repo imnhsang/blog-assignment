@@ -3,33 +3,35 @@
 .footer-page {
 	background: $blue-black;
 	padding: 50px 100px;
-	.margin-b-2 {
-		margin-bottom: 2rem;
-	}
-	.title {
-		font-size: 1.25rem;
-		color: $white;
-		font-weight: 700;
-	}
-	.list {
-		font-size: 1.125rem;
-		list-style: none;
-		padding: 0;
-		li {
-			margin-top: 8px;
+	&__company,
+	&__product,
+	&__social {
+		&__title {
+			font-size: 1.25rem;
+			color: $white;
+			font-weight: 700;
 		}
-		a {
-			color: $gray;
-			&:hover {
-				text-decoration: underline;
+		&__list {
+			font-size: 1.125rem;
+			list-style: none;
+			padding: 0;
+			li {
+				margin-top: 8px;
+			}
+			a {
+				color: $gray;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 	}
-	.footer-rights {
+
+	&__rights {
 		font-size: 1rem;
 		color: $gray;
 	}
-	.footer-location {
+	&__location {
 		padding: 0;
 		list-style: pointer;
 		color: $gray;
@@ -50,7 +52,7 @@
 			}
 		}
 	}
-	.footer-content {
+	&__content {
 		color: $gray;
 		font-size: 0.975rem;
 	}
@@ -59,7 +61,7 @@
 @media screen and (max-width: 992px) {
 	.footer-page {
 		padding: 40px 70px;
-		.logo-company {
+		&__logo {
 			margin-bottom: 1.75rem;
 		}
 	}
@@ -67,18 +69,20 @@
 @media screen and (max-width: 576px) {
 	.footer-page {
 		padding: 40px 30px;
-		.footer__company,
-		.footer__product {
+		&_company,
+		&__product {
 			margin-bottom: 0.75rem;
 		}
 	}
 }
 @media screen and (max-width: 320px) {
 	.footer-page {
-		.title {
-		}
-		.list {
-			font-size: 1rem;
+		&__company,
+		&__product,
+		&__social {
+			&__list {
+				font-size: 1rem;
+			}
 		}
 	}
 }

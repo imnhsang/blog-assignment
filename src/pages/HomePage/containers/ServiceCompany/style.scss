@@ -4,7 +4,7 @@
 	padding: 90px 100px;
 	color: $blue-black;
 	background: $blue-white;
-	.title-area {
+	&__title {
 		padding: 0 200px;
 		letter-spacing: 1.5px;
 		font-size: 1.5rem;
@@ -14,10 +14,10 @@
 
 @media screen and (max-width: 1200px) {
 	.area-service {
-		.title-area {
+		&__title {
 			padding: 0 5rem;
 		}
-		.services {
+		&__list-service {
 			.single-service:first-child,
 			.single-service:nth-child(2) {
 				margin-bottom: 2.5rem;
@@ -29,7 +29,7 @@
 @media screen and (max-width: 768px) {
 	.area-service {
 		padding: 60px 70px;
-		.services {
+		&__list-service {
 			.single-service {
 				margin-bottom: 2.5rem;
 			}
@@ -43,10 +43,10 @@
 @media screen and (max-width: 576px) {
 	.area-service {
 		padding: 40px 30px;
-		.title-area {
+		&__title {
 			padding: 0;
 		}
-		.services {
+		&__list-service {
 			.single-service:first-child,
 			.single-service:nth-child(2) {
 				margin-bottom: 2rem;
@@ -57,7 +57,7 @@
 
 @media screen and (max-width: 320px) {
 	.area-service {
-		.title-area {
+		&__title {
 			font-size: 1.25rem;
 		}
 	}

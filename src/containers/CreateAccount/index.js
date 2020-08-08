@@ -7,10 +7,10 @@ import './style.scss'
 const AreaCreateAccount = () => {
 	return (
 		<div className='area-create-account align-items-center flex-direction-column row'>
-			<p className='title text-align-center'>
+			<p className='area-create-account__title text-align-center'>
 				START HIRING BEST-IN-CLASS CORPORATE TRAINERS WITH LOREM4SKILL
 			</p>
-			<p className='subscription text-align-center'>
+			<p className='area-create-account__subscription text-align-center'>
 				Create your free account in minutes and access a network of top
 				trainers.
 			</p>

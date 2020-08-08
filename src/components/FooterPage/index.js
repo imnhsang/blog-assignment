@@ -2,6 +2,7 @@ import React from 'react'
 
 import LogoCompany from 'components/Logo/CompanyWhite'
 
+import 'assets/stylesheets/global.scss'
 import './style.scss'
 
 const FooterPage = () => {
@@ -26,13 +27,13 @@ const FooterPage = () => {
 	]
 	return (
 		<div className='footer-page'>
-			<div className='row margin-b-2'>
-				<div className='col-lg-12 col-md-12 col-3 footer__logo'>
+			<div className='row mr-b-2'>
+				<div className='col-lg-12 col-md-12 col-3 footer-page__logo'>
 					<LogoCompany />
 				</div>
-				<div className='col-lg-4 col-sm-12 col-3 footer__company'>
-					<div className='title'>COMPANY</div>
-					<ul className='list'>
+				<div className='col-lg-4 col-sm-12 col-3 footer-page__company'>
+					<div className='footer-page__company__title'>COMPANY</div>
+					<ul className='footer-page__company__list'>
 						<li>
 							<a href='/'>Contact Us</a>
 						</li>
@@ -44,9 +45,9 @@ const FooterPage = () => {
 						</li>
 					</ul>
 				</div>
-				<div className='col-lg-4 col-sm-12 col-3 footer__product'>
-					<div className='title'>PRODUCT</div>
-					<ul className='list'>
+				<div className='col-lg-4 col-sm-12 col-3 footer-page__product'>
+					<div className='footer-page__product__title'>PRODUCT</div>
+					<ul className='footer-page__product__list'>
 						<li>
 							<a href='/'>How it works</a>
 						</li>
@@ -58,26 +59,26 @@ const FooterPage = () => {
 						</li>
 					</ul>
 				</div>
-				<div className='col-lg-4 col-sm-12 col-3 footer__social'>
-					<div className='title'>SOCIAL</div>
-					<ul className='list'>
+				<div className='col-lg-4 col-sm-12 col-3 footer-page__social'>
+					<div className='footer-page__social__title'>SOCIAL</div>
+					<ul className='footer-page__social__list'>
 						<li>
 							<a href='/'>LinkedIn</a>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div className='footer-rights'>
+			<div className='footer-page__rights'>
 				<span>&#169; 2020 lorem4skill - All rights reserved</span>
 			</div>
-			<ul className='row footer-location'>
+			<ul className='row footer-page__location'>
 				{locations.map((e, inx) => (
 					<li key={inx}>
 						<span>{e}</span>
 					</li>
 				))}
 			</ul>
-			<div className='footer-content'>
+			<div className='footer-page__content'>
 				<span>
 					Lorem Ipsum is simply dummy text of the printing and typesetting
 					industry. Lorem Ipsum has been the industrys standard dummy text ever
