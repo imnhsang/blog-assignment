@@ -1,0 +1,44 @@
+@import 'src/assets/styles/variables';
+
+.area-quote {
+	padding: 90px 100px;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: $white;
+	.quote {
+		width: 65%;
+		.title {
+			font-size: 3rem;
+			font-weight: 700;
+			margin-bottom: 2rem;
+		}
+		.content {
+			font-size: 1.5rem;
+			margin-bottom: 2.75rem;
+		}
+		.author,
+		.position {
+			font-size: 1.125rem;
+			font-weight: 700;
+		}
+		img {
+			width: 125px;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.area-quote {
+		padding: 60px 70px;
+		.quote {
+			width: 100%;
+		}
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.area-quote {
+		padding: 40px 30px;
+	}
+}

@@ -1,0 +1,23 @@
+@import 'src/assets/styles/variables';
+
+.area-welcome {
+	height: 100vh;
+	padding: 50px;
+	background-size: cover;
+	display: flex;
+	&--content {
+		margin: auto 0;
+		width: 35%;
+		color: $white;
+		&--title {
+			font-size: 3.25rem;
+			letter-spacing: -1px;
+			font-weight: 700;
+			line-height: 1.375;
+		}
+		&--subscription {
+			font-size: 1.25rem;
+			margin-bottom: 3.5rem;
+		}
+	}
+}

@@ -1,0 +1,20 @@
+@import 'src/assets/styles/variables';
+
+.button-transparent {
+	box-shadow: 0 0 0 1px #767676 inset !important;
+	margin: 0 !important;
+	background: transparent !important;
+	color: $blue-black !important;
+	padding: 1rem 2rem !important;
+	width: 100%;
+	letter-spacing: 1.5px;
+	height: fit-content;
+	.icon:not(.button) {
+		opacity: 1 !important;
+	}
+	&:hover {
+		background: $blue !important;
+		color: $white !important;
+		box-shadow: $blue 0 0 0 1px inset !important;
+	}
+}
