@@ -42,3 +42,11 @@
 		padding: 40px 30px;
 	}
 }
+
+@media screen and (max-width: 576px) {
+	.process-work {
+		.title-area {
+			font-size: 1.25rem;
+		}
+	}
+}

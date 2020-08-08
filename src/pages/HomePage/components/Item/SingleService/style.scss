@@ -2,7 +2,7 @@
 
 .single-service {
 	.icon-service {
-		padding-right:1.25rem;
+		padding-right: 1.25rem;
 	}
 	.content {
 		width: calc(100% - 90px);
@@ -16,6 +16,24 @@
 			color: #767676;
 			font-size: 1.25rem;
 			line-height: 2.25rem;
+		}
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.single-service {
+
+		.content {
+		
+			.title {
+				font-size: 1.125rem !important;
+				margin-bottom: 1rem !important;
+			}
+			.description {
+
+				font-size: 1.125rem;
+				line-height: 2rem;
+			}
 		}
 	}
 }

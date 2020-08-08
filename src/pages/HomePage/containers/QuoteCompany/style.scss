@@ -40,5 +40,27 @@
 @media screen and (max-width: 576px) {
 	.area-quote {
 		padding: 40px 30px;
+		.quote {
+			.title {
+				font-size: 2.75rem;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.area-quote {
+		.quote {
+			.title {
+				font-size: 2rem;
+			}
+			.content {
+				font-size: 1.25rem;
+			}
+			.author,
+			.position {
+				font-size: 1em;
+			}
+		}
 	}
 }

@@ -35,10 +35,15 @@
 	.single-category-trainer {
 		padding: 1.5rem 0;
 		.p-1 {
-			// padding: 0 0 10px 0;
+			font-size:1.125
 		}
 		.content {
-			// width: 100%;
+			.title {
+				font-size: 1.125rem!important;
+			}
+			.description {
+				font-size: 1.125rem;
+			}
 		}
 	}
 }
