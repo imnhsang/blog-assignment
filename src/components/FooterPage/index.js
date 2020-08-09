@@ -29,7 +29,7 @@ const FooterPage = () => {
 		<div className='footer-page'>
 			<div className='row mr-b-2'>
 				<div className='col-lg-12 col-md-12 col-3 footer-page__logo'>
-					<LogoCompany />
+					<LogoCompany white />
 				</div>
 				<div className='col-lg-4 col-sm-12 col-3 footer-page__company'>
 					<div className='footer-page__company__title'>COMPANY</div>

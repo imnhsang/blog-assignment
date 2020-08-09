@@ -7,15 +7,15 @@ import QuoteArea from 'pages/HomePage/containers/QuoteCompany'
 import CategoryTrainerArea from 'pages/HomePage/containers/CategoryTrainer'
 import ProcessArea from 'pages/HomePage/containers/ProcessWork'
 import CreateAccountArea from 'containers/CreateAccount'
-// import Header from 'components/common/containers/Header.Page'
+import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
 
 function Home() {
 	return (
 		<div>
-			{/* <Header/> */}
-			<WelcomeArea/>
-			<PartnerArea/>
+			<Header type='guess' />
+			<WelcomeArea />
+			<PartnerArea />
 			<ServiceArea />
 			<QuoteArea />
 			<CategoryTrainerArea />

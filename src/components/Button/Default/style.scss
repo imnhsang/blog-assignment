@@ -1,0 +1,19 @@
+@import 'src/assets/stylesheets/variables';
+
+.button-default {
+	box-shadow: 0 0 0 1px $blue inset !important;
+	margin: 0 !important;
+	background: $blue !important;
+	color: $white !important;
+	padding: 1rem 2rem !important;
+	width: fit-content;
+	letter-spacing: 1px;
+	.icon:not(.button) {
+		opacity: 1 !important;
+	}
+	// &:hover {
+	// 	background: #fff !important;
+	// 	color: $blue-black !important;
+	// 	box-shadow: 0 0 0 1px $gray inset !important;
+	// }
+}

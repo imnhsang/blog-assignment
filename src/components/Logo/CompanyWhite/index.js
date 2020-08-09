@@ -2,12 +2,21 @@ import React from 'react'
 
 import './style.scss'
 
-function IconLogoCompany() {
+function IconLogoCompany({ type }) {
 	return (
-		<div className='logo-company'>
-			<span>lorem 4</span>
-			<span>skill</span>
-		</div>
+		<>
+			{type === 'blue' ? (
+				<div className='logo-company blue'>
+					<span>lorem 4</span>
+					<span>skill</span>
+				</div>
+			) : (
+				<div className='logo-company white'>
+					<span>lorem 4</span>
+					<span>skill</span>
+				</div>
+			)}
+		</>
 	)
 }
 
