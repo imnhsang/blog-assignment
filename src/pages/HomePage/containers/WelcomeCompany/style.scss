@@ -1,4 +1,5 @@
 @import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
 
 .area-welcome {
 	height: 100vh;
@@ -10,57 +11,35 @@
 		width: 50%;
 		color: $white;
 		padding-left: 3.5rem;
+		@include responsive(laptop) {
+			width: 65%;
+		}
+		@include responsive(small-tablet) {
+			width: 70%;
+		}
+		@include responsive(mobile) {
+			width: 100%;
+			padding-left: 0rem;
+		}
 		&__title {
 			font-size: 3rem;
 			letter-spacing: -1px;
 			font-weight: 700;
 			line-height: 1.375;
+			@include responsive(mobile) {
+				font-size: 2rem;
+			}
+			@include responsive(small-mobile){
+				font-size: 2rem;
+			}
 		}
 		&__subscription {
 			font-size: 1.5rem;
 			margin-bottom: 3.5rem;
-		}
-	}
-}
-
-@media screen and (max-width: 1200px) {
-	.area-welcome {
-		&__content {
-			width: 65%;
-		}
-	}
-}
-
-@media screen and (max-width: 768px) {
-	.area-welcome {
-		&__content {
-			width: 70%;
-		}
-	}
-}
-
-@media screen and (max-width: 576px) {
-	.area-welcome {
-		&__content {
-			width: 100%;
-			padding-left: 0rem;
-			&__title {
-				font-size: 2rem;
-			}
-			&__subscription {
+			@include responsive(mobile) {
 				font-size: 1.125rem;
 			}
-		}
-	}
-}
-
-@media screen and (max-width: 320px) {
-	.area-welcome {
-		&--content {
-			&--title {
-				font-size: 2rem;
-			}
-			&--subscription {
+			@include responsive(small-mobile){
 				font-size: 1.25rem;
 			}
 		}

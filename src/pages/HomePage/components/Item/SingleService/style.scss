@@ -1,4 +1,5 @@
 @import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
 
 .single-service {
 	&__icon {
@@ -11,23 +12,16 @@
 			font-weight: 700;
 			margin-bottom: 1.25rem !important;
 			font-size: 1.25rem !important;
+			@include responsive(small-mobile) {
+				font-size: 1.125rem !important;
+				margin-bottom: 1rem !important;
+			}
 		}
 		&__description {
 			color: #767676;
 			font-size: 1.25rem;
 			line-height: 2.25rem;
-		}
-	}
-}
-
-@media screen and (max-width: 320px) {
-	.single-service {
-		&__content {
-			&__title {
-				font-size: 1.125rem !important;
-				margin-bottom: 1rem !important;
-			}
-			&__description {
+			@include responsive(small-mobile) {
 				font-size: 1.125rem;
 				line-height: 2rem;
 			}

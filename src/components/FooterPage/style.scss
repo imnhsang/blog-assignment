@@ -1,8 +1,21 @@
 @import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
 
 .footer-page {
 	background: $blue-black;
 	padding: 50px 100px;
+	@include responsive(tablet) {
+		padding: 40px 70px;
+	}
+	@include responsive(mobile) {
+		padding: 40px 30px;
+	}
+
+	&__logo {
+		@include responsive(tablet) {
+			margin-bottom: 1.75rem;
+		}
+	}
 	&__company,
 	&__product,
 	&__social {
@@ -24,6 +37,16 @@
 					text-decoration: underline;
 				}
 			}
+			@include responsive(small-mobile){
+				font-size: 1rem;
+			}
+		}
+	}
+
+	&__company,
+	&__product{
+		@include responsive(mobile){
+			margin-bottom: 0.75rem;
 		}
 	}
 
@@ -55,34 +78,5 @@
 	&__content {
 		color: $gray;
 		font-size: 0.975rem;
-	}
-}
-
-@media screen and (max-width: 992px) {
-	.footer-page {
-		padding: 40px 70px;
-		&__logo {
-			margin-bottom: 1.75rem;
-		}
-	}
-}
-@media screen and (max-width: 576px) {
-	.footer-page {
-		padding: 40px 30px;
-		&_company,
-		&__product {
-			margin-bottom: 0.75rem;
-		}
-	}
-}
-@media screen and (max-width: 320px) {
-	.footer-page {
-		&__company,
-		&__product,
-		&__social {
-			&__list {
-				font-size: 1rem;
-			}
-		}
 	}
 }
