@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Dropdown } from 'semantic-ui-react'
 
 import Logo from 'components/Logo/CompanyWhite'
 import ButtonRequest from 'components/Button/Default'
@@ -8,11 +8,20 @@ import 'assets/stylesheets/global.scss'
 import './style.scss'
 
 function HeaderPage({ type }) {
-	const typeHeader =
-		type === 'guess' ? 'header-page--guess' : 'header-page--member'
-	const [classNameHeader, setClassNameHeader] = useState(typeHeader)
+	const [classNameHeader, setClassNameHeader] = useState('')
+	const [classNameHamburger, setClassNameHamburger] = useState('')
 
 	const name = 'Leo'
+	const categories = [
+		'LEADERSHIP',
+		'COACHING',
+		'SALES',
+		'PUBLIC SPEAKING',
+		'TEAM BUILDING',
+		'MANAGEMENT',
+		'FINANCE',
+		'MARKETING',
+	]
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
@@ -20,13 +29,43 @@ function HeaderPage({ type }) {
 
 	const handleScroll = () => {
 		if (window.pageYOffset > 0) {
-			setClassNameHeader(`${typeHeader} active`)
+			setClassNameHeader('active-header')
 		} else {
-			setClassNameHeader(typeHeader)
+			setClassNameHeader('')
 		}
 	}
+
+	const handleHamburger = () => {
+		return classNameHamburger === ''
+			? setClassNameHamburger('active-hamburger')
+			: setClassNameHamburger('')
+	}
+
 	return (
 		<div className='header-page'>
+			{type && (
+				<div
+					className={`header-page__hamburger ${classNameHamburger}`}
+					onClick={handleHamburger}
+				>
+					<div
+						className={`line-1  ${
+							classNameHeader || type !== 'guess' ? 'blue-black' : ''
+						}`}
+					></div>
+					<div
+						className={`line-2  ${
+							classNameHeader || type !== 'guess' ? 'blue-black' : ''
+						}`}
+					></div>
+					<div
+						className={`line-3  ${
+							classNameHeader || type !== 'guess' ? 'blue-black' : ''
+						}`}
+					></div>
+				</div>
+			)}
+
 			{!type && (
 				<div className='header-page--none'>
 					<Logo type='blue' />
@@ -39,7 +78,14 @@ function HeaderPage({ type }) {
 						<Logo type='blue' />
 					</div>
 					<div className='header-page__nav'>
-						<ul className='header-page__nav__list-nav-item'>
+						<div
+							className={`top-nav ${!classNameHamburger ? 'hide' : ''}`}
+						></div>
+						<ul
+							className={`header-page__nav__list-nav-item 
+							${!classNameHamburger ? 'hide' : ''}
+							`}
+						>
 							<li>
 								<a href='/'>BLOG</a>
 							</li>
@@ -49,8 +95,22 @@ function HeaderPage({ type }) {
 							<li>
 								<a href='/'>LATEST</a>
 							</li>
+							<li>
+								<Dropdown text='CATEGORIES' pointing='top'>
+									<Dropdown.Menu>
+										{categories.map((e, inx) => (
+											<Dropdown.Item key={inx} text={e} />
+										))}
+									</Dropdown.Menu>
+								</Dropdown>
+							</li>
 						</ul>
-						<div className='header-page__nav__list-control'>
+						<div
+							className={`header-page__nav__list-control	${
+								!classNameHamburger ? 'hide' : ''
+							}
+							`}
+						>
 							<ButtonRequest name='SIGN UP' />
 						</div>
 					</div>
@@ -58,14 +118,16 @@ function HeaderPage({ type }) {
 			)}
 
 			{type === 'member' && (
-				<div className={classNameHeader}>
+				<div className={`header-page--member ${classNameHeader}`}>
 					<div className='header-page__logo'>
-						<Logo
-							type={classNameHeader.includes('active') ? 'blue' : 'white'}
-						/>
+						<Logo type='blue' />
 					</div>
 					<div className='header-page__nav'>
-						<ul className='header-page__nav__list-nav-item'>
+						<ul
+							className={`header-page__nav__list-nav-item ${
+								!classNameHamburger ? 'hide' : ''
+							}`}
+						>
 							<li>
 								<a href='/'>REQUESTS</a>
 							</li>
@@ -73,7 +135,11 @@ function HeaderPage({ type }) {
 								<a href='/'>MESSAGES</a>
 							</li>
 						</ul>
-						<div className='header-page__nav__list-control'>
+						<div
+							className={`header-page__nav__list-control ${
+								!classNameHamburger ? 'hide' : ''
+							}`}
+						>
 							<ButtonRequest name='NEW REQUEST' />
 							<div className='profile-nav'>
 								<div className='profile-nav__avatar'>
@@ -92,14 +158,18 @@ function HeaderPage({ type }) {
 			)}
 
 			{type === 'guess' && (
-				<div className={classNameHeader}>
+				<div className={`header-page--guess ${classNameHeader}`}>
 					<div className='header-page__logo'>
 						<Logo
 							type={classNameHeader.includes('active') ? 'blue' : 'white'}
 						/>
 					</div>
 					<div className='header-page__nav'>
-						<ul className='header-page__nav__list-nav-item'>
+						<ul
+							className={`header-page__nav__list-nav-item 
+							${!classNameHamburger ? 'hide' : ''}
+							`}
+						>
 							<li>
 								<a href='/'>HOW IT WORKS</a>
 							</li>
