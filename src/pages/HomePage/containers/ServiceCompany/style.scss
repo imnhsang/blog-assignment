@@ -1,0 +1,49 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.area-service {
+	padding: 90px 100px;
+	color: $blue-black;
+	background: $blue-white;
+	@include responsive(small-tablet) {
+		padding: 60px 70px;
+	}
+	@include responsive(mobile) {
+		padding: 40px 30px;
+	}
+	&__title {
+		padding: 0 200px;
+		letter-spacing: 1.5px;
+		font-size: 1.5rem;
+		margin-bottom: 3.5rem;
+		@include responsive(laptop) {
+			padding: 0 5rem;
+		}
+		@include responsive(mobile) {
+			padding: 0;
+		}
+		@include responsive(small-mobile) {
+			font-size: 1.25rem;
+		}
+	}
+	&__list-service {
+		.single-service:first-child,
+		.single-service:nth-child(2) {
+			@include responsive(laptop) {
+				margin-bottom: 2.5rem;
+			}
+			@include responsive(mobile) {
+				margin-bottom: 2rem;
+			}
+		}
+
+		@include responsive(small-tablet) {
+			.single-service {
+				margin-bottom: 2.5rem;
+			}
+			.single-service:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

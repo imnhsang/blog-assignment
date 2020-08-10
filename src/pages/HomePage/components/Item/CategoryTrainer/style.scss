@@ -1,0 +1,40 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.single-category {
+	padding: 2rem 1.5em;
+	align-content: space-between;
+	@include responsive(small-mobile) {
+		padding: 1.5rem 0;
+	}
+	&__icon {
+		@include responsive(small-mobile) {
+			font-size: 1.125rem;
+		}
+		padding-right: 1.25rem;
+	}
+	&__content {
+		margin-bottom: 1.5rem;
+		width: calc(100% - 90px);
+		@include responsive(mobile) {
+			width: calc(100% * 9 / 12);
+		}
+		&__title {
+			color: $blue-black;
+			font-weight: 700;
+			margin-bottom: 1.25rem !important;
+			font-size: 1.25rem !important;
+			@include responsive(small-mobile){
+				font-size: 1.125rem !important;
+			}
+		}
+		&__description {
+			color: #767676;
+			font-size: 1.25rem;
+			line-height: 1.75rem;
+			@include responsive(small-mobile){
+				font-size: 1.125rem;
+			}
+		}
+	}
+}

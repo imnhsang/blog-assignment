@@ -1,0 +1,18 @@
+@import 'src/assets/stylesheets/variables';
+
+.button-transparent-arrow-right {
+	box-shadow: 0 0 0 1px #fff inset !important;
+	margin: 0 !important;
+	background: transparent !important;
+	color: $white !important;
+	padding: 1.25rem 2.25rem !important;
+	width: fit-content;
+	letter-spacing: 1.5px;
+	.icon:not(.button) {
+		opacity: 1 !important;
+	}
+	&:hover {
+		background: #fff !important;
+		color: $blue-black !important;
+	}
+}

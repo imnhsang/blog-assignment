@@ -1,0 +1,21 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.area-partner {
+	padding: 40px 100px;
+	@include responsive(mobile) {
+		padding: 40px 30px;
+	}
+	&__title {
+		color: $blue-black;
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-bottom: 3rem;
+	}
+	&__list-partner {
+		&__logo {
+			width: 100px;
+			padding: 0.5rem;
+		}
+	}
+}

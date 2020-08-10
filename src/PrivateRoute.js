@@ -6,7 +6,7 @@
 // 		<Route
 // 			{...rest}
 // 			render={(props) =>
-// 				1 === 1 ? (
+// 				1 ? (
 // 					<Component {...props} />
 // 				) : (
 // 					<Redirect

@@ -1,0 +1,82 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.footer-page {
+	background: $blue-black;
+	padding: 50px 100px;
+	@include responsive(tablet) {
+		padding: 40px 70px;
+	}
+	@include responsive(mobile) {
+		padding: 40px 30px;
+	}
+
+	&__logo {
+		@include responsive(tablet) {
+			margin-bottom: 1.75rem;
+		}
+	}
+	&__company,
+	&__product,
+	&__social {
+		&__title {
+			font-size: 1.25rem;
+			color: $white;
+			font-weight: 700;
+		}
+		&__list {
+			font-size: 1.125rem;
+			list-style: none;
+			padding: 0;
+			li {
+				margin-top: 8px;
+			}
+			a {
+				color: $gray;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+			@include responsive(small-mobile){
+				font-size: 1rem;
+			}
+		}
+	}
+
+	&__company,
+	&__product{
+		@include responsive(mobile){
+			margin-bottom: 0.75rem;
+		}
+	}
+
+	&__rights {
+		font-size: 1rem;
+		color: $gray;
+	}
+	&__location {
+		padding: 0;
+		list-style: pointer;
+		color: $gray;
+		font-size: 0.975rem;
+		flex-wrap: wrap;
+		li:first-child {
+			list-style: none;
+			margin-left: 0;
+			span {
+				margin-left: 0;
+			}
+		}
+		li {
+			margin-left: 15px;
+			margin-right: 6px;
+			span {
+				margin-left: -5px;
+			}
+		}
+	}
+	&__content {
+		color: $gray;
+		font-size: 0.975rem;
+	}
+}

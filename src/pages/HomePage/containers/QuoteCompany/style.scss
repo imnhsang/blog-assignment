@@ -1,0 +1,51 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.area-quote {
+	padding: 90px 100px;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: $white;
+	@include responsive(small-tablet) {
+		padding: 60px 70px;
+	}
+	@include responsive(mobile) {
+		padding: 40px 30px;
+	}
+	&__quote {
+		width: 65%;
+		@include responsive(small-tablet) {
+			width: 100%;
+		}
+		&__title {
+			font-size: 3rem;
+			font-weight: 700;
+			margin-bottom: 2rem;
+			@include responsive(mobile) {
+				font-size: 2.75rem;
+			}
+			@include responsive(small-mobile) {
+				font-size: 2rem;
+			}
+		}
+		&__content {
+			font-size: 1.5rem;
+			margin-bottom: 2.75rem;
+			@include responsive(small-mobile) {
+				font-size: 1.25rem;
+			}
+		}
+		&__author,
+		&__position {
+			font-size: 1.125rem;
+			font-weight: 700;
+			@include responsive(small-mobile) {
+				font-size: 1em;
+			}
+		}
+		&__logo-school {
+			width: 125px;
+		}
+	}
+}
