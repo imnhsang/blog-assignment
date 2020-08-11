@@ -2,4 +2,8 @@
 @import 'src/assets/stylesheets/mixins';
 
 .signin-page {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 100vh;
 }

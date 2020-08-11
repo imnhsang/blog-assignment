@@ -31,9 +31,8 @@ body {
 }
 
 .col-9 {
-	width: calc(100% * 9/ 12);
+	width: calc(100% * 9 / 12);
 }
-
 
 .col-10 {
 	width: calc(100% * 10 / 12);
@@ -57,6 +56,10 @@ body {
 
 .flex-direction-column {
 	flex-direction: column;
+}
+
+.d-flex {
+	display: flex;
 }
 
 @media screen and (max-width: 1200px) {

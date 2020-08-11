@@ -11,9 +11,12 @@
 	.icon:not(.button) {
 		opacity: 1 !important;
 	}
-	&:hover {
-		background: #fff !important;
-		color: $blue-black !important;
-		box-shadow: 0 0 0 1px $white inset !important;
+	&.small {
+		padding: 1rem 2.25rem !important;
 	}
+	// &:hover {
+	// 	background: #fff !important;
+	// 	color: $blue-black !important;
+	// 	box-shadow: 0 0 0 1px $white inset !important;
+	// }
 }

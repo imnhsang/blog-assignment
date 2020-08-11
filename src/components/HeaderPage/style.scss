@@ -2,6 +2,7 @@
 @import 'assets/stylesheets/mixins';
 
 .header-page {
+	z-index: 3;
 	position: fixed;
 	align-items: center;
 	width: 100%;
@@ -38,7 +39,7 @@
 	}
 	&__hamburger {
 		@include responsive(tablet) {
-			z-index: 4;
+			z-index: 7;
 			position: absolute;
 			top: 50%;
 			left: 1rem;
@@ -109,7 +110,7 @@
 				background: $blue-black;
 				width: 320px;
 				height: 100vh;
-				z-index: 2;
+				z-index: 5;
 				padding: 0;
 				// padding-top: 4rem;
 				box-shadow: 3px 0px 5px 0px #343a40;
@@ -128,7 +129,7 @@
 		&__list-control {
 			@include responsive(tablet) {
 				position: absolute;
-				z-index: 4;
+				z-index: 7;
 				transition: all 0.3s;
 			}
 		}
@@ -321,7 +322,7 @@
 					top: 0;
 					left: 0;
 					background: $blue-black;
-					z-index: 3;
+					z-index: 6;
 					transition: all 0.3s;
 					&.hide {
 						transform: translate(-100%, 0);
@@ -358,7 +359,7 @@
 							background: transparent;
 							position: relative;
 							&:after {
-								display: none!important;
+								display: none !important;
 							}
 						}
 						.item {
