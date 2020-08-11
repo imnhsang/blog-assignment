@@ -1,0 +1,40 @@
+@import 'src/assets/stylesheets/variables';
+
+.select-default {
+	position: relative;
+	select {
+		width: 100%;
+		padding: 6px 0 4px 0;
+		border: none;
+		border-bottom: 1px solid $gray;
+		outline: none;
+		background: transparent;
+		color: $black-opacity07;
+		font-size: 1.125rem;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		cursor: pointer;
+		option {
+      color: $black;
+		}
+		option:first-child {
+			display: none;
+		}
+		&:hover {
+			border-color: $blue;
+		}
+		&.focus-select {
+			border-color: $blue;
+		}
+		&.selected {
+			color: $black;
+		}
+	}
+	.angle-down {
+		position: absolute;
+		right: -7px;
+		top: 50%;
+		transform: translate(0, -50%);
+	}
+}

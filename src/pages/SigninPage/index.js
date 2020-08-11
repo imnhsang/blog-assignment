@@ -12,8 +12,7 @@ const SigninPage = () => {
 		<div className='signin-page'>
 			<Header />
 			<div
-				className='d-flex justify-content-center align-items-center h-100'
-				style={{ marginTop: '4.75rem' }}
+				className='d-flex justify-content-center align-items-center h-100 mt-475'
 			>
 				<FormSignin />
 			</div>

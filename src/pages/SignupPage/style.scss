@@ -1,0 +1,30 @@
+@import 'src/assets/stylesheets/variables';
+
+.signup-page {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 100vh;
+	.form-signup {
+		max-width: 776px;
+		padding: 40px 30px;
+		&__title {
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+	}
+	& .tabular.menu {
+		margin-bottom: 1.875rem !important;
+		justify-content: center;
+		color: $black !important;
+		.item {
+			width: 50%;
+			justify-content: center;
+      text-align: center;
+      font-weight: 700;
+			&.active {
+				color: $blue !important;
+			}
+		}
+	}
+}
