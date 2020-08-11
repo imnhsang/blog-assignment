@@ -3,9 +3,12 @@ import { Button, Icon } from 'semantic-ui-react'
 
 import './style.scss'
 
-const ButtonArrowRight = ({ name }) => {
+const ButtonArrowRight = ({ name, fluid, small }) => {
 	return (
-		<Button className='button-arrow-right'>
+		<Button
+			fluid={fluid}
+			className={`button-arrow-right ${small ? 'small' : ''}`}
+		>
 			{name} <Icon name='arrow right' />
 		</Button>
 	)
