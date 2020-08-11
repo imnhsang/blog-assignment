@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { validateEmail } from 'utils'
+
 import Input from 'components/Input/Default'
 import Select from 'components/Select/Default'
 import CheckBoxDefault from 'components/Input/Checkbox'
@@ -17,10 +19,6 @@ const FormSingupIndividual = () => {
 	const [errors, setErrors] = useState({})
 
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
-
-	const validateEmail = (email) => {
-		return !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/gm.test(email)
-	}
 
 	const handleOnChangeEmail = (e) => {
 		setEmail(e.target.value)

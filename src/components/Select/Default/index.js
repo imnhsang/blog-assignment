@@ -25,4 +25,4 @@ const SelectDefault = ({ value, placeholder, data, handleOnChange }) => {
 	)
 }
 
-export default SelectDefault
+export default React.memo(SelectDefault)

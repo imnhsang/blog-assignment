@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 
 import './style.scss'
 
-const InputDefault = ({ placeholder, value, error, handleOnChange, type }) => {
+const InputDefault = ({
+	name,
+	placeholder,
+	value,
+	error,
+	handleOnChange,
+	type,
+}) => {
 	const [focus, setFocus] = useState(false)
 	return (
 		<div className={`input-default ${focus || value ? 'focus-input' : ''}`}>
@@ -10,6 +17,7 @@ const InputDefault = ({ placeholder, value, error, handleOnChange, type }) => {
 				{error && value ? error : placeholder}
 			</p>
 			<input
+				name={name}
 				className={`${focus ? 'focus-input' : ''}`}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
@@ -21,4 +29,4 @@ const InputDefault = ({ placeholder, value, error, handleOnChange, type }) => {
 	)
 }
 
-export default InputDefault
+export default React.memo(InputDefault)

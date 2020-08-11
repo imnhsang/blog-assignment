@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import useMergeState from 'hooks/useMergeState'
+
+import { validateEmail } from 'utils'
 
 import Input from 'components/Input/Default'
 import Select from 'components/Select/Default'
@@ -9,22 +12,13 @@ import './style.scss'
 import 'assets/stylesheets/global.scss'
 
 const FormSingupCompany = () => {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [firstname, setFirstname] = useState('')
-	const [lastname, setLastname] = useState('')
-	const [companyname, setCompanyname] = useState('')
-	const [country, setCountry] = useState('')
+	const [formInformation, setFormInformation] = useMergeState({})
 	const [errors, setErrors] = useState({})
 
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
 
-	const validateEmail = (email) => {
-		return !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/gm.test(email)
-	}
-
 	const handleOnChangeEmail = (e) => {
-		setEmail(e.target.value)
+		setFormInformation({ ...formInformation, email: e.target.value })
 		if (validateEmail(e.target.value)) {
 			setErrors({ ...errors, email: 'Invalid email address' })
 		} else {
@@ -32,20 +26,8 @@ const FormSingupCompany = () => {
 		}
 	}
 
-	const handleOnChangePassword = (e) => {
-		setPassword(e.target.value)
-	}
-	const handleOnChangeFirstname = (e) => {
-		setFirstname(e.target.value)
-	}
-	const handleOnChangeLastname = (e) => {
-		setLastname(e.target.value)
-	}
-	const handleOnChangeCompanyname = (e) => {
-		setCompanyname(e.target.value)
-	}
-	const handleOnChangeCountry = (e) => {
-		setCountry(e.target.value)
+	const handleOnChange = (e) => {
+		setFormInformation(e.target.name, e.target.value)
 	}
 
 	return (
@@ -55,8 +37,9 @@ const FormSingupCompany = () => {
 					<div className=' mb-sm-05 col-sm-12 col-6 pr-sm-0 pr-075'>
 						<Input
 							placeholder='First name'
-							value={firstname}
-							handleOnChange={handleOnChangeFirstname}
+							value={formInformation.firstname}
+							name='firstname'
+							handleOnChange={handleOnChange}
 							type='text'
 							error={errors.firstname}
 						/>
@@ -64,8 +47,9 @@ const FormSingupCompany = () => {
 					<div className='col-sm-12 col-6 pl-sm-0 pl-075'>
 						<Input
 							placeholder='Last name'
-							value={lastname}
-							handleOnChange={handleOnChangeLastname}
+							value={formInformation.lastname}
+							name='lastname'
+							handleOnChange={handleOnChange}
 							type='text'
 							error={errors.lastname}
 						/>
@@ -75,16 +59,18 @@ const FormSingupCompany = () => {
 					<div className='col-6 col-sm-12 pr-sm-0 pr-075'>
 						<Input
 							placeholder='Company name'
-							value={companyname}
-							handleOnChange={handleOnChangeCompanyname}
+							value={formInformation.companyname}
+							name='companyname'
+							handleOnChange={handleOnChange}
 							type='text'
 							error={errors.company}
 						/>
 					</div>
 					<div className='col-sm-12 col-6 pl-sm-0 pl-075 mb-sm-1'>
 						<Select
-							value={country}
-							handleOnChange={handleOnChangeCountry}
+							value={formInformation.country}
+							name='country'
+							handleOnChange={handleOnChange}
 							placeholder='Country (Training Location)'
 							data={dataCountry}
 						/>
@@ -93,7 +79,8 @@ const FormSingupCompany = () => {
 				<div className='mb-05'>
 					<Input
 						placeholder='Email address'
-						value={email}
+						value={formInformation.email}
+						name='email'
 						handleOnChange={handleOnChangeEmail}
 						type='text'
 						error={errors.email}
@@ -101,9 +88,10 @@ const FormSingupCompany = () => {
 				</div>
 				<Input
 					placeholder='Password'
-					value={password}
+					value={formInformation.password}
 					type='password'
-					handleOnChange={handleOnChangePassword}
+					name='password'
+					handleOnChange={handleOnChange}
 					error={errors.password}
 				/>
 			</div>

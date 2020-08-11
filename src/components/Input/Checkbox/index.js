@@ -12,4 +12,4 @@ const CheckBoxDefault = ({ text, checked }) => {
 	)
 }
 
-export default CheckBoxDefault
+export default React.memo(CheckBoxDefault)
