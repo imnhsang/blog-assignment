@@ -20,10 +20,10 @@
 		.item {
 			width: 50%;
 			justify-content: center;
-			text-align: center;
+      text-align: center;
+      font-weight: 700;
 			&.active {
 				color: $blue !important;
-				border-width: 2px;
 			}
 		}
 	}
