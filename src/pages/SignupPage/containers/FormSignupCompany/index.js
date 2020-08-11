@@ -12,13 +12,13 @@ import './style.scss'
 import 'assets/stylesheets/global.scss'
 
 const FormSingupCompany = () => {
-	const [formInformation, setFormInformation] = useMergeState({})
+	const [formInformation, setFormInformation] = useMergeState({ firstname: '' })
 	const [errors, setErrors] = useState({})
 
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
 
 	const handleOnChangeEmail = (e) => {
-		setFormInformation({ ...formInformation, email: e.target.value })
+		setFormInformation({ [e.target.name]: e.target.value })
 		if (validateEmail(e.target.value)) {
 			setErrors({ ...errors, email: 'Invalid email address' })
 		} else {
@@ -27,7 +27,7 @@ const FormSingupCompany = () => {
 	}
 
 	const handleOnChange = (e) => {
-		setFormInformation(e.target.name, e.target.value)
+		setFormInformation({ [e.target.name]: e.target.value })
 	}
 
 	return (

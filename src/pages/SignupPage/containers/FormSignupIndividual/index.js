@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useMergeState from 'hooks/useMergeState'
 
 import { validateEmail } from 'utils'
 
@@ -11,17 +12,13 @@ import './style.scss'
 import 'assets/stylesheets/global.scss'
 
 const FormSingupIndividual = () => {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [firstname, setFirstname] = useState('')
-	const [lastname, setLastname] = useState('')
-	const [country, setCountry] = useState('')
+	const [formInformation, setFormInformation] = useMergeState({})
 	const [errors, setErrors] = useState({})
 
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
 
 	const handleOnChangeEmail = (e) => {
-		setEmail(e.target.value)
+		setFormInformation({ [e.target.name]: e.target.value })
 		if (validateEmail(e.target.value)) {
 			setErrors({ ...errors, email: 'Invalid email address' })
 		} else {
@@ -29,17 +26,8 @@ const FormSingupIndividual = () => {
 		}
 	}
 
-	const handleOnChangePassword = (e) => {
-		setPassword(e.target.value)
-	}
-	const handleOnChangeFirstname = (e) => {
-		setFirstname(e.target.value)
-	}
-	const handleOnChangeLastname = (e) => {
-		setLastname(e.target.value)
-	}
-	const handleOnChangeCountry = (e) => {
-		setCountry(e.target.value)
+	const handleOnChange = (e) => {
+		setFormInformation({ [e.target.name]: e.target.value })
 	}
 
 	return (
@@ -49,8 +37,9 @@ const FormSingupIndividual = () => {
 					<div className=' mb-sm-05 col-sm-12 col-6 pr-sm-0 pr-075'>
 						<Input
 							placeholder='First name'
-							value={firstname}
-							handleOnChange={handleOnChangeFirstname}
+							name='firstname'
+							value={formInformation.firstname}
+							handleOnChange={handleOnChange}
 							type='text'
 							error={errors.firstname}
 						/>
@@ -58,8 +47,9 @@ const FormSingupIndividual = () => {
 					<div className='col-sm-12 col-6 pl-sm-0 pl-075'>
 						<Input
 							placeholder='Last name'
-							value={lastname}
-							handleOnChange={handleOnChangeLastname}
+							name='lastname'
+							value={formInformation.lastname}
+							handleOnChange={handleOnChange}
 							type='text'
 							error={errors.lastname}
 						/>
@@ -68,8 +58,9 @@ const FormSingupIndividual = () => {
 
 				<div className='mb-15'>
 					<Select
-						value={country}
-						handleOnChange={handleOnChangeCountry}
+						name='country'
+						value={formInformation.country}
+						handleOnChange={handleOnChange}
 						placeholder='Country (Training Location)'
 						data={dataCountry}
 					/>
@@ -77,18 +68,20 @@ const FormSingupIndividual = () => {
 
 				<div className='mb-05'>
 					<Input
+						name='email'
 						placeholder='Email address'
-						value={email}
+						value={formInformation.email}
 						handleOnChange={handleOnChangeEmail}
 						type='text'
 						error={errors.email}
 					/>
 				</div>
 				<Input
+					name='password'
 					placeholder='Password'
-					value={password}
+					value={formInformation.password}
 					type='password'
-					handleOnChange={handleOnChangePassword}
+					handleOnChange={handleOnChange}
 					error={errors.password}
 				/>
 			</div>
