@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import InputEmail from 'components/Input/Default'
 import InputPassword from 'components/Input/Default'
-import CheckBoxDefault from 'components/Checkbox'
+import CheckBoxDefault from 'components/Input/Checkbox'
 import ButtonSign from 'components/Button/ArrowRight'
 
 import './style.scss'
@@ -52,7 +52,7 @@ const FormSignin = () => {
 				/>
 			</div>
 			<div className='d-flex justify-content-space-between mr-b-1'>
-				<CheckBoxDefault />
+				<CheckBoxDefault text='Remember Me' />
 				<a href='/'>Forgot password?</a>
 			</div>
 			<ButtonSign fluid name='LOG IN' small />

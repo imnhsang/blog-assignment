@@ -1,11 +1,10 @@
 @import 'src/assets/stylesheets/variables';
 
-.form-signin {
-	padding: 40px;
+.form-signup-company {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 776px;
+	// width: 766px;
 	text-align: center;
 	&__title {
 		margin-bottom: 2rem;

@@ -2,12 +2,12 @@ import React from 'react'
 
 import './style.scss'
 
-const CheckBoxDefault = () => {
+const CheckBoxDefault = ({ text, checked }) => {
 	return (
 		<div className='checkbox-default'>
-			<input type='checkbox' name='remember-me' />
+			<input type='checkbox' defaultChecked={checked} />
 			<span className='checkmark' />
-			<label htmlFor='remember-me'> Remember me</label>
+			<label> {text}</label>
 		</div>
 	)
 }
