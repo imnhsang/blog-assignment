@@ -1,0 +1,61 @@
+@import 'src/assets/stylesheets/variables';
+
+.media-links {
+	margin: auto;
+	max-width: 700px;
+  padding: 0 30px;
+  margin-bottom: 3rem;
+	&__header {
+		display: flex;
+		align-items: center;
+		padding: 1.25rem 0;
+		border-bottom: 1px solid $gray;
+		span {
+			margin-left: 10px;
+			color: $blue-black;
+			font-size: 1.125rem;
+			font-weight: 700;
+		}
+	}
+	&__information {
+		&__signature {
+			font-size: 1.25rem;
+			font-weight: 700;
+			padding-bottom: 1rem;
+			margin-top: 2.5rem;
+			border-bottom: 1px solid $gray;
+			a {
+				color: $blue;
+				&:hover {
+					color: $blue;
+					text-decoration: underline;
+				}
+			}
+		}
+		&__social {
+			margin-top: 1rem;
+			&__title {
+				color: $blue;
+				font-size: 1.25rem;
+				font-weight: 700;
+				padding-bottom: 2.5rem;
+				margin: 0;
+			}
+			&__list-social {
+				display: flex;
+				a {
+					margin: 0 0.5rem;
+					height: 40px;
+					width: 40px;
+					border: 1px solid $gray;
+					border-radius: 50%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					padding-left: 3px;
+					padding-bottom: 2px;
+				}
+			}
+		}
+	}
+}

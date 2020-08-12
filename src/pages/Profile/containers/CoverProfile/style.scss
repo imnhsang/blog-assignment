@@ -8,11 +8,12 @@
 	justify-content: center;
 	padding-top: calc(7rem + 60px);
 	padding-bottom: 60px;
-	padding-left: 40px;
-	padding-right: 40px;
+	padding-left: 30px;
+	padding-right: 30px;
 	background: $blue-black;
+	width: 100%;
 	@include responsive(tablet) {
-		padding-top: calc(4.25rem + 60px);
+		padding-top: calc(4.125rem + 60px);
 	}
 	&__avatar {
 		height: 180px;

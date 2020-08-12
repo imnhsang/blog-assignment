@@ -1,6 +1,67 @@
 @import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
 
 .profile-page {
-  // padding-top: 4.75rem;
-  height:50vh
+	&__scrollspy {
+		position: sticky;
+		top: 7rem;
+		display: flex;
+		list-style: none;
+		text-align: center;
+		justify-content: center;
+		border-bottom: 1px solid $gray;
+		margin: 0;
+		background: $white;
+		padding: 0;
+		@include responsive(tablet) {
+			top: 4.125rem;
+		}
+		li {
+			border-bottom: 3px solid transparent;
+			padding: 1.5rem 0;
+			margin-right: 2rem;
+			margin-left: 2rem;
+			color: $blue-black;
+			font-weight: 700;
+			font-size: 1.125rem;
+			// a {
+			// 	cursor: pointer;
+			// 	color: $blue-black;
+			// 	font-weight: 700;
+			// 	font-size: 1.125rem;
+			// }
+			i {
+				display: none;
+			}
+			&.active {
+				border-bottom: 3px solid $blue;
+				a.disabled {
+					pointer-events: none;
+				}
+			}
+			@include responsive(mobile) {
+				margin-right: 1.25rem;
+				margin-left: 1.25rem;
+				span {
+					display: none;
+				}
+				i {
+					display: block;
+				}
+			}
+		}
+	}
+	&__quote {
+		text-align: center;
+		max-width: 700px;
+		margin: auto;
+		padding: 0 3rem 3rem 3rem;
+		font-size: 2rem;
+		line-height: 3rem;
+		color: $blue-black;
+		@include responsive(small-mobile) {
+			font-size: 1.75rem;
+			line-height: 2.25rem;
+		}
+	}
 }
