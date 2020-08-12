@@ -8,7 +8,6 @@ import CheckBoxDefault from 'components/Input/Checkbox'
 import ButtonSign from 'components/Button/ArrowRight'
 
 import './style.scss'
-import 'assets/stylesheets/global.scss'
 
 const FormSignin = () => {
 	const [email, setEmail] = useState('')
@@ -31,8 +30,8 @@ const FormSignin = () => {
 	return (
 		<div className='form-signin'>
 			<h1 className='form-signin__title'>Log in and train up</h1>
-			<div className='d-flex flex-direction-column'>
-				<div style={{ marginBottom: '0.5rem' }}>
+			<div className='flex flex-column'>
+				<div className='mb-05'>
 					<InputEmail
 						placeholder='Email address'
 						value={email}
@@ -49,12 +48,12 @@ const FormSignin = () => {
 					error={errors.password}
 				/>
 			</div>
-			<div className='d-flex justify-content-space-between mr-b-1'>
+			<div className='flex justify-between mb-1'>
 				<CheckBoxDefault text='Remember Me' />
 				<a href='/'>Forgot password?</a>
 			</div>
 			<ButtonSign fluid name='LOG IN' small />
-			<span className='mr-t-1'>
+			<span className='mt-1'>
 				Don&#39;t have an account?&nbsp;&nbsp;<a href='/'>Sign up</a>
 			</span>
 		</div>

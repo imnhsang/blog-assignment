@@ -2,18 +2,15 @@ import React from 'react'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
-import FormSignin from 'pages/SigninPage/containers/FormSignin'
+import FormSignin from 'pages/Signin/containers/FormSignin'
 
 import './style.scss'
-import 'assets/stylesheets/global.scss'
 
 const SigninPage = () => {
 	return (
 		<div className='signin-page'>
 			<Header />
-			<div
-				className='d-flex justify-content-center align-items-center h-100 mt-475'
-			>
+			<div className='flex justify-center items-center h-full mt-475'>
 				<FormSignin />
 			</div>
 			<Footer />

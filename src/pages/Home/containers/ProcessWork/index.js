@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ItemProcess from 'pages/HomePage/components/Item/SingleService'
+import ItemProcess from 'pages/Home/components/Item/SingleService'
 
 import './style.scss'
 
@@ -13,7 +13,7 @@ const AreaProcessWork = () => {
 	]
 	return (
 		<div className='process-work'>
-			<p className='process-work__title text-align-center'>HOW LOREM4SKILL WORKS?</p>
+			<p className='process-work__title text-center'>HOW LOREM4SKILL WORKS?</p>
 			<div className='process-work__list-process row'>
 				{processes.map((e, inx) => (
 					<ItemProcess key={inx} name={e.name} title={e.title} />
