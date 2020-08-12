@@ -24,12 +24,12 @@
 			color: $blue-black;
 			font-weight: 700;
 			font-size: 1.125rem;
-			// a {
-			// 	cursor: pointer;
-			// 	color: $blue-black;
-			// 	font-weight: 700;
-			// 	font-size: 1.125rem;
-			// }
+			a {
+				cursor: pointer;
+				color: $blue-black;
+				font-weight: 700;
+				font-size: 1.125rem;
+			}
 			i {
 				display: none;
 			}
@@ -42,6 +42,9 @@
 			@include responsive(mobile) {
 				margin-right: 1.25rem;
 				margin-left: 1.25rem;
+				a {
+					display: none;
+				}
 				span {
 					display: none;
 				}
@@ -63,5 +66,8 @@
 			font-size: 1.75rem;
 			line-height: 2.25rem;
 		}
+	}
+	span.point {
+		top: -200px;
 	}
 }

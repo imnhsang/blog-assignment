@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
+import Scrollspy from 'react-scrollspy'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
@@ -59,36 +60,32 @@ const ProfilePage = () => {
 		<div className='profile-page'>
 			<Header type='member' />
 			<CoverProfile />
-
-			<ul className='profile-page__scrollspy'>
-				<li className='active'>
+			<Scrollspy
+				items={['career', 'skills', 'programs', 'clients', 'medialinks']}
+				currentClassName='active'
+				className='profile-page__scrollspy'
+			>
+				<li>
 					<span>CAREER</span>
 					<Icon name='list ul' size='large' />
-					{/* <a href='#career'>CAREER</a> */}
 				</li>
 				<li>
 					<span>SKILLS</span>
 					<Icon name='settings' size='large' />
-					{/* <a href='#skills'>SKILLS</a> */}
 				</li>
 				<li>
 					<span>PROGRAMS</span>
-
 					<Icon name='star outline' size='large' />
-					{/* <a href='#programs'>PROGRAMS</a> */}
 				</li>
 				<li>
 					<span>CLIENTS</span>
 					<Icon name='users' size='large' />
-					{/* <a href='#clients'>CLIENTS</a> */}
 				</li>
 				<li>
 					<span> MEDIA LINKS</span>
 					<Icon name='share alternate' size='large' />
-					{/* <a href='#medialinks'>MEDIA LINKS</a> */}
 				</li>
-			</ul>
-
+			</Scrollspy>
 			<div className='py-6 d-flex'>
 				<div className='profile-page__quote'>
 					<span>
@@ -97,21 +94,16 @@ const ProfilePage = () => {
 						has shared the stage with Prime Minesters, TV stars and a like.&#34;
 					</span>
 				</div>
-				<div id='career'>
-					<Highlights data={careers} name='CAREER HIGHLIGHTS' icon='list ul' />
-				</div>
-				<div id='skills'>
-					<Highlights data={skills} name='SKILL CAUGHT' icon='settings' />
-				</div>
-				<div id='programs'>
-					<RecommendedPrograms data={programs} />
-				</div>
-				<div id='clients'>
-					<Highlights data={clients} name='CLIENTS' icon='users' />
-				</div>
-				<div id='medialinks'>
-					<MediaLinks />
-				</div>
+				<span className='point' id='career' />
+				<Highlights data={careers} name='CAREER HIGHLIGHTS' icon='list ul' />
+				<span className='point' id='skills' />
+				<Highlights data={skills} name='SKILL CAUGHT' icon='settings' />
+				<span className='point' id='programs' />
+				<RecommendedPrograms data={programs} />
+				<span className='point' id='clients' />
+				<Highlights data={clients} name='CLIENTS' icon='users' />
+				<span className='point' id='medialinks' />
+				<MediaLinks />
 				<div className='text-center'>
 					<ButtonEngage name='ENGAGE NOW' />
 				</div>
