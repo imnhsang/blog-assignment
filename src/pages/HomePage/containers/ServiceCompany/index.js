@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ItemService from 'pages/Home/components/Item/SingleService'
+import ItemService from 'pages/HomePage/components/Item/SingleService'
 
 import './style.scss'
 

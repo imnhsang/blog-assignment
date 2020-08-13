@@ -3,8 +3,8 @@ import { Tab } from 'semantic-ui-react'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
-import FormSignupCompany from 'pages/Signup/containers/FormSignupCompany'
-import FormSignupIndividual from 'pages/Signup/containers/FormSignupIndividual'
+import FormSignupCompany from 'pages/SignupPage/containers/FormSignupCompany'
+import FormSignupIndividual from 'pages/SignupPage/containers/FormSignupIndividual'
 
 import './style.scss'
 

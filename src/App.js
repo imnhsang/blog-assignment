@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // import PrivateRoute from './PrivateRoute'
 
-import Home from 'pages/Home'
-import Login from 'pages/Signin'
-import Signup from 'pages/Signup'
-import Profile from 'pages/Profile'
-import Blog from 'pages/Blog'
-import BlogCategory from 'pages/BlogCategory'
-import BlogDetail from 'pages/BlogDetail'
+import Home from 'pages/HomePage'
+import Login from 'pages/SigninPage'
+import Signup from 'pages/SignupPage'
+import Profile from 'pages/ProfilePage'
+import Blog from 'pages/BlogPage'
+import BlogCategory from 'pages/BlogCategoryPage'
+import BlogDetail from 'pages/BlogDetailPage'
 
 function App() {
 	return (

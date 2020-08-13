@@ -12,13 +12,7 @@ const RecommendedPrograms = ({ data }) => {
 		data.length !== 0 ? lengthToArrayBoolean(data.length) : {}
 	)
 	const handleOnClickOpenContent = (index) => {
-		console.log(index)
-		console.log(activeIndexs)
-		if (activeIndexs[index]) {
-			setActiveIndexs({ [index]: false })
-		} else {
-			setActiveIndexs({ [index]: true })
-		}
+    setActiveIndexs({[index]:!activeIndexs[index]})
 	}
 	return (
 		<div className='recommended-programs'>

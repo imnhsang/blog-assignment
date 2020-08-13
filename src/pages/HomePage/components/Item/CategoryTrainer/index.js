@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
 
-import Button from 'pages/Home/components/Button/Transaparent'
+import Button from 'pages/HomePage/components/Button/Transaparent'
 
 import './style.scss'
 

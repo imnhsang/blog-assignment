@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ItemProcess from 'pages/Home/components/Item/SingleService'
+import ItemProcess from 'pages/HomePage/components/Item/SingleService'
 
 import './style.scss'
 

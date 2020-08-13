@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
-import FormSignin from 'pages/Signin/containers/FormSignin'
+import FormSignin from 'pages/SigninPage/containers/FormSignin'
 
 import './style.scss'
 
