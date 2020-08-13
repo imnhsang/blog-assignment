@@ -4,17 +4,14 @@ import Button from 'components/Button/TransparentArrowRight'
 
 import './style.scss'
 
-const AreaCreateAccount = () => {
+const AreaCreateAccount = ({ title, subcription, name }) => {
 	return (
 		<div className='area-create-account items-center flex-column row'>
-			<p className='area-create-account__title text-center'>
-				START HIRING BEST-IN-CLASS CORPORATE TRAINERS WITH LOREM4SKILL
-			</p>
+			<p className='area-create-account__title text-center'>{title}</p>
 			<p className='area-create-account__subscription text-center'>
-				Create your free account in minutes and access a network of top
-				trainers.
+				{subcription}
 			</p>
-			<Button name='SIGN UP WITH LOREM4SKILL' />
+			<Button name={name} />
 		</div>
 	)
 }

@@ -1,0 +1,112 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.cover-blog {
+	height: 100vh;
+	padding-top: 7rem;
+	@include responsive(tablet) {
+		padding-top: 4.125rem;
+	}
+	&__type-category {
+		text-align: center;
+		padding: 2rem 0;
+		margin: 0;
+		font-size: 1.875rem;
+		font-weight: 900;
+		background: $white;
+		border-bottom: 1px solid $gray;
+	}
+	&__content {
+		height: 100%;
+		padding: 40px;
+		background-size: cover;
+		display: flex;
+		align-items: flex-end;
+
+		&.category {
+			height: calc(100% - 6.675rem);
+		}
+		&.unfeatured {
+			align-items: center;
+			justify-content: center;
+			.cover-blog__content {
+				&__article {
+					padding-left: 0;
+					padding-bottom: 0;
+					text-align: center;
+					&__social {
+						justify-content: center;
+					}
+				}
+			}
+		}
+
+		&__article {
+			padding-left: 4rem;
+			padding-bottom: 4rem;
+			width: 50%;
+			color: $white;
+			@include responsive(laptop) {
+				width: 65%;
+			}
+			@include responsive(small-tablet) {
+				width: 70%;
+			}
+			@include responsive(mobile) {
+				width: 100%;
+				padding-left: 0rem;
+			}
+			&__featured {
+				font-weight: 700;
+				letter-spacing: 1px;
+				font-size: 1.25rem;
+			}
+			&__title {
+				font-size: 3.5rem;
+				letter-spacing: -1px;
+				font-weight: 700;
+				line-height: 1.375;
+				margin-bottom: 2rem;
+				@include responsive(mobile) {
+					font-size: 2rem;
+				}
+				@include responsive(small-mobile) {
+					font-size: 2rem;
+				}
+			}
+			&__type {
+				text-transform: uppercase;
+				font-size: 1.125rem;
+				letter-spacing: 1px;
+				padding-right: 5px;
+				border-right: 1px solid $white;
+			}
+			&__date {
+				font-size: 1.125rem;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				padding-left: 6px;
+			}
+			&__social {
+				margin-top: 2rem;
+				display: flex;
+				a {
+					margin-right: 1rem;
+					height: 40px;
+					width: 40px;
+					border: 1px solid $gray;
+					border-radius: 50%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					padding-left: 3px;
+					padding-bottom: 2px;
+					color: $white;
+					&:hover {
+						color: $white;
+					}
+				}
+			}
+		}
+	}
+}

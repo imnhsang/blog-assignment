@@ -20,7 +20,12 @@ function HomePage() {
 			<QuoteArea />
 			<CategoryTrainerArea />
 			<ProcessArea />
-			<CreateAccountArea />
+			<CreateAccountArea
+				title='	START HIRING BEST-IN-CLASS CORPORATE TRAINERS WITH LOREM4SKILL'
+				subcription='	Create your free account in minutes and access a network of top
+				trainers.'
+				name='SIGN UP WITH LOREM4SKILL'
+			/>
 			<Footer />
 		</div>
 	)

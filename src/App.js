@@ -7,6 +7,9 @@ import Home from 'pages/Home'
 import Login from 'pages/Signin'
 import Signup from 'pages/Signup'
 import Profile from 'pages/Profile'
+import Blog from 'pages/Blog'
+import BlogCategory from 'pages/BlogCategory'
+import BlogDetail from 'pages/BlogDetail'
 
 function App() {
 	return (
@@ -17,6 +20,9 @@ function App() {
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={Signup} />
 				<Route exact path='/profile' component={Profile} />
+				<Route exact path='/blog' component={Blog} />
+				<Route exact path='/blog/category' component={BlogCategory} />
+				<Route exact path='/blog/detail' component={BlogDetail} />
 			</Switch>
 		</Router>
 	)

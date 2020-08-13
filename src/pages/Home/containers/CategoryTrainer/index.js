@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ItemCategoryTrainer from 'pages/Home/components/Item/CategoryTrainer'
-import Button from 'pages/Home/components/Button/TransparentArrowDown'
+import Button from 'components/Button/TransparentArrowDown'
 
 import './style.scss'
 
