@@ -1,0 +1,41 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.cover-profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: calc(7rem + 60px);
+	padding-bottom: 60px;
+	padding-left: 30px;
+	padding-right: 30px;
+	background: $blue-black;
+	width: 100%;
+	@include responsive(tablet) {
+		padding-top: calc(4.125rem + 60px);
+	}
+	&__avatar {
+		height: 180px;
+		width: 180px;
+		border-radius: 50%;
+		background: $gray;
+		border: 4px solid $white;
+	}
+	&__fullname {
+		color: $white;
+		font-weight: 700;
+		font-size: 2.25rem;
+		margin-top: 2rem;
+		text-align: center;
+		letter-spacing: 1px;
+	}
+	&__full-position {
+		color: $white;
+		font-size: 1.375rem;
+		margin-top: 2.5rem;
+		margin-bottom: 2rem;
+		text-align: center;
+		line-height: 2rem;
+	}
+}

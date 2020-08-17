@@ -2,7 +2,6 @@ import React from 'react'
 
 import LogoCompany from 'components/Logo/CompanyWhite'
 
-import 'assets/stylesheets/global.scss'
 import './style.scss'
 
 const FooterPage = () => {
@@ -27,7 +26,7 @@ const FooterPage = () => {
 	]
 	return (
 		<div className='footer-page'>
-			<div className='row mr-b-2'>
+			<div className='row mb-2'>
 				<div className='col-lg-12 col-md-12 col-3 footer-page__logo'>
 					<LogoCompany white />
 				</div>

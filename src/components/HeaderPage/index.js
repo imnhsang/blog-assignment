@@ -4,7 +4,6 @@ import { Icon, Dropdown } from 'semantic-ui-react'
 import Logo from 'components/Logo/CompanyWhite'
 import ButtonRequest from 'components/Button/Default'
 
-import 'assets/stylesheets/global.scss'
 import './style.scss'
 
 function HeaderPage({ type }) {
