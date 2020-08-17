@@ -1,0 +1,23 @@
+@import 'src/assets/stylesheets/variables';
+
+.form-signin {
+	padding: 40px 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 776px;
+	text-align: center;
+	&__title {
+		margin-bottom: 2rem;
+	}
+	span {
+		// color: $blue;
+		span {
+			cursor: pointer;
+			color: $blue;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

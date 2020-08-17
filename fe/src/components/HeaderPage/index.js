@@ -1,0 +1,214 @@
+import React, { useEffect, useState } from 'react'
+import { Icon, Dropdown } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+
+import { signout } from 'actions/auth'
+
+import Logo from 'components/Logo/CompanyWhite'
+import ButtonRequest from 'components/Button/Default'
+
+import './style.scss'
+
+function HeaderPage({ type, onSignout }) {
+	const [classNameHeader, setClassNameHeader] = useState('')
+	const [classNameHamburger, setClassNameHamburger] = useState('')
+	const [signoutOpen, setSignoutOpen] = useState(false)
+	const history = useHistory()
+
+	const name = 'Leo'
+	const categories = [
+		'LEADERSHIP',
+		'COACHING',
+		'SALES',
+		'PUBLIC SPEAKING',
+		'TEAM BUILDING',
+		'MANAGEMENT',
+		'FINANCE',
+		'MARKETING',
+	]
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll)
+	})
+
+	const handleScroll = () => {
+		if (window.pageYOffset > 0) {
+			setClassNameHeader('active-header')
+		} else {
+			setClassNameHeader('')
+		}
+	}
+
+	const handleHamburger = () => {
+		return classNameHamburger === ''
+			? setClassNameHamburger('active-hamburger')
+			: setClassNameHamburger('')
+	}
+
+	const handleRedirect = (path) => {
+		history.push(path)
+	}
+
+	return (
+		<div className='header-page'>
+			{type && (
+				<div
+					className={`header-page__hamburger ${classNameHamburger}`}
+					onClick={handleHamburger}
+				>
+					<div
+						className={`line-1  ${
+							classNameHeader || type !== 'guess' ? 'blue-black' : ''
+						}`}
+					></div>
+					<div
+						className={`line-2  ${
+							classNameHeader || type !== 'guess' ? 'blue-black' : ''
+						}`}
+					></div>
+					<div
+						className={`line-3  ${
+							classNameHeader || type !== 'guess' ? 'blue-black' : ''
+						}`}
+					></div>
+				</div>
+			)}
+
+			{!type && (
+				<div className='header-page--none'>
+					<Logo type='blue' />
+				</div>
+			)}
+
+			{type === 'blog' && (
+				<div className='header-page--blog'>
+					<div className='header-page__logo'>
+						<Logo type='blue' />
+					</div>
+					<div className='header-page__nav'>
+						<div
+							className={`top-nav ${!classNameHamburger ? 'hide' : ''}`}
+						></div>
+						<ul
+							className={`header-page__nav__list-nav-item 
+							${!classNameHamburger ? 'hide' : ''}
+							`}
+						>
+							<li>
+								<a href='/'>BLOG</a>
+							</li>
+							<li>
+								<a href='/'>FEATURED</a>
+							</li>
+							<li>
+								<a href='/'>LATEST</a>
+							</li>
+							<li>
+								<Dropdown text='CATEGORIES' pointing='top'>
+									<Dropdown.Menu>
+										{categories.map((e, inx) => (
+											<Dropdown.Item key={inx} text={e} />
+										))}
+									</Dropdown.Menu>
+								</Dropdown>
+							</li>
+						</ul>
+						<div
+							className={`header-page__nav__list-control	${
+								!classNameHamburger ? 'hide' : ''
+							}
+							`}
+						>
+							<ButtonRequest name='SIGN UP' />
+						</div>
+					</div>
+				</div>
+			)}
+
+			{type === 'member' && (
+				<div className={`header-page--member ${classNameHeader}`}>
+					<div className='header-page__logo'>
+						<Logo type='blue' />
+					</div>
+					<div className='header-page__nav'>
+						<ul
+							className={`header-page__nav__list-nav-item ${
+								!classNameHamburger ? 'hide' : ''
+							}`}
+						>
+							<li>
+								<a href='/'>REQUESTS</a>
+							</li>
+							<li>
+								<a href='/'>MESSAGES</a>
+							</li>
+						</ul>
+						<div
+							className={`header-page__nav__list-control ${
+								!classNameHamburger ? 'hide' : ''
+							}`}
+						>
+							<ButtonRequest name='NEW REQUEST' />
+							<div
+								className='profile-nav'
+								onClick={() => setSignoutOpen(!signoutOpen)}
+							>
+								<div className='profile-nav__avatar'>
+									<span>{name[0]}</span>
+								</div>
+								<div className='profile-nav__name'>
+									<span>{name}</span>
+								</div>
+								<div className='profile-nav__arrow'>
+									<Icon name='angle down' />
+								</div>
+								{signoutOpen && (
+									<div className='profile-nav__dropdown'>
+										<li onClick={onSignout}>LOG OUT</li>
+									</div>
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{type === 'guess' && (
+				<div className={`header-page--guess ${classNameHeader}`}>
+					<div className='header-page__logo'>
+						<Logo
+							type={classNameHeader.includes('active') ? 'blue' : 'white'}
+						/>
+					</div>
+					<div className='header-page__nav'>
+						<ul
+							className={`header-page__nav__list-nav-item 
+							${!classNameHamburger ? 'hide' : ''}
+							`}
+						>
+							<li>
+								<a href='/'>HOW IT WORKS</a>
+							</li>
+							<li>
+								<a href='/'>APPLY AS A TRAINER</a>
+							</li>
+							<li>
+								<p onClick={() => handleRedirect('/login')}>SIGN IN</p>
+							</li>
+							<li>
+								<p onClick={() => handleRedirect('/signup')}>SIGN UP FREE</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			)}
+		</div>
+	)
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	onSignout: () => dispatch(signout()),
+})
+
+export default connect(null, mapDispatchToProps)(HeaderPage)
