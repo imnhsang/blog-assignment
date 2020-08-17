@@ -30,7 +30,7 @@ function HeaderPage({ type, onSignout }) {
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
-	})
+	}, [])
 
 	const handleScroll = () => {
 		if (window.pageYOffset > 0) {

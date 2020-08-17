@@ -39,6 +39,7 @@ app.get('/', async (req, res) => {
 	res.status(200).send('APIs are running...')
 })
 
+//AUTH
 app.post('/signup', async (req, res) => {
 	const user = req.body
 	try {
@@ -51,6 +52,7 @@ app.post('/signup', async (req, res) => {
 	}
 })
 
+//USERS
 app.get('/user/:uid', async (req, res) => {
 	const { uid } = req.params
 	console.log(uid)
@@ -71,7 +73,29 @@ app.get('/user/:uid', async (req, res) => {
 
 		res.status(201).send({
 			msg: 'Information User got successfully!!!',
-			users,
+			data: users[0],
+		})
+	} catch (error) {
+		res.status(500).send('Server error...')
+	}
+})
+
+//CATEGORIES
+app.get('/categories', async (req, res) => {
+	try {
+		const snapshot = await admin.firestore().collection('categories').get()
+
+		let categories = []
+		snapshot.forEach((doc) => {
+			let id = doc.id
+			let data = doc.data()
+
+			categories.push({ id, ...data })
+		})
+
+		res.status(201).send({
+			msg: 'Categories got successfully!!!',
+			data: categories,
 		})
 	} catch (error) {
 		res.status(500).send('Server error...')
