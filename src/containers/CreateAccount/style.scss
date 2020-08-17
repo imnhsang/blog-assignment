@@ -1,38 +1,29 @@
 @import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
 
 .area-create-account {
 	background: $blue;
+	width: 100%;
 	padding: 90px 100px;
 	color: $white;
+	@include responsive(tablet) {
+		padding: 60px 70px;
+	}
+	@include responsive(mobile) {
+		padding: 40px 30px;
+	}
 	&__title {
 		font-weight: 700;
 		font-size: 1.5rem;
 		letter-spacing: 1.5px;
+		@include responsive(small-mobile) {
+			font-size: 1.25rem;
+		}
 	}
 	&__subscription {
 		margin-bottom: 2rem;
 		font-size: 1.25rem;
-	}
-}
-
-@media screen and (max-width: 992px) {
-	.area-create-account {
-		padding: 60px 70px;
-	}
-}
-
-@media screen and (max-width: 576px) {
-	.area-create-account {
-		padding: 40px 30px;
-	}
-}
-
-@media screen and (max-width: 320px) {
-	.area-create-account {
-		&__title {
-			font-size: 1.25rem;
-		}
-		&__subscription {
+		@include responsive(small-mobile) {
 			font-size: 1.125rem;
 		}
 	}

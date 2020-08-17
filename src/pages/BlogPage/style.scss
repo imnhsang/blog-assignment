@@ -1,0 +1,18 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.blog-page {
+	&__title-list-article {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-top: 6rem;
+		margin-bottom: 2rem;
+	}
+	&__list-article-featured {
+		display: flex;
+		flex-wrap: wrap;
+		width: 80%;
+    margin: auto;
+    margin-bottom: 1rem;
+	}
+}

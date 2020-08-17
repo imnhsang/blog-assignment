@@ -3,10 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // import PrivateRoute from './PrivateRoute'
 
-import Home from 'pages/Home'
-import Login from 'pages/Signin'
-import Signup from 'pages/Signup'
-import Profile from 'pages/Profile'
+import Home from 'pages/HomePage'
+import Login from 'pages/SigninPage'
+import Signup from 'pages/SignupPage'
+import Profile from 'pages/ProfilePage'
+import Blog from 'pages/BlogPage'
+import BlogCategory from 'pages/BlogPage/BlogCategoryPage'
+import BlogDetail from 'pages/BlogPage/BlogDetailPage'
 
 function App() {
 	return (
@@ -17,6 +20,9 @@ function App() {
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={Signup} />
 				<Route exact path='/profile' component={Profile} />
+				<Route exact path='/blog' component={Blog} />
+				<Route exact path='/blog/category' component={BlogCategory} />
+				<Route exact path='/blog/detail' component={BlogDetail} />
 			</Switch>
 		</Router>
 	)
