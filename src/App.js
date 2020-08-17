@@ -8,8 +8,8 @@ import Login from 'pages/SigninPage'
 import Signup from 'pages/SignupPage'
 import Profile from 'pages/ProfilePage'
 import Blog from 'pages/BlogPage'
-import BlogCategory from 'pages/BlogCategoryPage'
-import BlogDetail from 'pages/BlogDetailPage'
+import BlogCategory from 'pages/BlogPage/BlogCategoryPage'
+import BlogDetail from 'pages/BlogPage/BlogDetailPage'
 
 function App() {
 	return (
