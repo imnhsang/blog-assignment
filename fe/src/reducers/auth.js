@@ -9,7 +9,7 @@ const initialState = {
 	loadingSign: false,
 }
 
-const failtToastify = (err) =>
+const failToastify = (err) =>
 	toast.error(err, {
 		position: 'top-right',
 		autoClose: 5000,
@@ -25,15 +25,17 @@ const auth = (state = initialState, action) => {
 		case Auth.LOGIN_SUCCESS:
 			return { ...state, uid: action.payload.user.uid, loadingSign: false }
 		case Auth.LOGIN_FAIL:
-			failtToastify(action.payload.err.message)
+			failToastify(action.payload.err.message)
 			return { ...state, loadingSign: false }
 		case Auth.SIGNOUT_SUCCESS:
 			return { ...state, uid: null }
 		case Auth.SIGNOUT_FAIL:
+      failToastify(action.payload.err.message)
 			return { ...state }
 		case Auth.SIGNUP_SUCCESS:
 			return { ...state, uid: action.payload.user.uid }
 		case Auth.SIGNUP_FAIL:
+      failToastify(action.payload.err.message)
 			return { ...state }
 		case Auth.REQUEST_AUTH:
 			return { ...state, loadingAuth: true }

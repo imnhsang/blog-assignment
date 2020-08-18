@@ -15,7 +15,7 @@ const SigninPage = ({ onLogin }) => {
 			<div className='signin-page'>
 				<Header />
 				<div className='flex justify-center items-center h-full mt-475'>
-					<FormSignin handleOnLogin={onLogin} />
+					<FormSignin onLogin={onLogin} />
 				</div>
 				<Footer />
 			</div>

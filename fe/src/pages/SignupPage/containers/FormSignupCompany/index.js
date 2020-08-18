@@ -14,38 +14,71 @@ import ButtonSign from 'components/Button/ArrowRight'
 import './style.scss'
 
 const FormSingupCompany = ({ onSignup }) => {
-	const [formInformation, setFormInformation] = useMergeState({ firstname: '' })
+	const [formInformation, setFormInformation] = useMergeState({
+		firstname: '',
+		lastname: '',
+		email: '',
+		password: '',
+		country: '',
+	})
 	const [errors, setErrors] = useState({})
 	const history = useHistory()
 
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
 
-	const handleOnChangeEmail = (e) => {
-		setFormInformation({ [e.target.name]: e.target.value })
-		if (validateEmail(e.target.value)) {
+	const validateInputEmail = (value) => {
+		if (value.length === 0) {
+			setErrors({ ...errors, email: 'Email address is required' })
+		} else if (validateEmail(value)) {
 			setErrors({ ...errors, email: 'Invalid email address' })
 		} else {
 			setErrors({ ...errors, email: '' })
 		}
 	}
 
+	const validateInputText = (name, value) => {
+		console.log(name, value.length)
+		if (value.length === 0) {
+			setErrors({
+				...errors,
+				[name]: `${name.charAt(0).toUpperCase() + name.slice(1)} is required`,
+			})
+		} else {
+			setErrors({ ...errors, [name]: '' })
+		}
+	}
+
+	const handleOnChangeEmail = (e) => {
+		setFormInformation({ [e.target.name]: e.target.value })
+		validateInputEmail(e.target.value)
+	}
+
 	const handleOnChange = (e) => {
 		setFormInformation({ [e.target.name]: e.target.value })
+		validateInputText(e.target.name, e.target.value)
 	}
 
 	const handleOnChangeCheckbox = (e) => {
 		setFormInformation({ [e.target.name]: e.target.checked })
 	}
 
+	const validateForm = () => {
+		// validateInputText('country', formInformation.country)
+		// validateInputText('lastname', formInformation.lastname)
+		// validateInputText('firstname', formInformation.firstname)
+
+		// validateInputEmail(formInformation.email)
+		// validateInputText('password', formInformation.password)
+		return false
+	}
+
 	const handleOnSignup = () => {
-		if (formInformation.agreeservice) {
+		if (validateForm()) {
 			onSignup(formInformation)
-		} else {
-			setErrors({ ...errors, agreeservice: true })
 		}
-  }
-  
-  const handleOnkeydownEnter = (e) => {
+	}
+
+	const handleOnkeydownEnter = (e) => {
 		if (e.key === 'Enter') {
 			handleOnSignup()
 		}
@@ -61,8 +94,8 @@ const FormSingupCompany = ({ onSignup }) => {
 							value={formInformation.firstname}
 							name='firstname'
 							handleOnChange={handleOnChange}
-              type='text'
-              onKeyDown={handleOnkeydownEnter}
+							type='text'
+							onKeyDown={handleOnkeydownEnter}
 							error={errors.firstname}
 						/>
 					</div>
@@ -71,8 +104,8 @@ const FormSingupCompany = ({ onSignup }) => {
 							placeholder='Last name'
 							value={formInformation.lastname}
 							name='lastname'
-              handleOnChange={handleOnChange}
-              onKeyDown={handleOnkeydownEnter}
+							handleOnChange={handleOnChange}
+							onKeyDown={handleOnkeydownEnter}
 							type='text'
 							error={errors.lastname}
 						/>
@@ -84,8 +117,8 @@ const FormSingupCompany = ({ onSignup }) => {
 							placeholder='Company name'
 							value={formInformation.companyname}
 							name='companyname'
-              handleOnChange={handleOnChange}
-              onKeyDown={handleOnkeydownEnter}
+							handleOnChange={handleOnChange}
+							onKeyDown={handleOnkeydownEnter}
 							type='text'
 							error={errors.company}
 						/>
@@ -97,6 +130,7 @@ const FormSingupCompany = ({ onSignup }) => {
 							handleOnChange={handleOnChange}
 							placeholder='Country (Training Location)'
 							data={dataCountry}
+							error={errors.country}
 						/>
 					</div>
 				</div>
@@ -105,8 +139,8 @@ const FormSingupCompany = ({ onSignup }) => {
 						placeholder='Email address'
 						value={formInformation.email}
 						name='email'
-            handleOnChange={handleOnChangeEmail}
-            onKeyDown={handleOnkeydownEnter}
+						handleOnChange={handleOnChangeEmail}
+						onKeyDown={handleOnkeydownEnter}
 						type='text'
 						error={errors.email}
 					/>
@@ -116,8 +150,8 @@ const FormSingupCompany = ({ onSignup }) => {
 					value={formInformation.password}
 					type='password'
 					name='password'
-          handleOnChange={handleOnChange}
-          onKeyDown={handleOnkeydownEnter}
+					handleOnChange={handleOnChange}
+					onKeyDown={handleOnkeydownEnter}
 					error={errors.password}
 				/>
 			</div>

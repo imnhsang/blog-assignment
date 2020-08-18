@@ -30,6 +30,9 @@ function HeaderPage({ type, onSignout }) {
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
 	}, [])
 
 	const handleScroll = () => {
@@ -196,8 +199,8 @@ function HeaderPage({ type, onSignout }) {
 							<li>
 								<p onClick={() => handleRedirect('/login')}>SIGN IN</p>
 							</li>
-							<li>
-								<p onClick={() => handleRedirect('/signup')}>SIGN UP FREE</p>
+							<li onClick={() => handleRedirect('/signup')}>
+								<p>SIGN UP FREE</p>
 							</li>
 						</ul>
 					</div>

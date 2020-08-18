@@ -16,7 +16,7 @@
 		appearance: none;
 		cursor: pointer;
 		option {
-      color: $black;
+			color: $black;
 		}
 		option:first-child {
 			display: none;
@@ -29,6 +29,9 @@
 		}
 		&.selected {
 			color: $black;
+		}
+		&.error {
+			border-color: $red;
 		}
 	}
 	.angle-down {

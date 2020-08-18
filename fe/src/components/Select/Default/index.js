@@ -3,8 +3,15 @@ import { Icon } from 'semantic-ui-react'
 
 import './style.scss'
 
-const SelectDefault = ({ value, placeholder, data, handleOnChange, name }) => {
-	const [focus, setFocus] = useState(false)
+const SelectDefault = ({
+	value,
+	placeholder,
+	data,
+	handleOnChange,
+	name,
+	error,
+}) => {
+  const [focus, setFocus] = useState(false)
 	return (
 		<div className='select-default'>
 			<div className='angle-down'>
@@ -12,7 +19,9 @@ const SelectDefault = ({ value, placeholder, data, handleOnChange, name }) => {
 			</div>
 			<select
 				name={name}
-				className={`${focus ? 'focus-select' : ''} ${value ? 'selected' : ''}`}
+				className={`${focus ? 'focus-select' : ''} ${value ? 'selected' : ''} ${
+					error ? 'error' : ''
+				}`}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
 				onChange={handleOnChange}

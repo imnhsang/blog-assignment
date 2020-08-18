@@ -7,19 +7,17 @@ const InputDefault = ({
 	placeholder,
 	value,
 	error,
-  handleOnChange,
-  onKeyDown,
+	handleOnChange,
+	onKeyDown,
 	type,
 }) => {
 	const [focus, setFocus] = useState(false)
 	return (
 		<div className={`input-default ${focus || value ? 'focus-input' : ''}`}>
-			<p className={`${error && value ? 'error' : ''}`}>
-				{error && value ? error : placeholder}
-			</p>
+			<p className={`${error ? 'error' : ''}`}>{error ? error : placeholder}</p>
 			<input
 				name={name}
-				className={`${focus ? 'focus-input' : ''}`}
+				className={`${focus ? 'focus-input' : ''} ${error ? 'error' : ''}`}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
 				onChange={handleOnChange}

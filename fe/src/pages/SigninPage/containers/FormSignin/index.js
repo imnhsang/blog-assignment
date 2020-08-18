@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useMergeState from 'hooks/useMergeState'
 import { Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -11,28 +12,66 @@ import ButtonSign from 'components/Button/ArrowRight'
 
 import './style.scss'
 
-const FormSignin = ({ handleOnLogin, uid }) => {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+const FormSignin = ({ onLogin, uid }) => {
+	const [formState, setFormState] = useMergeState({ email: '', password: '' })
 	const [errors, setErrors] = useState({})
 	const history = useHistory()
 
-	const handleOnChangeEmail = (e) => {
-		setEmail(e.target.value)
-		if (validateEmail(e.target.value)) {
+	const validateInputEmail = (value) => {
+		if (value.length === 0) {
+			setErrors({ ...errors, email: 'Email address is required' })
+		} else if (validateEmail(value)) {
 			setErrors({ ...errors, email: 'Invalid email address' })
 		} else {
 			setErrors({ ...errors, email: '' })
 		}
 	}
 
+	const validateInputPassword = (value) => {
+		if (value.length === 0) {
+			setErrors({ ...errors, password: 'Password is required' })
+		} else {
+			setErrors({ ...errors, password: '' })
+		}
+	}
+
+	const validateForm = () => {
+		const errorsValidateForm = {}
+		if (formState.password.length === 0) {
+			errorsValidateForm.password = 'Password is required'
+		}
+		if (formState.email.length === 0) {
+			errorsValidateForm.email = 'Email address is required'
+		} else if (validateEmail(formState.email)) {
+			errorsValidateForm.email = 'Invalid email address'
+		}
+		if (JSON.stringify(errorsValidateForm) === '{}') {
+			return true
+		} else {
+			setErrors({ ...errorsValidateForm })
+			return false
+		}
+	}
+
+	const handleOnLogin = () => {
+		if (validateForm()) {
+			onLogin(formState.email, formState.password)
+		}
+	}
+
+	const handleOnChangeEmail = (e) => {
+		setFormState({ email: e.target.value })
+		validateInputEmail(e.target.value)
+	}
+
 	const handleOnChangePassword = (e) => {
-		setPassword(e.target.value)
+		setFormState({ password: e.target.value })
+		validateInputPassword(e.target.value)
 	}
 
 	const handleOnkeydownEnter = (e) => {
 		if (e.key === 'Enter') {
-			handleOnLogin(email, password)
+			handleOnLogin()
 		}
 	}
 
@@ -47,7 +86,7 @@ const FormSignin = ({ handleOnLogin, uid }) => {
 				<div className='mb-05'>
 					<InputEmail
 						placeholder='Email address'
-						value={email}
+						value={formState.email}
 						handleOnChange={handleOnChangeEmail}
 						type='text'
 						error={errors.email}
@@ -56,7 +95,7 @@ const FormSignin = ({ handleOnLogin, uid }) => {
 				</div>
 				<InputPassword
 					placeholder='Password'
-					value={password}
+					value={formState.password}
 					type='password'
 					handleOnChange={handleOnChangePassword}
 					error={errors.password}
@@ -67,12 +106,7 @@ const FormSignin = ({ handleOnLogin, uid }) => {
 				<CheckBoxDefault text='Remember Me' />
 				<a href='/'>Forgot password?</a>
 			</div>
-			<ButtonSign
-				fluid
-				name='LOG IN'
-				small
-				onClick={() => handleOnLogin(email, password)}
-			/>
+			<ButtonSign fluid name='LOG IN' small onClick={handleOnLogin} />
 			<span className='mt-1'>
 				Don&#39;t have an account?&nbsp;&nbsp;
 				<span onClick={() => history.push('/signup')}>Sign up</span>

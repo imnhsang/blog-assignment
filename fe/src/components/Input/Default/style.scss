@@ -34,11 +34,14 @@
 		&.focus-input {
 			border-color: $blue;
 		}
+		&.error {
+			border-color: $red;
+		}
 	}
 	&.focus-input {
 		p {
 			opacity: 1;
-			transform: translate(0, -80%);
+			transform: translate(0, -90%);
 		}
 	}
 }
