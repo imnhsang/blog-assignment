@@ -55,7 +55,6 @@ export const signout = () => async (dispatch) => {
 }
 
 export const signup = (inforUser) => async (dispatch) => {
-	console.log(inforUser)
 	const body = {
 		email: inforUser.email,
 		firstname: inforUser.firstname,
@@ -80,7 +79,7 @@ export const signup = (inforUser) => async (dispatch) => {
 }
 
 const fetchAuthData = () => async (dispatch) => {
-	dispatch(requestAuthData())
+	// dispatch(requestAuthData())
 
 	const res = await api.post('/auth/currently-signedin')
 

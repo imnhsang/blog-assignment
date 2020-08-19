@@ -5,7 +5,7 @@ import { Auth } from '../constants/actionTypes'
 const initialState = {
 	uid: null,
 	isInitialized: false,
-	loadingAuth: false,
+	loadingAuth: true,
 	loadingSign: false,
 }
 
@@ -44,7 +44,11 @@ const auth = (state = initialState, action) => {
 		case Auth.RECEIVE_AUTH_DATA:
 			return { ...state, uid: action.payload.uid }
 		case Auth.INITIALIZED_AUTH_DATA:
-			return { ...state, isInitialized: action.status, loadingAuth: false }
+			return {
+				...state,
+				isInitialized: action.payload.status,
+				loadingAuth: false,
+			}
 		default:
 			return state
 	}
