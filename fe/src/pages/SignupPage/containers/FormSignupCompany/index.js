@@ -63,13 +63,39 @@ const FormSingupCompany = ({ onSignup }) => {
 	}
 
 	const validateForm = () => {
-		// validateInputText('country', formInformation.country)
-		// validateInputText('lastname', formInformation.lastname)
-		// validateInputText('firstname', formInformation.firstname)
+		const errorsValidateForm = {}
+		if (formInformation.firstname.length === 0) {
+			errorsValidateForm.firstname = 'Firstname is required'
+		}
 
-		// validateInputEmail(formInformation.email)
-		// validateInputText('password', formInformation.password)
-		return false
+		if (formInformation.lastname.length === 0) {
+			errorsValidateForm.lastname = 'Lastname is required'
+		}
+
+		if (formInformation.country.length === 0) {
+			errorsValidateForm.country = 'Country is required'
+		}
+
+		if (formInformation.password.length === 0) {
+			errorsValidateForm.password = 'Password is required'
+		}
+
+		if (formInformation.email.length === 0) {
+			errorsValidateForm.email = 'Email address is required'
+		} else if (validateEmail(formInformation.email)) {
+			errorsValidateForm.email = 'Invalid email address'
+		}
+
+		if (formInformation.agreeservice !== true) {
+			errorsValidateForm.agreeservice = 'Must agree service'
+		}
+
+		if (JSON.stringify(errorsValidateForm) === '{}') {
+			return true
+		} else {
+			setErrors({ ...errorsValidateForm })
+			return false
+		}
 	}
 
 	const handleOnSignup = () => {
