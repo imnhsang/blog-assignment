@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import useMergeState from 'hooks/useMergeState'
 import { Redirect, useHistory } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { validateEmail } from 'utils'
 
@@ -12,7 +12,9 @@ import ButtonSign from 'components/Button/ArrowRight'
 
 import './style.scss'
 
-const FormSignin = ({ onLogin, uid }) => {
+const FormSignin = ({ onLogin }) => {
+	const uid = useSelector((state) => state.auth.uid)
+
 	const [formState, setFormState] = useMergeState({ email: '', password: '' })
 	const [errors, setErrors] = useState({})
 	const history = useHistory()
@@ -115,10 +117,4 @@ const FormSignin = ({ onLogin, uid }) => {
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {
-		uid: state.auth.uid,
-	}
-}
-
-export default connect(mapStateToProps)(FormSignin)
+export default FormSignin

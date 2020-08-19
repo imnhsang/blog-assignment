@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { isAuthenticated } from 'utils'
 
@@ -12,7 +12,8 @@ import FormSignupIndividual from 'pages/SignupPage/containers/FormSignupIndividu
 
 import './style.scss'
 
-const SignupPage = ({ uid }) => {
+const SignupPage = () => {
+	const uid = useSelector((state) => state.auth.uid)
 	const panes = [
 		{ menuItem: 'COMPANY SIGN UP', render: () => <FormSignupCompany /> },
 		{ menuItem: 'INDIVIDUAL SIGN UP', render: () => <FormSignupIndividual /> },
@@ -35,11 +36,4 @@ const SignupPage = ({ uid }) => {
 		</div>
 	)
 }
-
-const mapStateToProps = (state) => {
-	return {
-		uid: state.auth.uid,
-	}
-}
-
-export default connect(mapStateToProps)(SignupPage)
+export default SignupPage

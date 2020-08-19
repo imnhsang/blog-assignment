@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -15,10 +15,12 @@ import Blog from 'pages/BlogPage'
 import BlogCategory from 'pages/BlogPage/BlogCategoryPage'
 import BlogDetail from 'pages/BlogPage/BlogDetailPage'
 
-function App({ onFetchAuthData, loading }) {
+function App({ onFetchAuthData }) {
 	useEffect(() => {
 		onFetchAuthData()
 	}, [onFetchAuthData])
+
+	const loading = useSelector((state) => state.auth.loadingAuth)
 
 	return (
 		<>
@@ -41,14 +43,8 @@ function App({ onFetchAuthData, loading }) {
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {
-		loading: state.auth.loadingAuth,
-	}
-}
-
 const mapDispatchToProps = (dispatch) => ({
 	onFetchAuthData: () => dispatch(fetchAuthDataIfNeeded()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(App)

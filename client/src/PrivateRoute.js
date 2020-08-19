@@ -1,8 +1,9 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const PrivateRoute = ({ uid, component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
+	const uid = useSelector((state) => state.auth.uid)
 	return (
 		<Route
 			{...rest}
@@ -19,10 +20,4 @@ const PrivateRoute = ({ uid, component: Component, ...rest }) => {
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {
-		uid: state.auth.uid,
-	}
-}
-
-export default connect(mapStateToProps)(PrivateRoute)
+export default PrivateRoute

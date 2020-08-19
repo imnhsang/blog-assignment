@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import Scrollspy from 'react-scrollspy'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import Header from 'components/HeaderPage'
@@ -14,7 +14,7 @@ import ButtonEngage from 'components/Button/Default'
 
 import './style.scss'
 
-const ProfilePage = ({ uid }) => {
+const ProfilePage = () => {
 	const careers = [
 		{
 			subscription:
@@ -58,12 +58,13 @@ const ProfilePage = ({ uid }) => {
 		},
 	]
 
+	const uid = useSelector((state) => state.auth.uid)
+
 	if (!uid) {
 		return <Redirect to='/login' />
 	}
 
 	return (
-    
 		<div className='profile-page'>
 			<Header type='member' />
 			<CoverProfile />
@@ -120,10 +121,4 @@ const ProfilePage = ({ uid }) => {
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {
-		uid: state.auth.uid,
-	}
-}
-
-export default connect(mapStateToProps)(ProfilePage)
+export default ProfilePage
