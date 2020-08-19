@@ -66,8 +66,8 @@ export const signup = (inforUser) => async (dispatch) => {
 
 	const res = await api.post('/auth/signup', body)
 
-  const { status, data } = res
-  
+	const { status, data } = res
+
 	if (status === 201) {
 		return dispatch({
 			type: Auth.SIGNUP_SUCCESS,
@@ -96,8 +96,7 @@ const fetchAuthData = () => async (dispatch) => {
 
 const shouldFetchAuthData = (state) => {
 	const { isInitialized } = state
-	if (!isInitialized) return true
-	return false
+	return !isInitialized
 }
 
 export const fetchAuthDataIfNeeded = () => (dispatch, getState) => {

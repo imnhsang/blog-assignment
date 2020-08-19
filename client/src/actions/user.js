@@ -22,17 +22,16 @@ export const failedRequestUserData = () => ({
 const fetchUserData = async (uid) => (dispatch) => {
 	dispatch(requestUserData())
 	try {
-    const res = api.get(`/user/${uid}`)
-    console.log(res)
+		const res = api.get(`/user/${uid}`)
+		console.log(res)
 	} catch (err) {
-    console.log(err)
-  }
+		console.log(err)
+	}
 }
 
 const shouldFetchUserData = (state) => {
 	const { isInitialized } = state
-	if (!isInitialized) return true
-	return false
+	return !isInitialized
 }
 
 export const fetchUserDataIfNeeded = (uid) => (dispatch, getState) => {
