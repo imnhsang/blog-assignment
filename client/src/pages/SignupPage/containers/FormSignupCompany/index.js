@@ -37,7 +37,6 @@ const FormSingupCompany = ({ onSignup }) => {
 	}
 
 	const validateInputText = (name, value) => {
-		console.log(name, value.length)
 		if (value.length === 0) {
 			setErrors({
 				...errors,

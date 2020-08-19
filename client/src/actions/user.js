@@ -22,9 +22,8 @@ export const failedRequestUserData = () => ({
 const fetchUserData = async (uid) => (dispatch) => {
 	dispatch(requestUserData())
 	try {
-    const res = await api.get(`/user/${uid}`)
+    const res = api.get(`/user/${uid}`)
     console.log(res)
-
 	} catch (err) {
     console.log(err)
   }
