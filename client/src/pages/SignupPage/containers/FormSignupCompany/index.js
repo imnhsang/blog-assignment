@@ -70,9 +70,7 @@ const FormSingupCompany = ({ signup }) => {
 			}
 		})
 
-		if (formInformation.email.length === 0) {
-			errorsValidateForm.email = 'Email address is required'
-		} else if (validateEmail(formInformation.email)) {
+		if (validateEmail(formInformation.email)) {
 			errorsValidateForm.email = 'Invalid email address'
 		}
 
