@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Icon, Dropdown } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { signout } from 'redux/services/auth'
+import { fetchUserDataIfNeeded } from 'redux/services/user'
+import { getUIDFromStorage } from 'utils'
 
 import Logo from 'components/Logo/CompanyWhite'
 import ButtonRequest from 'components/Button/Default'
 
 import './style.scss'
 
-function HeaderPage({ type, signout }) {
+function HeaderPage({ type, signout, fetchUserDataIfNeeded }) {
 	const [classNameHeader, setClassNameHeader] = useState('')
 	const [classNameHamburger, setClassNameHamburger] = useState('')
 	const [signoutOpen, setSignoutOpen] = useState(false)
 	const history = useHistory()
 
-	const name = 'Leo'
 	const categories = [
 		'LEADERSHIP',
 		'COACHING',
@@ -34,6 +35,14 @@ function HeaderPage({ type, signout }) {
 			window.removeEventListener('scroll', handleScroll)
 		}
 	}, [])
+
+	useEffect(() => {
+		if (type === 'member') {
+			fetchUserDataIfNeeded(getUIDFromStorage())
+		}
+	})
+
+	const user = useSelector((state) => state.user.user)
 
 	const handleScroll = () => {
 		if (window.pageYOffset > 0) {
@@ -158,10 +167,10 @@ function HeaderPage({ type, signout }) {
 								onClick={() => setSignoutOpen(!signoutOpen)}
 							>
 								<div className='profile-nav__avatar'>
-									<span>{name[0]}</span>
+									<span>{user && user.firstname[0]}</span>
 								</div>
 								<div className='profile-nav__name'>
-									<span>{name}</span>
+									<span>{user && user.firstname}</span>
 								</div>
 								<div className='profile-nav__arrow'>
 									<Icon name='angle down' />
@@ -212,6 +221,7 @@ function HeaderPage({ type, signout }) {
 
 const actionCreators = {
 	signout,
+	fetchUserDataIfNeeded,
 }
 
-export default connect(null,actionCreators)(HeaderPage)
+export default connect(null, actionCreators)(HeaderPage)

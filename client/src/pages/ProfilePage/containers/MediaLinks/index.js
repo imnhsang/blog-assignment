@@ -3,7 +3,7 @@ import { Icon } from 'semantic-ui-react'
 
 import './style.scss'
 
-const MediaLinks = () => {
+const MediaLinks = ({ user }) => {
 	return (
 		<div className='media-links'>
 			<div className='media-links__header'>
@@ -12,7 +12,9 @@ const MediaLinks = () => {
 			</div>
 			<div className='media-links__information'>
 				<div className='media-links__information__signature'>
-					<a href='/'>Nguyen Hoang Sang ft. Leo Nguyen</a>
+					<a href='/'>
+						Nguyen Hoang Sang ft. {user && `${user.firstname} ${user.lastname}`}
+					</a>
 				</div>
 				<div className='media-links__information__social'>
 					<p className='media-links__information__social__title'>
@@ -22,7 +24,7 @@ const MediaLinks = () => {
 						<a href='/'>
 							<Icon name='facebook f' color='black' />
 						</a>
-            <a href='/'>
+						<a href='/'>
 							<Icon name='twitter' color='black' />
 						</a>
 					</div>
