@@ -3,7 +3,7 @@ import { Tab } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { isAuthenticated } from 'utils'
+// import { isAuthenticated } from 'utils'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
@@ -13,13 +13,13 @@ import FormSignupIndividual from 'pages/SignupPage/containers/FormSignupIndividu
 import './style.scss'
 
 const SignupPage = () => {
-	const uid = useSelector((state) => state.auth.uid)
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 	const panes = [
 		{ menuItem: 'COMPANY SIGN UP', render: () => <FormSignupCompany /> },
 		{ menuItem: 'INDIVIDUAL SIGN UP', render: () => <FormSignupIndividual /> },
 	]
 
-	if (uid || isAuthenticated()) {
+	if (isAuthenticated) {
 		return <Redirect to='/profile' />
 	}
 

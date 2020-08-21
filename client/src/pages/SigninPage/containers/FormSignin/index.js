@@ -1,8 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import useMergeState from 'hooks/useMergeState'
 import { Redirect, useHistory } from 'react-router-dom'
 
-import { validateEmail, isAuthenticated } from 'utils'
+import { validateEmail } from 'utils'
 
 import InputEmail from 'components/Input/Default'
 import InputPassword from 'components/Input/Default'
@@ -74,7 +75,8 @@ const FormSignin = ({ onLogin }) => {
 		}
 	}
 
-	if (isAuthenticated()) {
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+	if (isAuthenticated) {
 		return <Redirect to='/profile' />
 	}
 

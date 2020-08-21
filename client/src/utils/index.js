@@ -15,10 +15,6 @@ export const getUIDFromStorage = () => {
 	return uid
 }
 
-export const isAuthenticated = () => {
-	return getUIDFromStorage()
-}
-
 export const clearStorage = () => {
 	localStorage.clear()
 }
