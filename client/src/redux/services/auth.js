@@ -46,6 +46,8 @@ export const signout = () => async (dispatch) => {
 
 export const signup = (inforUser) => async (dispatch) => {
 	try {
+		dispatch(requestAuth())
+
 		const body = {
 			email: inforUser.email,
 			firstname: inforUser.firstname,
@@ -63,6 +65,6 @@ export const signup = (inforUser) => async (dispatch) => {
 			dispatch(responseSignupFail(errors[0].msg))
 		}
 	} catch (error) {
-		dispatch(responseSignoutFail(error.response.data.errors[0].msg))
+		dispatch(responseSignupFail(error.response.data.errors[0].msg))
 	}
 }

@@ -71,8 +71,8 @@ const FormSignin = ({ onLogin }) => {
 		}
 	}
 
-	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
-	if (isAuthenticated) {
+	const auth = useSelector((state) => state.auth)
+	if (auth.isAuthenticated) {
 		return <Redirect to='/profile' />
 	}
 
@@ -103,7 +103,13 @@ const FormSignin = ({ onLogin }) => {
 				<CheckBoxDefault text='Remember Me' />
 				<a href='/'>Forgot password?</a>
 			</div>
-			<ButtonSign fluid name='LOG IN' small onClick={handleOnLogin} />
+			<ButtonSign
+				fluid
+				name='LOG IN'
+				small
+				onClick={handleOnLogin}
+				loading={auth.loading}
+			/>
 			<span className='mt-1'>
 				Don&#39;t have an account?&nbsp;&nbsp;
 				<span onClick={() => history.push('/signup')}>Sign up</span>

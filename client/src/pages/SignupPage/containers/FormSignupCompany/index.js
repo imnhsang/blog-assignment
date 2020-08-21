@@ -1,6 +1,6 @@
 import React from 'react'
 import useMergeState from 'hooks/useMergeState'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { signup } from 'redux/services/auth'
@@ -23,7 +23,7 @@ const FormSingupCompany = ({ signup }) => {
 	})
 	const [errors, setErrors] = useMergeState({})
 	const history = useHistory()
-
+	const loading = useSelector((state) => state.auth.loading)
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
 
 	const validateInputEmail = (value) => {
@@ -182,7 +182,13 @@ const FormSingupCompany = ({ signup }) => {
 					text='Yes! I understand an agree to the lorem4skill terms of service'
 				/>
 			</div>
-			<ButtonSign fluid name='GET STARTED' small onClick={handleOnSignup} />
+			<ButtonSign
+				fluid
+				name='GET STARTED'
+				small
+				onClick={handleOnSignup}
+				loading={loading}
+			/>
 			<span className='mt-1'>
 				Already have an account?&nbsp;&nbsp;
 				<span onClick={() => history.push('/login')}>Sign in</span>
