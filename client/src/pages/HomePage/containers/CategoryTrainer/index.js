@@ -6,7 +6,7 @@ import Button from 'components/Button/TransparentArrowDown'
 import './style.scss'
 
 const AreaCategoryTrainer = () => {
-	const categories = [
+	const listCategory = [
 		{
 			name: 'user outline',
 			title: 'LEADERSHIP',
@@ -54,7 +54,7 @@ const AreaCategoryTrainer = () => {
 				GAIN ACESS TO A NETWORK OF TOP TRAINERS
 			</p>
 			<div className='row area-category-trainer__list-category'>
-				{categories.map((e, inx) => (
+				{listCategory.map((e, inx) => (
 					<ItemCategoryTrainer
 						name={e.name}
 						title={e.title}

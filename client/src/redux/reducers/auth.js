@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-import { Auth } from '../constants/actionTypes'
+import { Auth } from '../../constants/actionTypes'
 import { setUIDToStorage, clearStorage, getUIDFromStorage } from 'utils'
 
 const initialState = {

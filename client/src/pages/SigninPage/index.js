@@ -7,7 +7,7 @@ import FormSignin from 'pages/SigninPage/containers/FormSignin'
 
 import './style.scss'
 
-import { loginWithEmailPassword } from 'services/auth'
+import { loginWithEmailPassword } from 'redux/services/auth'
 
 const SigninPage = ({ loginWithEmailPassword }) => {
 	return (

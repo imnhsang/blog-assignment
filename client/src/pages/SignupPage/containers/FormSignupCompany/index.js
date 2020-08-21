@@ -3,7 +3,7 @@ import useMergeState from 'hooks/useMergeState'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { signup } from 'services/auth'
+import { signup } from 'redux/services/auth'
 import { validateEmail, uppercaseFirstLetter } from 'utils'
 
 import Input from 'components/Input/Default'

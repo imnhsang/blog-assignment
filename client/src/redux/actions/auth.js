@@ -1,4 +1,4 @@
-import { Auth } from '../constants/actionTypes'
+import { Auth } from '../../constants/actionTypes'
 
 export const requestAuth = () => ({
 	type: Auth.REQUEST_AUTH,

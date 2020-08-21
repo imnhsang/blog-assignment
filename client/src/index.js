@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore, applyMiddleware } from 'redux'
 
 import App from './App'
-import rootReducer from './reducers'
+import rootReducer from 'redux/store'
 
 import 'semantic-ui-css/semantic.min.css'
 import 'assets/stylesheets/global.scss'

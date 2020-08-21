@@ -1,4 +1,4 @@
-import { User } from '../constants/actionTypes'
+import { User } from '../../constants/actionTypes'
 import api from 'api'
 
 export const initializedUserData = (status) => ({

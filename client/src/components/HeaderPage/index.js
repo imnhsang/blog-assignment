@@ -3,7 +3,7 @@ import { Icon, Dropdown } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { signout } from 'services/auth'
+import { signout } from 'redux/services/auth'
 
 import Logo from 'components/Logo/CompanyWhite'
 import ButtonRequest from 'components/Button/Default'

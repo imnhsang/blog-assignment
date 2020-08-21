@@ -1,6 +1,6 @@
 import toast from 'react-toastify'
 
-import { User } from '../constants/actionTypes'
+import { User } from '../../constants/actionTypes'
 
 const initialState = {
 	user: null,
