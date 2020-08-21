@@ -18,9 +18,7 @@ const FormSignin = ({ onLogin }) => {
 	const history = useHistory()
 
 	const validateInputEmail = (value) => {
-		if (value.length === 0) {
-			setErrors({ email: 'Email address is required' })
-		} else if (validateEmail(value)) {
+		if (validateEmail(value)) {
 			setErrors({ email: 'Invalid email address' })
 		} else {
 			setErrors({ email: '' })
@@ -40,9 +38,7 @@ const FormSignin = ({ onLogin }) => {
 		if (formState.password.length === 0) {
 			errorsValidateForm.password = 'Password is required'
 		}
-		if (formState.email.length === 0) {
-			errorsValidateForm.email = 'Email address is required'
-		} else if (validateEmail(formState.email)) {
+		if (validateEmail(formState.email)) {
 			errorsValidateForm.email = 'Invalid email address'
 		}
 		if (JSON.stringify(errorsValidateForm) === '{}') {

@@ -27,9 +27,7 @@ const FormSingupCompany = ({ signup }) => {
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
 
 	const validateInputEmail = (value) => {
-		if (value.length === 0) {
-			setErrors({ email: 'Email address is required' })
-		} else if (validateEmail(value)) {
+		if (validateEmail(value)) {
 			setErrors({ email: 'Invalid email address' })
 		} else {
 			setErrors({ email: '' })
