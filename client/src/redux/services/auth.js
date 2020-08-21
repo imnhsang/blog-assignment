@@ -25,7 +25,6 @@ export const loginWithEmailPassword = (email, password) => async (dispatch) => {
 			dispatch(responseLoginFail(errors[0].msg))
 		}
 	} catch (error) {
-		console.log(error)
 		dispatch(responseLoginFail(error.response.data.errors[0].msg))
 	}
 }
