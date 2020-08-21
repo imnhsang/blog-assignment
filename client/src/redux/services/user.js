@@ -1,7 +1,7 @@
 import {
 	requestUserData,
 	receiveUserData,
-	failedRequestUserData,
+	responseUserDataFail,
 } from '../actions/user'
 import api from 'api'
 import { isSuccess } from 'helpers'
@@ -16,10 +16,10 @@ const fetchUserData = (uid) => async (dispatch) => {
 			dispatch(receiveUserData(data.data))
 		} else {
 			const { errors } = res.data
-			dispatch(failedRequestUserData(errors[0].msg))
+			dispatch(responseUserDataFail(errors[0].msg))
 		}
 	} catch (error) {
-		dispatch(failedRequestUserData(error.response.data.errors[0].msg))
+		dispatch(responseUserDataFail(error.response.data.errors[0].msg))
 	}
 }
 
@@ -32,5 +32,5 @@ export const fetchUserDataIfNeeded = (uid) => (dispatch, getState) => {
 	if (shouldFetchUserData(getState().user)) {
 		return dispatch(fetchUserData(uid))
 	}
-	return Promise.resolve()
+	return true
 }

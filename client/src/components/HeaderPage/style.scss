@@ -382,6 +382,7 @@
 					i {
 						color: $blue-black;
 						font-size: 1.125rem;
+						text-transform: uppercase;
 						@include responsive(tablet) {
 							color: $white;
 						}

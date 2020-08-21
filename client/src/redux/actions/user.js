@@ -9,7 +9,7 @@ export const receiveUserData = (user) => ({
 	payload: { user },
 })
 
-export const failedRequestUserData = () => ({
-	type: User.FAILED_REQUEST_USER_DATA,
+export const responseUserDataFail = () => ({
+	type: User.RESPONSE_USER_DATA_FAIL,
 })
 

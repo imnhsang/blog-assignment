@@ -18,17 +18,6 @@ function HeaderPage({ type, signout, fetchUserDataIfNeeded }) {
 	const [signoutOpen, setSignoutOpen] = useState(false)
 	const history = useHistory()
 
-	const categories = [
-		'LEADERSHIP',
-		'COACHING',
-		'SALES',
-		'PUBLIC SPEAKING',
-		'TEAM BUILDING',
-		'MANAGEMENT',
-		'FINANCE',
-		'MARKETING',
-	]
-
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
 		return () => {
@@ -43,6 +32,7 @@ function HeaderPage({ type, signout, fetchUserDataIfNeeded }) {
 	})
 
 	const user = useSelector((state) => state.user.user)
+	const listCategory = useSelector((state) => state.category.listCategory)
 
 	const handleScroll = () => {
 		if (window.pageYOffset > 0) {
@@ -119,9 +109,10 @@ function HeaderPage({ type, signout, fetchUserDataIfNeeded }) {
 							<li>
 								<Dropdown text='CATEGORIES' pointing='top'>
 									<Dropdown.Menu>
-										{categories.map((e, inx) => (
-											<Dropdown.Item key={inx} text={e} />
-										))}
+										{listCategory &&
+											listCategory.map((e, inx) => (
+												<Dropdown.Item key={inx} text={e.title} />
+											))}
 									</Dropdown.Menu>
 								</Dropdown>
 							</li>

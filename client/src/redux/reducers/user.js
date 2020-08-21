@@ -30,7 +30,7 @@ const user = (state = initialState, action) => {
 				user: action.payload.user,
 				isInitialized: true,
 			}
-		case User.FAILED_REQUEST_USER_DATA:
+		case User.RESPONSE_USER_DATA_FAIL:
 			failToastify(action.payload.err)
 			return { ...state, loading: false }
 		default:

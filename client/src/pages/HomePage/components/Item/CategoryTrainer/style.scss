@@ -24,7 +24,8 @@
 			font-weight: 700;
 			margin-bottom: 1.25rem !important;
 			font-size: 1.25rem !important;
-			@include responsive(small-mobile){
+			text-transform: uppercase;
+			@include responsive(small-mobile) {
 				font-size: 1.125rem !important;
 			}
 		}
@@ -32,7 +33,7 @@
 			color: #767676;
 			font-size: 1.25rem;
 			line-height: 1.75rem;
-			@include responsive(small-mobile){
+			@include responsive(small-mobile) {
 				font-size: 1.125rem;
 			}
 		}

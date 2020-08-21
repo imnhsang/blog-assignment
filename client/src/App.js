@@ -24,7 +24,7 @@ function App() {
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/signup' component={Signup} />
 					<Route exact path='/blog' component={Blog} />
-					<Route exact path='/blog/category' component={BlogCategory} />
+					<Route exact path='/blog/:category' component={BlogCategory} />
 					<Route exact path='/blog/detail' component={BlogDetail} />
 					<Route exact path='*' component={Home} />
 				</Switch>

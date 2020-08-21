@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect, useSelector } from 'react-redux'
+
+import { fetchListCategoryDataIfNeeded } from 'redux/services/category'
 
 import WelcomeArea from 'pages/HomePage/containers/WelcomeCompany'
 import PartnerArea from 'pages/HomePage/containers/PartnerCompany'
@@ -10,7 +13,12 @@ import CreateAccountArea from 'containers/CreateAccount'
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
 
-function HomePage() {
+function HomePage({ fetchListCategoryDataIfNeeded }) {
+	useEffect(() => {
+		fetchListCategoryDataIfNeeded()
+	}, [fetchListCategoryDataIfNeeded])
+
+	const listCategory = useSelector((state) => state.category.listCategory)
 	return (
 		<div>
 			<Header type='guess' />
@@ -18,7 +26,7 @@ function HomePage() {
 			<PartnerArea />
 			<ServiceArea />
 			<QuoteArea />
-			<CategoryTrainerArea />
+			<CategoryTrainerArea data={listCategory} />
 			<ProcessArea />
 			<CreateAccountArea
 				title='	START HIRING BEST-IN-CLASS CORPORATE TRAINERS WITH LOREM4SKILL'
@@ -31,4 +39,6 @@ function HomePage() {
 	)
 }
 
-export default HomePage
+const actionCreators = { fetchListCategoryDataIfNeeded }
+
+export default connect(null, actionCreators)(HomePage)

@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+
+import { fetchListCategoryDataIfNeeded } from 'redux/services/category'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
@@ -9,7 +12,11 @@ import Button from 'components/Button/TransparentArrowDown'
 
 import './style.scss'
 
-const BlogPage = () => {
+const BlogPage = ({ fetchListCategoryDataIfNeeded }) => {
+	useEffect(() => {
+		fetchListCategoryDataIfNeeded()
+	}, [fetchListCategoryDataIfNeeded])
+
 	return (
 		<div className='blog-page'>
 			<Header type='blog' />
@@ -48,4 +55,6 @@ const BlogPage = () => {
 	)
 }
 
-export default BlogPage
+const actionCreators = { fetchListCategoryDataIfNeeded }
+
+export default connect(null, actionCreators)(BlogPage)
