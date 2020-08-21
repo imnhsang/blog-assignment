@@ -4,7 +4,7 @@ import { Auth } from '../constants/actionTypes'
 import { setUIDToStorage, clearStorage, getUIDFromStorage } from 'utils'
 
 const initialState = {
-	isAuthenticated: getUIDFromStorage() ? true : false,
+	isAuthenticated: !!getUIDFromStorage(),
 	loading: false,
 }
 
