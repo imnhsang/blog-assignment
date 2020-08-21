@@ -1,0 +1,47 @@
+@import 'src/assets/stylesheets/variables';
+
+.input-default {
+	margin-bottom: 1rem;
+	position: relative;
+	p {
+		text-transform: uppercase;
+		text-align: left;
+		width: 100%;
+		margin: 0;
+		position: absolute;
+		transform: translate(0, 30%);
+		transition: all 0.3s;
+		color: $gray;
+		opacity: 0;
+		z-index: 1;
+		font-size: 0.75rem;
+		&.error {
+			color: $red;
+			text-transform: none;
+		}
+	}
+	input {
+		position: relative;
+		z-index: 2;
+		width: 100%;
+		border: none;
+		border-bottom: $gray 1px solid;
+		outline: none;
+		padding: 6px 0 4px 0;
+		font-size: 1.125rem;
+		color: $black;
+		&:hover,
+		&.focus-input {
+			border-color: $blue;
+		}
+		&.error {
+			border-color: $red;
+		}
+	}
+	&.focus-input {
+		p {
+			opacity: 1;
+			transform: translate(0, -90%);
+		}
+	}
+}
