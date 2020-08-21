@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useMergeState from 'hooks/useMergeState'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { signup } from 'actions/auth'
-import { validateEmail } from 'utils'
+import { signup } from 'services/auth'
+import { validateEmail, uppercaseFirstLetter } from 'utils'
 
 import Input from 'components/Input/Default'
 import Select from 'components/Select/Default'
@@ -13,7 +13,7 @@ import ButtonSign from 'components/Button/ArrowRight'
 
 import './style.scss'
 
-const FormSingupCompany = ({ onSignup }) => {
+const FormSingupCompany = ({ signup }) => {
 	const [formInformation, setFormInformation] = useMergeState({
 		firstname: '',
 		lastname: '',
@@ -21,18 +21,18 @@ const FormSingupCompany = ({ onSignup }) => {
 		password: '',
 		country: '',
 	})
-	const [errors, setErrors] = useState({})
+	const [errors, setErrors] = useMergeState({})
 	const history = useHistory()
 
 	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
 
 	const validateInputEmail = (value) => {
 		if (value.length === 0) {
-			setErrors({ ...errors, email: 'Email address is required' })
+			setErrors({ email: 'Email address is required' })
 		} else if (validateEmail(value)) {
-			setErrors({ ...errors, email: 'Invalid email address' })
+			setErrors({ email: 'Invalid email address' })
 		} else {
-			setErrors({ ...errors, email: '' })
+			setErrors({ email: '' })
 		}
 	}
 
@@ -63,21 +63,12 @@ const FormSingupCompany = ({ onSignup }) => {
 
 	const validateForm = () => {
 		const errorsValidateForm = {}
-		if (formInformation.firstname.length === 0) {
-			errorsValidateForm.firstname = 'Firstname is required'
-		}
-
-		if (formInformation.lastname.length === 0) {
-			errorsValidateForm.lastname = 'Lastname is required'
-		}
-
-		if (formInformation.country.length === 0) {
-			errorsValidateForm.country = 'Country is required'
-		}
-
-		if (formInformation.password.length === 0) {
-			errorsValidateForm.password = 'Password is required'
-		}
+		const fields = ['firstname', 'lastname', 'country', 'password']
+		fields.forEach((field) => {
+			if (formInformation[field].length === 0) {
+				errorsValidateForm[field] = `${uppercaseFirstLetter(field)} is required`
+			}
+		})
 
 		if (formInformation.email.length === 0) {
 			errorsValidateForm.email = 'Email address is required'
@@ -99,7 +90,7 @@ const FormSingupCompany = ({ onSignup }) => {
 
 	const handleOnSignup = () => {
 		if (validateForm()) {
-			onSignup(formInformation)
+			signup(formInformation)
 		}
 	}
 
@@ -204,8 +195,8 @@ const FormSingupCompany = ({ onSignup }) => {
 	)
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	onSignup: (informationUser) => dispatch(signup(informationUser)),
-})
+const actionCreators = {
+	signup,
+}
 
-export default connect(null, mapDispatchToProps)(FormSingupCompany)
+export default connect(null, actionCreators)(FormSingupCompany)

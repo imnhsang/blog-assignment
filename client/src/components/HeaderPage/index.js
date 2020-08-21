@@ -3,14 +3,14 @@ import { Icon, Dropdown } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { signout } from 'actions/auth'
+import { signout } from 'services/auth'
 
 import Logo from 'components/Logo/CompanyWhite'
 import ButtonRequest from 'components/Button/Default'
 
 import './style.scss'
 
-function HeaderPage({ type, onSignout }) {
+function HeaderPage({ type, signout }) {
 	const [classNameHeader, setClassNameHeader] = useState('')
 	const [classNameHamburger, setClassNameHamburger] = useState('')
 	const [signoutOpen, setSignoutOpen] = useState(false)
@@ -168,7 +168,7 @@ function HeaderPage({ type, onSignout }) {
 								</div>
 								{signoutOpen && (
 									<div className='profile-nav__dropdown'>
-										<li onClick={onSignout}>LOG OUT</li>
+										<li onClick={signout}>LOG OUT</li>
 									</div>
 								)}
 							</div>
@@ -210,8 +210,8 @@ function HeaderPage({ type, onSignout }) {
 	)
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	onSignout: () => dispatch(signout()),
-})
+const actionCreators = {
+	signout,
+}
 
-export default connect(null, mapDispatchToProps)(HeaderPage)
+export default connect(null,actionCreators)(HeaderPage)

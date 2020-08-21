@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useMergeState from 'hooks/useMergeState'
 import { Redirect, useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
-import { validateEmail } from 'utils'
+import { validateEmail, isAuthenticated } from 'utils'
 
 import InputEmail from 'components/Input/Default'
 import InputPassword from 'components/Input/Default'
@@ -13,27 +12,25 @@ import ButtonSign from 'components/Button/ArrowRight'
 import './style.scss'
 
 const FormSignin = ({ onLogin }) => {
-	const uid = useSelector((state) => state.auth.uid)
-
 	const [formState, setFormState] = useMergeState({ email: '', password: '' })
-	const [errors, setErrors] = useState({})
+	const [errors, setErrors] = useMergeState({ email: '', password: '' })
 	const history = useHistory()
 
 	const validateInputEmail = (value) => {
 		if (value.length === 0) {
-			setErrors({ ...errors, email: 'Email address is required' })
+			setErrors({ email: 'Email address is required' })
 		} else if (validateEmail(value)) {
-			setErrors({ ...errors, email: 'Invalid email address' })
+			setErrors({ email: 'Invalid email address' })
 		} else {
-			setErrors({ ...errors, email: '' })
+			setErrors({ email: '' })
 		}
 	}
 
 	const validateInputPassword = (value) => {
 		if (value.length === 0) {
-			setErrors({ ...errors, password: 'Password is required' })
+			setErrors({ password: 'Password is required' })
 		} else {
-			setErrors({ ...errors, password: '' })
+			setErrors({ password: '' })
 		}
 	}
 
@@ -77,7 +74,7 @@ const FormSignin = ({ onLogin }) => {
 		}
 	}
 
-	if (uid) {
+	if (isAuthenticated()) {
 		return <Redirect to='/profile' />
 	}
 

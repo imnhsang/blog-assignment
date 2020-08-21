@@ -1,7 +1,6 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import Scrollspy from 'react-scrollspy'
-import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import Header from 'components/HeaderPage'
@@ -13,6 +12,7 @@ import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
 
 import './style.scss'
+import { isAuthenticated } from 'utils'
 
 const ProfilePage = () => {
 	const careers = [
@@ -58,9 +58,7 @@ const ProfilePage = () => {
 		},
 	]
 
-	const uid = useSelector((state) => state.auth.uid)
-
-	if (!uid) {
+	if (!isAuthenticated()) {
 		return <Redirect to='/login' />
 	}
 

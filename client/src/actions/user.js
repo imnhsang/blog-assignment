@@ -38,5 +38,5 @@ export const fetchUserDataIfNeeded = (uid) => (dispatch, getState) => {
 	if (shouldFetchUserData(getState().user)) {
 		return dispatch(fetchUserData(uid))
 	}
-	return Promise.resolve()
+	return true
 }

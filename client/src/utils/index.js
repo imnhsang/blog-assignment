@@ -6,25 +6,29 @@ export const lengthToArrayBoolean = (length) => {
 	return Array(length).fill(true, 0, 1)
 }
 
-export function setAccountToStorage(id) {
-	localStorage.setItem('account', id)
+export const setUIDToStorage = (uid) => {
+	localStorage.setItem('uid', uid)
 }
 
-export const getAccountFromStorage = () => {
-	const account = localStorage.getItem('account')
-	return account
+export const getUIDFromStorage = () => {
+	const uid = localStorage.getItem('uid')
+	return uid
 }
 
 export const isAuthenticated = () => {
-	return getAccountFromStorage()
+	return getUIDFromStorage()
 }
 
 export const clearStorage = () => {
 	localStorage.clear()
 }
 
-export function objectToQueryString(obj) {
+export const objectToQueryString = (obj) => {
 	return Object.keys(obj)
 		.map((key) => `${key}=${obj[key]}`)
 		.join('&')
+}
+
+export const uppercaseFirstLetter = (letter) => {
+	return letter.charAt(0).toUpperCase() + letter.slice(1)
 }

@@ -1,106 +1,34 @@
 import { Auth } from '../constants/actionTypes'
-import api from 'api'
 
-export const initializedAuthData = (status) => ({
-	type: Auth.INITIALIZED_AUTH_DATA,
-	payload: { status },
-})
-
-export const requestAuthData = () => ({
+export const requestAuth = () => ({
 	type: Auth.REQUEST_AUTH,
 })
 
-export const requestSign = () => ({
-	type: Auth.REQUEST_SIGN,
-})
-
-export const receiveAuthData = (uid) => ({
-	type: Auth.RECEIVE_AUTH_DATA,
+export const responseLoginSuccess = (uid) => ({
+	type: Auth.LOGIN_SUCCESS,
 	payload: { uid },
 })
 
-export const loginWithEmailPassword = (email, password) => async (dispatch) => {
-	dispatch(requestSign())
+export const responseLoginFail = (err) => ({
+	type: Auth.LOGIN_FAIL,
+	payload: { err },
+})
 
-	const body = { email, password }
-	const res = await api.post('/auth/signin-emailpassword', body)
+export const responseSignoutSuccess = () => ({
+	type: Auth.SIGNOUT_SUCCESS,
+})
 
-	const { status, data } = res
+export const responseSignoutFail = (err) => ({
+	type: Auth.SIGNOUT_FAIL,
+	payload: { err },
+})
 
-	if (status === 200) {
-		return dispatch({
-			type: Auth.LOGIN_SUCCESS,
-			payload: { uid: data.data.uid },
-		})
-	} else {
-		const { errors } = data
-		return dispatch({ type: Auth.LOGIN_FAIL, payload: { err: errors[0].msg } })
-	}
-}
+export const responseSignupSuccess = (uid) => ({
+	type: Auth.SIGNUP_SUCCESS,
+	payload: { uid },
+})
 
-export const signout = () => async (dispatch) => {
-	const res = await api.post('/auth/signout')
-
-	const { status, data } = res
-
-	if (status === 200) {
-		return dispatch({ type: Auth.SIGNOUT_SUCCESS })
-	} else {
-		const { errors } = data
-		return dispatch({
-			type: Auth.SIGNOUT_FAIL,
-			payload: { err: errors[0].msg },
-		})
-	}
-}
-
-export const signup = (inforUser) => async (dispatch) => {
-	const body = {
-		email: inforUser.email,
-		firstname: inforUser.firstname,
-		lastname: inforUser.lastname,
-		password: inforUser.password,
-		country: inforUser.country,
-	}
-
-	const res = await api.post('/auth/signup', body)
-
-	const { status, data } = res
-
-	if (status === 201) {
-		return dispatch({
-			type: Auth.SIGNUP_SUCCESS,
-			payload: { uid: data.data.uid },
-		})
-	} else {
-		const { errors } = data
-		dispatch({ type: Auth.SIGNUP_FAIL, payload: { err: errors[0].msg } })
-	}
-}
-
-const fetchAuthData = () => async (dispatch) => {
-	// dispatch(requestAuthData())
-
-	const res = await api.post('/auth/currently-signedin')
-
-	const { status, data } = res
-
-	if (status === 200) {
-		dispatch(receiveAuthData(data.data.uid))
-		dispatch(initializedAuthData(true))
-	} else {
-		dispatch(initializedAuthData(true))
-	}
-}
-
-const shouldFetchAuthData = (state) => {
-	const { isInitialized } = state
-	return !isInitialized
-}
-
-export const fetchAuthDataIfNeeded = () => (dispatch, getState) => {
-	if (shouldFetchAuthData(getState().auth)) {
-		return dispatch(fetchAuthData())
-	}
-	return Promise.resolve()
-}
+export const responseSignupFail = (err) => ({
+	type: Auth.SIGNUP_FAIL,
+	payload: { err },
+})

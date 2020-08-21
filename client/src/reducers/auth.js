@@ -1,12 +1,10 @@
 import { toast } from 'react-toastify'
 
 import { Auth } from '../constants/actionTypes'
+import { setUIDToStorage, clearStorage } from 'utils'
 
 const initialState = {
-	uid: null,
-	isInitialized: false,
-	loadingAuth: true,
-	loadingSign: false,
+	loading: false,
 }
 
 const failToastify = (err) =>
@@ -23,32 +21,25 @@ const failToastify = (err) =>
 const auth = (state = initialState, action) => {
 	switch (action.type) {
 		case Auth.LOGIN_SUCCESS:
-			return { ...state, uid: action.payload.uid, loadingSign: false }
+			setUIDToStorage(action.payload.uid)
+			return { ...state, loading: false }
 		case Auth.LOGIN_FAIL:
 			failToastify(action.payload.err)
-			return { ...state, loadingSign: false }
+			return { ...state, loading: false }
 		case Auth.SIGNOUT_SUCCESS:
-			return { ...state, uid: null }
+			clearStorage()
+			return { ...state }
 		case Auth.SIGNOUT_FAIL:
 			failToastify(action.payload.err)
 			return { ...state }
 		case Auth.SIGNUP_SUCCESS:
-			return { ...state, uid: action.payload.uid }
+			setUIDToStorage(action.payload.uid)
+			return { ...state, loading: false }
 		case Auth.SIGNUP_FAIL:
 			failToastify(action.payload.err)
-			return { ...state }
+			return { ...state, loading: false }
 		case Auth.REQUEST_AUTH:
-			return { ...state, loadingAuth: true }
-		case Auth.REQUEST_SIGN:
-			return { ...state, loadingSign: true }
-		case Auth.RECEIVE_AUTH_DATA:
-			return { ...state, uid: action.payload.uid }
-		case Auth.INITIALIZED_AUTH_DATA:
-			return {
-				...state,
-				isInitialized: action.payload.status,
-				loadingAuth: false,
-			}
+			return { ...state, loading: true }
 		default:
 			return state
 	}

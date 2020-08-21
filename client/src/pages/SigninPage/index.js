@@ -7,15 +7,15 @@ import FormSignin from 'pages/SigninPage/containers/FormSignin'
 
 import './style.scss'
 
-import { loginWithEmailPassword } from 'actions/auth'
+import { loginWithEmailPassword } from 'services/auth'
 
-const SigninPage = ({ onLogin }) => {
+const SigninPage = ({ loginWithEmailPassword }) => {
 	return (
 		<>
 			<div className='signin-page'>
 				<Header />
 				<div className='flex justify-center items-center h-full mt-475'>
-					<FormSignin onLogin={onLogin} />
+					<FormSignin onLogin={loginWithEmailPassword} />
 				</div>
 				<Footer />
 			</div>
@@ -23,9 +23,8 @@ const SigninPage = ({ onLogin }) => {
 	)
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	onLogin: (email, password) =>
-		dispatch(loginWithEmailPassword(email, password)),
-})
+const actionCreators = {
+	loginWithEmailPassword,
+}
 
-export default connect(null, mapDispatchToProps)(SigninPage)
+export default connect(null, actionCreators)(SigninPage)
