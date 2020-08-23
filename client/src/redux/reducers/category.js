@@ -13,6 +13,7 @@ const category = (state = initialState, action) => {
 		case Category.RECEIVE_LIST_CATEGORY_DATA:
 			return {
 				...state,
+				isInitialized: true,
 				listCategory: action.payload.listCategory,
 				loading: false,
 			}

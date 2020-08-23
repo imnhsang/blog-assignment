@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 
 import { signout } from 'redux/services/auth'
 import { fetchUserDataIfNeeded } from 'redux/services/user'
+import { fetchListCategoryDataIfNeeded } from 'redux/services/category'
 import { getUIDFromStorage } from 'utils'
 
 import Logo from 'components/Logo/CompanyWhite'
@@ -12,7 +13,12 @@ import ButtonRequest from 'components/Button/Default'
 
 import './style.scss'
 
-function HeaderPage({ type, signout, fetchUserDataIfNeeded }) {
+function HeaderPage({
+	type,
+	signout,
+	fetchUserDataIfNeeded,
+	fetchListCategoryDataIfNeeded,
+}) {
 	const [classNameHeader, setClassNameHeader] = useState('')
 	const [classNameHamburger, setClassNameHamburger] = useState('')
 	const [signoutOpen, setSignoutOpen] = useState(false)
@@ -32,6 +38,13 @@ function HeaderPage({ type, signout, fetchUserDataIfNeeded }) {
 	})
 
 	const user = useSelector((state) => state.user.user)
+
+	useEffect(() => {
+		if (type === 'blog') {
+			fetchListCategoryDataIfNeeded()
+		}
+	})
+
 	const listCategory = useSelector((state) => state.category.listCategory)
 
 	const handleScroll = () => {
@@ -213,6 +226,7 @@ function HeaderPage({ type, signout, fetchUserDataIfNeeded }) {
 const actionCreators = {
 	signout,
 	fetchUserDataIfNeeded,
+	fetchListCategoryDataIfNeeded,
 }
 
 export default connect(null, actionCreators)(HeaderPage)

@@ -1,14 +1,14 @@
 import { Category } from '../../constants/actionTypes'
 
-export const requestListCategoryData = () => ({
+export const requestCategoryData = () => ({
 	type: Category.REQUEST_LIST_CATEGORY_DATA,
 })
 
-export const receiveListCategoryData = (listCategory) => ({
+export const receiveCategoryData = (listCategory) => ({
 	type: Category.RECEIVE_LIST_CATEGORY_DATA,
 	payload: { listCategory },
 })
 
-export const responseListCategoryDataFail = () => ({
+export const responseCategoryDataFail = () => ({
 	type: Category.RESPONSE_LIST_CATEGORY_DATA_FAIL,
 })

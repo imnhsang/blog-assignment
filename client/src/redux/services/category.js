@@ -1,26 +1,26 @@
 import {
-	receiveListCategoryData,
-	requestListCategoryData,
-	responseListCategoryDataFail,
+	receiveCategoryData,
+	requestCategoryData,
+	responseCategoryDataFail,
 } from '../actions/category'
 import api from 'api'
 import { isSuccess } from 'helpers'
 
 const fetchListCategoryData = () => async (dispatch) => {
 	try {
-		dispatch(requestListCategoryData())
+		dispatch(requestCategoryData())
 
 		const res = await api.get('/categories')
 
 		if (isSuccess(res)) {
 			const { data } = res
-			dispatch(receiveListCategoryData(data.data))
+			dispatch(receiveCategoryData(data.data))
 		} else {
 			const { errors } = res.data
-			dispatch(responseListCategoryDataFail(errors[0].msg))
+			dispatch(responseCategoryDataFail(errors[0].msg))
 		}
 	} catch (error) {
-		dispatch(responseListCategoryDataFail(error.response.data.errors[0].msg))
+		dispatch(responseCategoryDataFail(error.response.data.errors[0].msg))
 	}
 }
 

@@ -1,5 +1,10 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	useLocation,
+} from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -13,11 +18,22 @@ import Blog from 'pages/BlogPage'
 import BlogCategory from 'pages/BlogPage/BlogCategoryPage'
 import BlogDetail from 'pages/BlogPage/BlogDetailPage'
 
+function ScrollToTop() {
+	const { pathname } = useLocation()
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [pathname])
+
+	return null
+}
+
 function App() {
 	return (
 		<>
 			<ToastContainer />
 			<Router>
+				<ScrollToTop />
 				<Switch>
 					<PrivateRoute exact path='/profile' component={Profile} />
 					<Route exact path='/' component={Home} />
