@@ -57,7 +57,7 @@ const ProfilePage = () => {
 			topics: ['Non verbal communication', 'Understanding the audience'],
 		},
 	]
-	const user = useSelector((state) => state.user.user)
+	const profile = useSelector((state) => state.profile.profile)
 
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
@@ -68,7 +68,7 @@ const ProfilePage = () => {
 	return (
 		<div className='profile-page'>
 			<Header type='member' />
-			<CoverProfile user={user} />
+			<CoverProfile profile={profile} />
 			<Scrollspy
 				items={['career', 'skills', 'programs', 'clients', 'medialinks']}
 				currentClassName='active'
@@ -112,7 +112,7 @@ const ProfilePage = () => {
 				<span className='point' id='clients' />
 				<Highlights data={clients} name='CLIENTS' icon='users' />
 				<span className='point' id='medialinks' />
-				<MediaLinks user={user} />
+				<MediaLinks profile={profile} />
 				<div className='text-center'>
 					<ButtonEngage name='ENGAGE NOW' />
 				</div>

@@ -8,16 +8,16 @@ const initialState = {
 
 const category = (state = initialState, action) => {
 	switch (action.type) {
-		case Category.REQUEST_LIST_CATEGORY_DATA:
+		case Category.REQUEST_CATEGORY:
 			return { ...state, loading: true }
-		case Category.RECEIVE_LIST_CATEGORY_DATA:
+		case Category.GET_LIST_CATEGORY:
 			return {
 				...state,
 				isInitialized: true,
-				listCategory: action.payload.listCategory,
+				listCategory: action.payload.data,
 				loading: false,
 			}
-		case Category.RESPONSE_LIST_CATEGORY_DATA_FAIL:
+		case Category.CATEGORY_ERROR:
 			return {
 				...state,
 				loading: false,

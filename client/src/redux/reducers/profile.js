@@ -1,9 +1,9 @@
 import { toast } from 'react-toastify'
 
-import { User } from '../../constants/actionTypes'
+import { Profile } from '../../constants/actionTypes'
 
 const initialState = {
-	user: null,
+	profile: null,
 	isInitialized: false,
 	loading: false,
 }
@@ -19,18 +19,18 @@ const failToastify = (err) =>
 		progress: undefined,
 	})
 
-const user = (state = initialState, action) => {
+const profile = (state = initialState, action) => {
 	switch (action.type) {
-		case User.REQUEST_USER_DATA:
+		case Profile.REQUEST_PROFILE:
 			return { ...state, loading: true }
-		case User.RECEIVE_USER_DATA:
+		case Profile.GET_PROFILE:
 			return {
 				...state,
 				loading: false,
-				user: action.payload.user,
+				profile: action.payload.data,
 				isInitialized: true,
 			}
-		case User.RESPONSE_USER_DATA_FAIL:
+		case Profile.PROFILE_ERROR:
 			failToastify(action.payload.err)
 			return { ...state, loading: false }
 		default:
@@ -38,4 +38,4 @@ const user = (state = initialState, action) => {
 	}
 }
 
-export default user
+export default profile

@@ -4,31 +4,31 @@ export const requestAuth = () => ({
 	type: Auth.REQUEST_AUTH,
 })
 
-export const responseLoginSuccess = (uid) => ({
+export const loginSuccess = (uid) => ({
 	type: Auth.LOGIN_SUCCESS,
 	payload: { uid },
 })
 
-export const responseLoginFail = (err) => ({
+export const loginFail = (err) => ({
 	type: Auth.LOGIN_FAIL,
 	payload: { err },
 })
 
-export const responseSignoutSuccess = () => ({
+export const signoutSuccess = () => ({
 	type: Auth.SIGNOUT_SUCCESS,
 })
 
-export const responseSignoutFail = (err) => ({
+export const signoutFail = (err) => ({
 	type: Auth.SIGNOUT_FAIL,
 	payload: { err },
 })
 
-export const responseSignupSuccess = (uid) => ({
+export const signupSuccess = (uid) => ({
 	type: Auth.SIGNUP_SUCCESS,
 	payload: { uid },
 })
 
-export const responseSignupFail = (err) => ({
+export const signupFail = (err) => ({
 	type: Auth.SIGNUP_FAIL,
 	payload: { err },
 })

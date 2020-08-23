@@ -4,8 +4,8 @@ import { connect, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { signout } from 'redux/services/auth'
-import { fetchUserDataIfNeeded } from 'redux/services/user'
-import { fetchListCategoryDataIfNeeded } from 'redux/services/category'
+import { fetchProfileIfNeeded } from 'redux/services/profile'
+import { fetchListCategoryIfNeeded } from 'redux/services/category'
 import { getUIDFromStorage } from 'utils'
 
 import Logo from 'components/Logo/CompanyWhite'
@@ -16,8 +16,8 @@ import './style.scss'
 function HeaderPage({
 	type,
 	signout,
-	fetchUserDataIfNeeded,
-	fetchListCategoryDataIfNeeded,
+	fetchProfileIfNeeded,
+	fetchListCategoryIfNeeded,
 }) {
 	const [classNameHeader, setClassNameHeader] = useState('')
 	const [classNameHamburger, setClassNameHamburger] = useState('')
@@ -33,15 +33,15 @@ function HeaderPage({
 
 	useEffect(() => {
 		if (type === 'member') {
-			fetchUserDataIfNeeded(getUIDFromStorage())
+			fetchProfileIfNeeded(getUIDFromStorage())
 		}
 	})
 
-	const user = useSelector((state) => state.user.user)
+	const profile = useSelector((state) => state.profile.profile)
 
 	useEffect(() => {
 		if (type === 'blog') {
-			fetchListCategoryDataIfNeeded()
+			fetchListCategoryIfNeeded()
 		}
 	})
 
@@ -171,10 +171,10 @@ function HeaderPage({
 								onClick={() => setSignoutOpen(!signoutOpen)}
 							>
 								<div className='profile-nav__avatar'>
-									<span>{user && user.firstname[0]}</span>
+									<span>{profile && profile.firstname[0]}</span>
 								</div>
 								<div className='profile-nav__name'>
-									<span>{user && user.firstname}</span>
+									<span>{profile && profile.firstname}</span>
 								</div>
 								<div className='profile-nav__arrow'>
 									<Icon name='angle down' />
@@ -225,8 +225,8 @@ function HeaderPage({
 
 const actionCreators = {
 	signout,
-	fetchUserDataIfNeeded,
-	fetchListCategoryDataIfNeeded,
+	fetchProfileIfNeeded,
+	fetchListCategoryIfNeeded,
 }
 
 export default connect(null, actionCreators)(HeaderPage)

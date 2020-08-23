@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect, useSelector } from 'react-redux'
 
-import { fetchListCategoryDataIfNeeded } from 'redux/services/category'
+import { fetchListCategoryIfNeeded } from 'redux/services/category'
 
 import WelcomeArea from 'pages/HomePage/containers/WelcomeCompany'
 import PartnerArea from 'pages/HomePage/containers/PartnerCompany'
@@ -13,10 +13,10 @@ import CreateAccountArea from 'containers/CreateAccount'
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
 
-function HomePage({ fetchListCategoryDataIfNeeded }) {
+function HomePage({ fetchListCategoryIfNeeded }) {
 	useEffect(() => {
-		fetchListCategoryDataIfNeeded()
-	}, [fetchListCategoryDataIfNeeded])
+		fetchListCategoryIfNeeded()
+	}, [fetchListCategoryIfNeeded])
 
 	const listCategory = useSelector((state) => state.category.listCategory)
 	return (
@@ -39,6 +39,6 @@ function HomePage({ fetchListCategoryDataIfNeeded }) {
 	)
 }
 
-const actionCreators = { fetchListCategoryDataIfNeeded }
+const actionCreators = { fetchListCategoryIfNeeded }
 
 export default connect(null, actionCreators)(HomePage)
