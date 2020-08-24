@@ -28,3 +28,7 @@ export const objectToQueryString = (obj) => {
 export const uppercaseFirstLetter = (letter) => {
 	return letter.charAt(0).toUpperCase() + letter.slice(1)
 }
+
+export const convertContentToURL = (content) => {
+	return content.toLowerCase().replace(/\s/g, '-')
+}

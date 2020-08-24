@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { Icon, Dropdown } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { signout } from 'redux/services/auth'
+import { fetchProfileIfNeeded } from 'redux/services/profile'
+import { fetchListCategoryIfNeeded } from 'redux/services/category'
+import { getUIDFromStorage } from 'utils'
 
 import Logo from 'components/Logo/CompanyWhite'
 import ButtonRequest from 'components/Button/Default'
 
 import './style.scss'
 
-function HeaderPage({ type, signout }) {
+function HeaderPage({
+	type,
+	signout,
+	fetchProfileIfNeeded,
+	fetchListCategoryIfNeeded,
+}) {
 	const [classNameHeader, setClassNameHeader] = useState('')
 	const [classNameHamburger, setClassNameHamburger] = useState('')
 	const [signoutOpen, setSignoutOpen] = useState(false)
 	const history = useHistory()
-
-	const name = 'Leo'
-	const categories = [
-		'LEADERSHIP',
-		'COACHING',
-		'SALES',
-		'PUBLIC SPEAKING',
-		'TEAM BUILDING',
-		'MANAGEMENT',
-		'FINANCE',
-		'MARKETING',
-	]
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
@@ -34,6 +30,22 @@ function HeaderPage({ type, signout }) {
 			window.removeEventListener('scroll', handleScroll)
 		}
 	}, [])
+
+	useEffect(() => {
+		if (type === 'member') {
+			fetchProfileIfNeeded(getUIDFromStorage())
+		}
+	})
+
+	const profile = useSelector((state) => state.profile.profile)
+
+	useEffect(() => {
+		if (type === 'blog') {
+			fetchListCategoryIfNeeded()
+		}
+	})
+
+	const listCategory = useSelector((state) => state.category.listCategory)
 
 	const handleScroll = () => {
 		if (window.pageYOffset > 0) {
@@ -110,9 +122,10 @@ function HeaderPage({ type, signout }) {
 							<li>
 								<Dropdown text='CATEGORIES' pointing='top'>
 									<Dropdown.Menu>
-										{categories.map((e, inx) => (
-											<Dropdown.Item key={inx} text={e} />
-										))}
+										{listCategory &&
+											listCategory.map((e, inx) => (
+												<Dropdown.Item key={inx} text={e.title} />
+											))}
 									</Dropdown.Menu>
 								</Dropdown>
 							</li>
@@ -158,10 +171,10 @@ function HeaderPage({ type, signout }) {
 								onClick={() => setSignoutOpen(!signoutOpen)}
 							>
 								<div className='profile-nav__avatar'>
-									<span>{name[0]}</span>
+									<span>{profile && profile.firstname[0]}</span>
 								</div>
 								<div className='profile-nav__name'>
-									<span>{name}</span>
+									<span>{profile && profile.firstname}</span>
 								</div>
 								<div className='profile-nav__arrow'>
 									<Icon name='angle down' />
@@ -212,6 +225,8 @@ function HeaderPage({ type, signout }) {
 
 const actionCreators = {
 	signout,
+	fetchProfileIfNeeded,
+	fetchListCategoryIfNeeded,
 }
 
-export default connect(null,actionCreators)(HeaderPage)
+export default connect(null, actionCreators)(HeaderPage)

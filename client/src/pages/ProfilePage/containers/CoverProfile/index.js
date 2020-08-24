@@ -1,15 +1,14 @@
 import React from 'react'
-
 import ButtonEngage from 'components/Button/Default'
 
 import './style.scss'
 
-const CoverProfile = () => {
+const CoverProfile = ({ profile }) => {
 	return (
 		<div className='cover-profile'>
 			<div className='cover-profile__avatar'></div>
 			<div className='cover-profile__fullname'>
-				<span>Leo Nguyen</span>
+				<span>{profile && `${profile.firstname} ${profile.lastname}`}</span>
 			</div>
 			<div className='cover-profile__full-position'>
 				<span>Public Speaking and Professional Stage Presence</span>
