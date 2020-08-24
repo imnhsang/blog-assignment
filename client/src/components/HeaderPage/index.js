@@ -171,7 +171,11 @@ function HeaderPage({
 								onClick={() => setSignoutOpen(!signoutOpen)}
 							>
 								<div className='profile-nav__avatar'>
-									<span>{profile && profile.firstname[0]}</span>
+									{profile && profile.avatar ? (
+										<img src={profile.avatar} alt='' />
+									) : (
+										<span>{profile && profile.firstname[0]}</span>
+									)}
 								</div>
 								<div className='profile-nav__name'>
 									<span>{profile && profile.firstname}</span>

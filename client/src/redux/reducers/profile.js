@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify'
 
 import { Profile } from '../../constants/actionTypes'
+import { clearStorage } from 'utils'
 
 const initialState = {
 	profile: null,
@@ -32,6 +33,7 @@ const profile = (state = initialState, action) => {
 			}
 		case Profile.PROFILE_ERROR:
 			failToastify(action.payload.err)
+			clearStorage()
 			return { ...state, loading: false }
 		default:
 			return state

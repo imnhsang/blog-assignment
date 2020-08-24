@@ -19,7 +19,7 @@ const fetchProfile = (uid) => async (dispatch) => {
 			dispatch(failRequestProfile(errors[0].msg))
 		}
 	} catch (error) {
-		// dispatch(failRequestProfile(error.response.data.errors[0].msg))
+		dispatch(failRequestProfile(error.response.data.errors[0].msg))
 	}
 }
 
