@@ -4,21 +4,11 @@ import { Icon } from 'semantic-ui-react'
 import ButtonEngage from 'components/Button/Default'
 import './style.scss'
 
-const CoverProfile = ({ profile, onChangeSelectNewAvatar }) => {
+const CoverProfile = ({ profile }) => {
 	return (
 		<div className='cover-profile'>
 			<div className='cover-profile__avatar'>
 				<img src={(profile && profile.avatar) || ''} alt='' />
-				<label className='cover-profile__avatar__change-avatar'>
-					<input
-						name='change-avatar'
-						type='file'
-						onChange={onChangeSelectNewAvatar}
-						accept='image/*'
-						className='cover-profile__avatar__change-avatar'
-					/>
-					<Icon name='camera' />
-				</label>
 			</div>
 			<div className='cover-profile__fullname'>
 				<span>{profile && `${profile.firstname} ${profile.lastname}`}</span>
@@ -27,6 +17,9 @@ const CoverProfile = ({ profile, onChangeSelectNewAvatar }) => {
 				<span>Public Speaking and Professional Stage Presence</span>
 			</div>
 			<ButtonEngage name='ENGAGE NOW' />
+			<div className='cover-profile__action-profile'>
+				<Icon name='pencil' /> <span>Edit Profile</span>
+			</div>
 		</div>
 	)
 }

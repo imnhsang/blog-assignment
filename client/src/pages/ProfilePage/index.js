@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 import Scrollspy from 'react-scrollspy'
 import { Redirect } from 'react-router-dom'
+
+import useMergeState from 'hooks/useMergeState'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
@@ -11,7 +13,7 @@ import Highlights from 'pages/ProfilePage/containers/Hightlights'
 import MediaLinks from 'pages/ProfilePage/containers/MediaLinks'
 import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
-import ModalUpdateAvatar from 'pages/ProfilePage/containers/Modal/UpdateAvatar'
+import ModalUpdateProfile from 'pages/ProfilePage/containers/ModalUpdateProfile'
 
 import './style.scss'
 
@@ -60,18 +62,18 @@ const ProfilePage = () => {
 	]
 	const profile = useSelector((state) => state.profile.profile)
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
-	const [newAvatar, setNewAvatar] = useState('')
+	const [updateProfile, setUpdateProfile] = useMergeState({
+		firstname: '',
+		lastname: '',
+		avatarFile: {},
+	})
 
-	const handleSelectNewAvatar = (e) => {
-		setNewAvatar(e.target.files[0])
+	const handleChangeAvatar = (e) => {
+		setUpdateProfile({ avatar: e.target.files[0] })
 	}
 
-	const handleCloseModalNewAvatar = () => {
-		setNewAvatar('')
-	}
-
-	const handleSaveNewAvatar = async () => {
-		console.log(newAvatar)
+	const handleSaveProfile = () => {
+		console.log(updateProfile)
 	}
 
 	if (!isAuthenticated) {
@@ -81,17 +83,13 @@ const ProfilePage = () => {
 	return (
 		<div className='profile-page'>
 			<Header type='member' />
-			<CoverProfile
+			<CoverProfile profile={profile} />
+			<ModalUpdateProfile
 				profile={profile}
-				onChangeSelectNewAvatar={handleSelectNewAvatar}
+				updateProfile={updateProfile}
+				handleChangeAvatar={handleChangeAvatar}
+				handleSaveProfile={handleSaveProfile}
 			/>
-			{newAvatar && (
-				<ModalUpdateAvatar
-					urlNewAvatar={newAvatar}
-					onCloseModal={handleCloseModalNewAvatar}
-					onSave={handleSaveNewAvatar}
-				/>
-			)}
 			<Scrollspy
 				items={['career', 'skills', 'programs', 'clients', 'medialinks']}
 				currentClassName='active'

@@ -3,9 +3,12 @@ import { Button } from 'semantic-ui-react'
 
 import './style.scss'
 
-const ButtonTransparent = ({ text, onClick }) => {
+const ButtonTransparent = ({ text, onClick, fitWidth }) => {
 	return (
-		<Button className='button-transparent' onClick={onClick}>
+		<Button
+			className={`button-transparent ${fitWidth ? 'fit-width' : ''}`}
+			onClick={onClick}
+		>
 			{text}
 		</Button>
 	)

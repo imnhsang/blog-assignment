@@ -9,6 +9,9 @@
 	width: 100%;
 	letter-spacing: 1.5px;
 	height: fit-content;
+	&.fit-width {
+		width: fit-content;
+	}
 	.icon:not(.button) {
 		opacity: 1 !important;
 	}

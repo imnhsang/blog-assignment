@@ -2,6 +2,7 @@
 @import 'src/assets/stylesheets/mixins';
 
 .cover-profile {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -27,26 +28,6 @@
 			height: 100%;
 			border-radius: 50%;
 		}
-		&__change-avatar {
-			cursor: pointer;
-			background: $gray;
-			padding: 7px 8px;
-			border: 2px solid $white;
-			text-align: center;
-			border-radius: 50%;
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			transform: translate(-4px, -4px);
-			input {
-				width: 0;
-        height: 0;
-        opacity: 0;
-			}
-			i {
-				margin: 0 !important;
-			}
-		}
 	}
 	&__fullname {
 		color: $white;
@@ -63,5 +44,32 @@
 		margin-bottom: 2rem;
 		text-align: center;
 		line-height: 2rem;
+	}
+	&__action-profile {
+		cursor: pointer;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		transform: translate(-20px, -20px);
+		background: $secondary-white;
+		color: $secondary-black;
+		padding: 0.5rem 0.75rem;
+		border-radius: 4px;
+		&:hover {
+			background: $secondary-gray;
+		}
+		i {
+			margin: 0 !important;
+		}
+		span {
+			font-size: 1.125rem;
+			font-weight: 700;
+			margin-left: 4px;
+		}
+		@include responsive(small-tablet) {
+			span {
+				display: none;
+			}
+		}
 	}
 }
