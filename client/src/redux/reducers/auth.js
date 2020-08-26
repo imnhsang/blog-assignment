@@ -1,23 +1,11 @@
-import { toast } from 'react-toastify'
-
 import { Auth } from '../../constants/actionTypes'
 import { setUIDToStorage, clearStorage, getUIDFromStorage } from 'utils'
+import { failToastify } from 'helpers'
 
 const initialState = {
 	isAuthenticated: !!getUIDFromStorage(),
 	loading: false,
 }
-
-const failToastify = (err) =>
-	toast.error(err, {
-		position: 'top-right',
-		autoClose: 3000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-	})
 
 const auth = (state = initialState, action) => {
 	switch (action.type) {

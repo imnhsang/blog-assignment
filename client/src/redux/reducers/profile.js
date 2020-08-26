@@ -1,7 +1,6 @@
-import { toast } from 'react-toastify'
-
 import { Profile } from '../../constants/actionTypes'
 import { clearStorage } from 'utils'
+import { failToastify, successToastify } from 'helpers'
 
 const initialState = {
 	profile: null,
@@ -9,28 +8,6 @@ const initialState = {
 	loadingGetProfile: false,
 	loadingUpdateProfile: false,
 }
-
-const failToastify = (err) =>
-	toast.error(err, {
-		position: 'top-right',
-		autoClose: 3000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-	})
-
-const successToastify = (text) =>
-	toast.success(text, {
-		position: 'top-right',
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-	})
 
 const profile = (state = initialState, action) => {
 	switch (action.type) {

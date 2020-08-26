@@ -1,5 +1,5 @@
 import { Category } from '../../constants/actionTypes'
-
+import { failToastify } from 'helpers'
 const initialState = {
 	listCategory: null,
 	isInitialized: false,
@@ -18,6 +18,7 @@ const category = (state = initialState, action) => {
 				loading: false,
 			}
 		case Category.CATEGORY_ERROR:
+			failToastify(action.payload.err)
 			return {
 				...state,
 				loading: false,
