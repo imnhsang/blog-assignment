@@ -15,10 +15,13 @@ import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
 import ModalUpdateProfile from 'pages/ProfilePage/containers/Modal/UpdateProfile'
 import ModalCreateBlog from 'pages/ProfilePage/containers/Modal/CreateBlog'
+
 import { refreshProfile } from 'redux/services/profile'
+import { createBlog } from 'redux/services/blog'
+
 import './style.scss'
 
-const ProfilePage = ({ refreshProfile }) => {
+const ProfilePage = ({ refreshProfile, createBlog }) => {
 	const careers = [
 		{
 			subscription:
@@ -73,6 +76,7 @@ const ProfilePage = ({ refreshProfile }) => {
 	const [createBlogData, setCreateBlogData] = useMergeState({})
 
 	const handleShowModalProfile = () => {
+		setAvatarFile(null)
 		setOpenModalProfile(!openModalProfile)
 	}
 
@@ -93,6 +97,8 @@ const ProfilePage = ({ refreshProfile }) => {
 	}
 
 	const handleShowModalBlog = () => {
+		setCoverFile(null)
+		setCreateBlogData({})
 		setOpenModalBlog(!openModalBlog)
 	}
 
@@ -104,8 +110,16 @@ const ProfilePage = ({ refreshProfile }) => {
 		setCreateBlogData({ [e.target.name]: e.target.value })
 	}
 
+	const validateFormBlog = () => {
+		return createBlogData.title && createBlogData.category
+	}
+
 	const handleSaveBlog = async () => {
-		console.log(createBlogData)
+		if (coverFile && validateFormBlog()) {
+			if (await createBlog(coverFile, createBlogData)) {
+				handleShowModalBlog()
+			}
+		}
 	}
 
 	if (!isAuthenticated) {
@@ -114,7 +128,7 @@ const ProfilePage = ({ refreshProfile }) => {
 
 	return (
 		<div className='profile-page'>
-			<Header type='member' />
+			<Header type='member' handleOpenModalBlog={handleShowModalBlog} />
 			<CoverProfile
 				profile={profile}
 				handleShowModalProfile={handleShowModalProfile}
@@ -131,14 +145,16 @@ const ProfilePage = ({ refreshProfile }) => {
 					handleChangeText={handleChangeText}
 				/>
 			)}
-			<ModalCreateBlog
-				handleShowModalProfile={handleShowModalBlog}
-				createBlogData={createBlogData}
-				coverFile={coverFile}
-				handleChangeCover={handleChangeCover}
-				handleSaveBlog={handleSaveBlog}
-				handleChangeText={handleChangeTextBlog}
-			/>
+			{openModalBlog && (
+				<ModalCreateBlog
+					handleShowModalBlog={handleShowModalBlog}
+					createBlogData={createBlogData}
+					coverFile={coverFile}
+					handleChangeCover={handleChangeCover}
+					handleSaveBlog={handleSaveBlog}
+					handleChangeText={handleChangeTextBlog}
+				/>
+			)}
 			<Scrollspy
 				items={['career', 'skills', 'programs', 'clients', 'medialinks']}
 				currentClassName='active'
@@ -194,5 +210,6 @@ const ProfilePage = ({ refreshProfile }) => {
 
 const actionCreators = {
 	refreshProfile,
+	createBlog,
 }
 export default connect(null, actionCreators)(ProfilePage)

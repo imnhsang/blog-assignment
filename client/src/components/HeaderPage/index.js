@@ -18,6 +18,7 @@ function HeaderPage({
 	signout,
 	fetchProfileIfNeeded,
 	fetchListCategoryIfNeeded,
+	handleOpenModalBlog,
 }) {
 	const [classNameHeader, setClassNameHeader] = useState('')
 	const [classNameHamburger, setClassNameHamburger] = useState('')
@@ -168,7 +169,7 @@ function HeaderPage({
 								!classNameHamburger ? 'hide' : ''
 							}`}
 						>
-							<ButtonRequest name='NEW REQUEST' />
+							<ButtonRequest name='NEW REQUEST' onClick={handleOpenModalBlog} />
 							<div
 								className='profile-nav'
 								onClick={() => setSignoutOpen(!signoutOpen)}

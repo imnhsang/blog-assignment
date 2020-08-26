@@ -8,7 +8,11 @@ import imageCover from 'assets/images/background/home_welcome.jpg'
 const ArticleCard = ({ item, category }) => {
 	return (
 		<div className='article-card'>
-			<img src={imageCover} alt='' className='article-card__cover' />
+			<img
+				src={(item && item.cover) || imageCover}
+				alt=''
+				className='article-card__cover'
+			/>
 			<div className='article-card__information'>
 				<p className='article-card__information__title'>{item && item.title}</p>
 				<div className='flex'>

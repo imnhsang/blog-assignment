@@ -1,11 +1,16 @@
+import { v4 as uuidv4 } from 'uuid'
+
 import {
 	requestGetListBlogByCategory,
 	getListBlogByCategory,
+	requestPostBlog,
+	postBlog,
 	failRequestBlog,
 } from '../actions/blog'
 import api from '../../api'
 import { isSuccess } from 'helpers'
-
+import fire from 'config/fire'
+import { getUIDFromStorage } from 'utils'
 const fetchListBlogByCategory = (category) => async (dispatch) => {
 	try {
 		dispatch(requestGetListBlogByCategory())
@@ -35,4 +40,42 @@ export const fetchListBlogByCategoryIfNeeded = (category) => (
 		return dispatch(fetchListBlogByCategory(category))
 	}
 	return true
+}
+
+export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
+	try {
+		dispatch(requestPostBlog())
+
+		let urlCover = ''
+
+		if (coverFile) {
+			const refCover = 'blogs/' + uuidv4()
+
+			await fire.storage().ref(refCover).put(coverFile)
+
+			urlCover = await fire.storage().ref(refCover).getDownloadURL()
+		}
+
+		const body = {
+			uid: getUIDFromStorage(),
+			title: createBlogData.title,
+			category: createBlogData.category,
+			created_at: Date.now(),
+			cover: urlCover,
+		}
+
+		const res = await api.post('/blogs/create-blog', body)
+		if (isSuccess(res)) {
+			dispatch(postBlog(body))
+			return true
+		} else {
+			const { errors } = res.data
+			dispatch(failRequestBlog(errors[0].msg))
+			return false
+		}
+	} catch (error) {
+		console.log(error)
+		dispatch(failRequestBlog(error.response.data.errors[0].msg))
+		return false
+	}
 }

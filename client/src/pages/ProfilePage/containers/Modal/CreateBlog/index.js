@@ -25,7 +25,7 @@ const ModalCreateBlog = ({
 	}, [fetchListCategoryIfNeeded])
 
 	const listCategory = useSelector((state) => state.category.listCategory)
-
+	const loading = useSelector((state) => state.blog.loadingCreateBlog)
 	return (
 		<div className='modal-create-blog'>
 			<p className='modal-create-blog__title'>Create blog</p>
@@ -64,7 +64,11 @@ const ModalCreateBlog = ({
 						/>
 					</div>
 					<div className='p-05'>
-						<Button name='SAVE BLOG' onClick={handleSaveBlog} />
+						<Button
+							name='SAVE BLOG'
+							onClick={handleSaveBlog}
+							loading={loading}
+						/>
 					</div>
 				</div>
 			</div>

@@ -39,8 +39,8 @@ router.get('/list-blog/:category', async (req, res) => {
 		const snapshot = await db
 			.collection('blogs')
 			.where('category', '==', category)
-      .get()
-      
+			.get()
+
 		let blogs = []
 		snapshot.forEach((doc) => {
 			let id = doc.id
@@ -55,6 +55,32 @@ router.get('/list-blog/:category', async (req, res) => {
 		})
 	} catch (error) {
 		console.log(error)
+
+		res.status(500).send('Server error...')
+	}
+})
+
+// @route     POST /api/blogs/create-blog
+// @desc      Create blog
+// @access    Public
+router.post('/create-blog', async (req, res) => {
+	try {
+		const { uid, cover, title, category, created_at } = req.body
+
+		db.collection('blogs')
+			.add({
+				uid,
+				cover: cover || '',
+				title,
+				category,
+				created_at,
+			})
+
+		res.status(200).send({
+			msg: 'Blog created successfully!!!',
+		})
+	} catch (err) {
+		console.log(err)
 
 		res.status(500).send('Server error...')
 	}
