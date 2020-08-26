@@ -136,7 +136,10 @@ function HeaderPage({
 							}
 							`}
 						>
-							<ButtonRequest name='SIGN UP' />
+							<ButtonRequest
+								onClick={() => handleRedirect('/signup')}
+								name='SIGN UP'
+							/>
 						</div>
 					</div>
 				</div>

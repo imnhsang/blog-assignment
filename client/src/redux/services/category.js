@@ -10,7 +10,7 @@ const fetchListCategory = () => async (dispatch) => {
 	try {
 		dispatch(requestCategory())
 
-		const res = await api.get('/categories')
+		const res = await api.get('/categories/list-category')
 
 		if (isSuccess(res)) {
 			const { data } = res
@@ -20,12 +20,12 @@ const fetchListCategory = () => async (dispatch) => {
 			dispatch(failRequestCategory(errors[0].msg))
 		}
 	} catch (error) {
-		// dispatch(responseCategoryDataFail(error.response.data.errors[0].msg))
+		dispatch(failRequestCategory(error.response.data.errors[0].msg))
 	}
 }
 
 const shouldFetchListCategory = (state) => {
-	const { isInitialized } = state
+  const { isInitialized } = state
 	return !isInitialized
 }
 

@@ -15,6 +15,7 @@ const AreaCategoryTrainer = ({ data }) => {
 				{data &&
 					data.map((e, inx) => (
 						<ItemCategoryTrainer
+							id={e.id}
 							name={e.name}
 							title={e.title}
 							description={e.description}
@@ -22,7 +23,7 @@ const AreaCategoryTrainer = ({ data }) => {
 						/>
 					))}
 			</div>
-			<Button text='VIEW MORE CATEFORIES' />
+			<Button text='VIEW MORE CATEGORIES' />
 		</div>
 	)
 }

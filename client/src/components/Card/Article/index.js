@@ -1,23 +1,22 @@
 import React from 'react'
 
+import { getDayMonthYear, uppercaseLetter } from 'utils'
 import './style.scss'
 
 import imageCover from 'assets/images/background/home_welcome.jpg'
 
-const ArticleCard = () => {
+const ArticleCard = ({ item, category }) => {
 	return (
 		<div className='article-card'>
 			<img src={imageCover} alt='' className='article-card__cover' />
 			<div className='article-card__information'>
-				<p className='article-card__information__title'>
-					longest post title goes here reaches second line
-				</p>
+				<p className='article-card__information__title'>{item && item.title}</p>
 				<div className='flex'>
 					<span className='article-card__information__type'>
-						IN <span>COACHING</span>
+						IN <span>{category && uppercaseLetter(category)}</span>
 					</span>
 					<span className='article-card__information__date'>
-						august 18, 2020
+						{item && getDayMonthYear(item.created_at)}
 					</span>
 				</div>
 			</div>

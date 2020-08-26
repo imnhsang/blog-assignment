@@ -5,12 +5,11 @@ import { Icon } from 'semantic-ui-react'
 import Button from 'pages/HomePage/components/Button/Transaparent'
 
 import './style.scss'
-import { convertContentToURL } from 'utils'
 
-const AreaItemCategoryTrainer = ({ name, title, description }) => {
+const AreaItemCategoryTrainer = ({ id, name, title, description }) => {
 	const history = useHistory()
-	const rediectToBlog = (category) => {
-		history.push(`/blog/${convertContentToURL(category)}`)
+	const rediectToBlog = () => {
+		history.push(`/blog/${id}`)
 	}
 	return (
 		<div className='single-category col-sm-12 col-lg-6 col-xl-4 col-3 row'>

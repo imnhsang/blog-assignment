@@ -3,13 +3,12 @@ const router = express.Router()
 
 const db = require('../../configs/db')
 
-// @route     GET /api/categories
+// @route     GET /api/categories/list-category
 // @desc      Get all categories
 // @access    Public
-router.get('/', async (req, res) => {
+router.get('/list-category', async (req, res) => {
 	try {
 		const snapshot = await db.collection('categories').get()
-		// const snapshot = await admin.firestore().collection('categories').get()
 
 		let categories = []
 		snapshot.forEach((doc) => {
@@ -24,8 +23,8 @@ router.get('/', async (req, res) => {
 			data: categories,
 		})
 	} catch (error) {
-    console.log(error)
-    
+		console.log(error)
+
 		res.status(500).send('Server error...')
 	}
 })
