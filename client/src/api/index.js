@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-export const host =
-	'https://us-central1-blog-assignment-acf8f.cloudfunctions.net/blogassignment'
+export const host = 'http://localhost:5000'
 export const apiHost = `${host}/api/`
 
 const instance = axios.create({

@@ -1,38 +1,38 @@
-import { toast } from 'react-toastify'
-
 import { Profile } from '../../constants/actionTypes'
+import { clearStorage } from 'utils'
+import { failToastify, successToastify } from 'helpers'
 
 const initialState = {
 	profile: null,
 	isInitialized: false,
-	loading: false,
+	loadingGetProfile: false,
+	loadingUpdateProfile: false,
 }
-
-const failToastify = (err) =>
-	toast.error(err, {
-		position: 'top-right',
-		autoClose: 3000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-	})
 
 const profile = (state = initialState, action) => {
 	switch (action.type) {
-		case Profile.REQUEST_PROFILE:
-			return { ...state, loading: true }
+		case Profile.REQUEST_GET_PROFILE:
+			return { ...state, loadingGetProfile: true }
 		case Profile.GET_PROFILE:
 			return {
 				...state,
-				loading: false,
+				loadingGetProfile: false,
 				profile: action.payload.data,
 				isInitialized: true,
 			}
+		case Profile.REQUEST_UPDATE_PROFILE:
+			return { ...state, loadingUpdateProfile: true }
+		case Profile.UPDATE_PROFILE:
+			successToastify('Profile updated successfully!!!')
+			return {
+				...state,
+				profile: action.payload.data,
+				loadingUpdateProfile: false,
+			}
 		case Profile.PROFILE_ERROR:
 			failToastify(action.payload.err)
-			return { ...state, loading: false }
+			clearStorage()
+			return { ...state, loadingGetProfile: false, loadingUpdateProfile: false }
 		default:
 			return state
 	}

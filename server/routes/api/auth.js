@@ -1,9 +1,10 @@
 const express = require('express')
+
 const router = express.Router()
 const { check, validationResult } = require('express-validator')
 
-const admin = require('firebase-admin')
-const fire = require('../../config/fire')
+const fire = require('../../configs/fire')
+const db =require('../../configs/db')
 
 // @route     POST /auth/signup
 // @desc      Sign up account
@@ -32,14 +33,12 @@ router.post(
 						uid: account.user.uid,
 					}
 
-					await admin.firestore().collection('users').add(user)
+					await db.collection('users').add(user)
 
-					return res
-						.status(201)
-						.send({
-							msg: 'User created successfully!!!',
-							data: { uid: user.uid },
-						})
+					return res.status(201).send({
+						msg: 'User created successfully!!!',
+						data: { uid: user.uid },
+					})
 				} catch (err) {
 					console.log(err)
 

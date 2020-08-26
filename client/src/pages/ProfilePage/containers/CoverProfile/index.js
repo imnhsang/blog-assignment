@@ -1,12 +1,19 @@
 import React from 'react'
-import ButtonEngage from 'components/Button/Default'
+import { Icon } from 'semantic-ui-react'
 
+import ButtonEngage from 'components/Button/Default'
 import './style.scss'
 
-const CoverProfile = ({ profile }) => {
+const CoverProfile = ({
+	profile,
+	handleShowModalProfile,
+	openModalProfile,
+}) => {
 	return (
 		<div className='cover-profile'>
-			<div className='cover-profile__avatar'></div>
+			<div className='cover-profile__avatar'>
+				<img src={(profile && profile.avatar) || ''} alt='' />
+			</div>
 			<div className='cover-profile__fullname'>
 				<span>{profile && `${profile.firstname} ${profile.lastname}`}</span>
 			</div>
@@ -14,6 +21,14 @@ const CoverProfile = ({ profile }) => {
 				<span>Public Speaking and Professional Stage Presence</span>
 			</div>
 			<ButtonEngage name='ENGAGE NOW' />
+			{!openModalProfile && (
+				<div
+					className='cover-profile__action-profile'
+					onClick={handleShowModalProfile}
+				>
+					<Icon name='pencil' /> <span>Edit Profile</span>
+				</div>
+			)}
 		</div>
 	)
 }

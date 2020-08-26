@@ -253,7 +253,12 @@
 						border-radius: 50%;
 						border: 1px solid $gray;
 						display: flex;
-						background: $white;
+            background: $white;
+            img{
+              width:100%;
+              height:100%;
+              border-radius: 50%;
+            }
 						span {
 							margin: auto;
 							color: $blue-black;

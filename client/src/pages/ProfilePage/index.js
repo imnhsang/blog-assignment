@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 import Scrollspy from 'react-scrollspy'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import useMergeState from 'hooks/useMergeState'
 
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
@@ -11,10 +13,12 @@ import Highlights from 'pages/ProfilePage/containers/Hightlights'
 import MediaLinks from 'pages/ProfilePage/containers/MediaLinks'
 import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
+import ModalUpdateProfile from 'pages/ProfilePage/containers/ModalUpdateProfile'
 
+import { refreshProfile } from 'redux/services/profile'
 import './style.scss'
 
-const ProfilePage = () => {
+const ProfilePage = ({ refreshProfile }) => {
 	const careers = [
 		{
 			subscription:
@@ -58,8 +62,31 @@ const ProfilePage = () => {
 		},
 	]
 	const profile = useSelector((state) => state.profile.profile)
-
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+
+	const [avatarFile, setAvatarFile] = useState(null)
+	const [openModalProfile, setOpenModalProfile] = useState(false)
+	const [updateProfileData, setUpdateProfileData] = useMergeState({})
+
+	const handleShowModalProfile = () => {
+		setOpenModalProfile(!openModalProfile)
+	}
+
+	const handleChangeAvatar = (e) => {
+		setAvatarFile(e.target.files[0])
+	}
+
+	const handleChangeText = (e) => {
+		setUpdateProfileData({ [e.target.name]: e.target.value })
+	}
+
+	const handleSaveProfile = async () => {
+		if (avatarFile || JSON.stringify(updateProfileData) !== '{}') {
+			if (await refreshProfile(avatarFile, updateProfileData)) {
+				handleShowModalProfile()
+			}
+		}
+	}
 
 	if (!isAuthenticated) {
 		return <Redirect to='/login' />
@@ -68,7 +95,22 @@ const ProfilePage = () => {
 	return (
 		<div className='profile-page'>
 			<Header type='member' />
-			<CoverProfile profile={profile} />
+			<CoverProfile
+				profile={profile}
+				handleShowModalProfile={handleShowModalProfile}
+				openModalProfile={openModalProfile}
+			/>
+			{openModalProfile && (
+				<ModalUpdateProfile
+					handleShowModalProfile={handleShowModalProfile}
+					profile={profile}
+					updateProfile={updateProfileData}
+					avatarFile={avatarFile}
+					handleChangeAvatar={handleChangeAvatar}
+					handleSaveProfile={handleSaveProfile}
+					handleChangeText={handleChangeText}
+				/>
+			)}
 			<Scrollspy
 				items={['career', 'skills', 'programs', 'clients', 'medialinks']}
 				currentClassName='active'
@@ -122,4 +164,7 @@ const ProfilePage = () => {
 	)
 }
 
-export default ProfilePage
+const actionCreators = {
+	refreshProfile,
+}
+export default connect(null, actionCreators)(ProfilePage)

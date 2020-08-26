@@ -4,6 +4,10 @@ export const requestAuth = () => ({
 	type: Auth.REQUEST_AUTH,
 })
 
+export const failRequestAuth = () => ({
+	type: Auth.AUTH_ERROR,
+})
+
 export const loginSuccess = (uid) => ({
 	type: Auth.LOGIN_SUCCESS,
 	payload: { uid },

@@ -1,5 +1,6 @@
 const firebase = require('firebase/app')
 require('firebase/auth')
+require('firebase/storage')
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyDAiZ0721hsxA7Rde871PyN8dbsVnpteeA',
