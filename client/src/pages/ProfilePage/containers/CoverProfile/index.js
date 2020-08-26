@@ -4,7 +4,11 @@ import { Icon } from 'semantic-ui-react'
 import ButtonEngage from 'components/Button/Default'
 import './style.scss'
 
-const CoverProfile = ({ profile }) => {
+const CoverProfile = ({
+	profile,
+	handleShowModalProfile,
+	openModalProfile,
+}) => {
 	return (
 		<div className='cover-profile'>
 			<div className='cover-profile__avatar'>
@@ -17,9 +21,14 @@ const CoverProfile = ({ profile }) => {
 				<span>Public Speaking and Professional Stage Presence</span>
 			</div>
 			<ButtonEngage name='ENGAGE NOW' />
-			<div className='cover-profile__action-profile'>
-				<Icon name='pencil' /> <span>Edit Profile</span>
-			</div>
+			{!openModalProfile && (
+				<div
+					className='cover-profile__action-profile'
+					onClick={handleShowModalProfile}
+				>
+					<Icon name='pencil' /> <span>Edit Profile</span>
+				</div>
+			)}
 		</div>
 	)
 }

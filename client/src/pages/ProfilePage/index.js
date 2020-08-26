@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 import Scrollspy from 'react-scrollspy'
@@ -15,7 +15,11 @@ import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
 import ModalUpdateProfile from 'pages/ProfilePage/containers/ModalUpdateProfile'
 
+import fire from 'config/fire'
 import './style.scss'
+import { getUIDFromStorage } from 'utils'
+import api from 'api'
+import { isSuccess } from 'helpers'
 
 const ProfilePage = () => {
 	const careers = [
@@ -62,18 +66,70 @@ const ProfilePage = () => {
 	]
 	const profile = useSelector((state) => state.profile.profile)
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
-	const [updateProfile, setUpdateProfile] = useMergeState({
-		firstname: '',
-		lastname: '',
-		avatarFile: {},
-	})
 
-	const handleChangeAvatar = (e) => {
-		setUpdateProfile({ avatar: e.target.files[0] })
+	const [avatarFile, setAvatarFile] = useState(null)
+	const [openModalProfile, setOpenModalProfile] = useState(false)
+	const [updateProfile, setUpdateProfile] = useMergeState({})
+
+	const handleShowModalProfile = () => {
+		setOpenModalProfile(!openModalProfile)
 	}
 
-	const handleSaveProfile = () => {
-		console.log(updateProfile)
+	const handleChangeAvatar = (e) => {
+		setAvatarFile(e.target.files[0])
+	}
+
+	const handleChangeText = (e) => {
+		setUpdateProfile({ [e.target.name]: e.target.value })
+	}
+
+	const handleSaveProfile = async () => {
+		const refAvatar = 'users/' + getUIDFromStorage() + '/profile.jpg'
+		try {
+			if (avatarFile) {
+				fire
+					.storage()
+					.ref(refAvatar)
+					.put(avatarFile)
+					.then(() => {
+						fire
+							.storage()
+							.ref(refAvatar)
+							.getDownloadURL()
+							.then(async (urlAvatar) => {
+								try {
+									const body = {
+										...profile,
+										avatar: urlAvatar,
+										firstname: updateProfile.firstname || profile.firstname,
+										lastname: updateProfile.lastname || profile.lastname,
+									}
+									const res = await api.post('/users/update-profile', body)
+									if (isSuccess(res)) {
+										console.log(res.data)
+									} else {
+										console.log(res.data)
+									}
+								} catch (error) {
+									console.log(error)
+								}
+							})
+							.catch((err) => console.log(err))
+					})
+					.catch((err) => console.log(err))
+			} else {
+				const body = {
+					...profile,
+					firstname: updateProfile.firstname || profile.firstname,
+					lastname: updateProfile.lastname || profile.lastname,
+				}
+
+				const res = await api.post('/users/update-profile', body)
+				console.log(res)
+			}
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	if (!isAuthenticated) {
@@ -83,13 +139,22 @@ const ProfilePage = () => {
 	return (
 		<div className='profile-page'>
 			<Header type='member' />
-			<CoverProfile profile={profile} />
-			<ModalUpdateProfile
+			<CoverProfile
 				profile={profile}
-				updateProfile={updateProfile}
-				handleChangeAvatar={handleChangeAvatar}
-				handleSaveProfile={handleSaveProfile}
+				handleShowModalProfile={handleShowModalProfile}
+				openModalProfile={openModalProfile}
 			/>
+			{openModalProfile && (
+				<ModalUpdateProfile
+					handleShowModalProfile={handleShowModalProfile}
+					profile={profile}
+					updateProfile={updateProfile}
+					avatarFile={avatarFile}
+					handleChangeAvatar={handleChangeAvatar}
+					handleSaveProfile={handleSaveProfile}
+					handleChangeText={handleChangeText}
+				/>
+			)}
 			<Scrollspy
 				items={['career', 'skills', 'programs', 'clients', 'medialinks']}
 				currentClassName='active'

@@ -9,9 +9,12 @@ import './style.scss'
 
 const ModalUpdateProfile = ({
 	profile,
-	updateProfile,
+	// updateProfile,
+	avatarFile,
 	handleSaveProfile,
 	handleChangeAvatar,
+	handleChangeText,
+	handleShowModalProfile,
 }) => {
 	return (
 		<div className='modal-update-profile'>
@@ -20,8 +23,8 @@ const ModalUpdateProfile = ({
 				<div className='modal-update-profile__form-profile__avatar'>
 					<img
 						src={
-							updateProfile.avatar
-								? URL.createObjectURL(updateProfile.avatar)
+							avatarFile
+								? URL.createObjectURL(avatarFile)
 								: profile && profile.avatar
 						}
 						alt=''
@@ -32,14 +35,28 @@ const ModalUpdateProfile = ({
 					</label>
 				</div>
 				<div className='modal-update-profile__form-profile__firstname'>
-					<Input type='text' placeholder='Full name' />
+					<Input
+						name='firstname'
+						type='text'
+						placeholder='First name'
+						handleOnChange={handleChangeText}
+					/>
 				</div>
 				<div className='modal-update-profile__form-profile__lastname'>
-					<Input type='text' placeholder='Last name' />
+					<Input
+						name='lastname'
+						type='text'
+						placeholder='Last name'
+						handleOnChange={handleChangeText}
+					/>
 				</div>
 				<div className='modal-update-profile__form-profile__actions'>
 					<div className='p-05'>
-						<ButtonTransparent text='CANCEL' fitWidth />
+						<ButtonTransparent
+							onClick={handleShowModalProfile}
+							text='CANCEL'
+							fitWidth
+						/>
 					</div>
 					<div className='p-05'>
 						<Button name='SAVE PROFILE' onClick={handleSaveProfile} />
