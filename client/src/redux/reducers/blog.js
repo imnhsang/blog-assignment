@@ -28,19 +28,28 @@ const blog = (state = initialState, action) => {
 		case Blog.POST_BLOG:
 			successToastify('Blog posted successfully!!!')
 			// const { blog } = action.payload
-			return {
-				...state,
-				loadingCreateBlog: false,
-				listBlogByCategory: {
-					...state.listBlogByCategory,
-					[action.payload.blog.category]: {
-						...state.listBlogByCategory[action.payload.blog.category],
-						data: [
-							...state.listBlogByCategory[action.payload.blog.category].data,
-							action.payload.blog,
-						],
+			if (
+				state.listBlogByCategory[action.payload.blog.category] !== undefined
+			) {
+				return {
+					...state,
+					loadingCreateBlog: false,
+					listBlogByCategory: {
+						...state.listBlogByCategory,
+						[action.payload.blog.category]: {
+							...state.listBlogByCategory[action.payload.blog.category],
+							data: [
+								...state.listBlogByCategory[action.payload.blog.category].data,
+								action.payload.blog,
+							],
+						},
 					},
-				},
+				}
+			} else {
+				return {
+					...state,
+					loadingCreateBlog: false,
+				}
 			}
 		case Blog.BLOG_ERROR:
 			failToastify(action.payload.err)
