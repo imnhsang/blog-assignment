@@ -52,13 +52,9 @@ export const refreshProfile = (avatarFile, updateProfileData) => async (
 		if (avatarFile) {
 			const refAvatar = 'users/' + profileData.uid + '/profile.jpg'
 
-			await fire
-				.storage()
-				.ref(refAvatar)
-				.put(avatarFile)
-				.then(async () => {
-					urlNewAvatar = await fire.storage().ref(refAvatar).getDownloadURL()
-				})
+			await fire.storage().ref(refAvatar).put(avatarFile)
+
+			urlNewAvatar = await fire.storage().ref(refAvatar).getDownloadURL()
 		}
 
 		const body = {
