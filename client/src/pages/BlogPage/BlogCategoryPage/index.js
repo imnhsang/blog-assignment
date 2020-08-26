@@ -27,7 +27,6 @@ const BlogCategoryPage = ({ fetchListBlogByCategoryIfNeeded }) => {
 
 	const categoryData =
 		listCategory && listCategory.find((e) => e.id === category)
-	console.log(listBlogByCategory)
 	return (
 		<div className='blog-category-page'>
 			<Header type='blog' />
