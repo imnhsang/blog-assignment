@@ -42,7 +42,10 @@ export const fetchListBlogByCategoryIfNeeded = (category) => (
 	return true
 }
 
-export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
+export const createBlog = (coverFile, createBlogData) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch(requestPostBlog())
 
@@ -66,7 +69,9 @@ export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
 
 		const res = await api.post('/blogs/create-blog', body)
 		if (isSuccess(res)) {
-			dispatch(postBlog(body))
+			if (getState().blog.listBlogByCategory[body.category] !== undefined) {
+				dispatch(postBlog(body))
+			}
 			return true
 		} else {
 			const { errors } = res.data
