@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
-
+import { useSelector } from 'react-redux'
 import Input from 'components/Input/Default'
 import Button from 'components/Button/Default'
 import ButtonTransparent from 'pages/HomePage/components/Button/Transaparent'
@@ -9,13 +9,13 @@ import './style.scss'
 
 const ModalUpdateProfile = ({
 	profile,
-	// updateProfile,
 	avatarFile,
 	handleSaveProfile,
 	handleChangeAvatar,
 	handleChangeText,
 	handleShowModalProfile,
 }) => {
+	const loading = useSelector((state) => state.profile.loadingUpdateProfile)
 	return (
 		<div className='modal-update-profile'>
 			<p className='modal-update-profile__title'>Edit your profile</p>
@@ -59,7 +59,11 @@ const ModalUpdateProfile = ({
 						/>
 					</div>
 					<div className='p-05'>
-						<Button name='SAVE PROFILE' onClick={handleSaveProfile} />
+						<Button
+							name='SAVE PROFILE'
+							onClick={handleSaveProfile}
+							loading={loading}
+						/>
 					</div>
 				</div>
 			</div>

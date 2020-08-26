@@ -1,11 +1,20 @@
 import { Profile } from '../../constants/actionTypes'
 
-export const requestProfile = () => ({
-	type: Profile.REQUEST_PROFILE,
+export const requestGetProfile = () => ({
+	type: Profile.REQUEST_GET_PROFILE,
 })
 
 export const getProfile = (data) => ({
 	type: Profile.GET_PROFILE,
+	payload: { data },
+})
+
+export const requestUpdateProfile = () => ({
+	type: Profile.REQUEST_UPDATE_PROFILE,
+})
+
+export const updateProfile = (data) => ({
+	type: Profile.UPDATE_PROFILE,
 	payload: { data },
 })
 

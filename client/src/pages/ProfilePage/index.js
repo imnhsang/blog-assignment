@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 import Scrollspy from 'react-scrollspy'
 import { Redirect } from 'react-router-dom'
-
+import { connect } from 'react-redux'
 import useMergeState from 'hooks/useMergeState'
 
 import Header from 'components/HeaderPage'
@@ -15,13 +15,10 @@ import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
 import ModalUpdateProfile from 'pages/ProfilePage/containers/ModalUpdateProfile'
 
-import fire from 'config/fire'
+import { refreshProfile } from 'redux/services/profile'
 import './style.scss'
-import { getUIDFromStorage } from 'utils'
-import api from 'api'
-import { isSuccess } from 'helpers'
 
-const ProfilePage = () => {
+const ProfilePage = ({ refreshProfile }) => {
 	const careers = [
 		{
 			subscription:
@@ -69,7 +66,7 @@ const ProfilePage = () => {
 
 	const [avatarFile, setAvatarFile] = useState(null)
 	const [openModalProfile, setOpenModalProfile] = useState(false)
-	const [updateProfile, setUpdateProfile] = useMergeState({})
+	const [updateProfileData, setUpdateProfileData] = useMergeState({})
 
 	const handleShowModalProfile = () => {
 		setOpenModalProfile(!openModalProfile)
@@ -80,55 +77,14 @@ const ProfilePage = () => {
 	}
 
 	const handleChangeText = (e) => {
-		setUpdateProfile({ [e.target.name]: e.target.value })
+		setUpdateProfileData({ [e.target.name]: e.target.value })
 	}
 
 	const handleSaveProfile = async () => {
-		const refAvatar = 'users/' + getUIDFromStorage() + '/profile.jpg'
-		try {
-			if (avatarFile) {
-				fire
-					.storage()
-					.ref(refAvatar)
-					.put(avatarFile)
-					.then(() => {
-						fire
-							.storage()
-							.ref(refAvatar)
-							.getDownloadURL()
-							.then(async (urlAvatar) => {
-								try {
-									const body = {
-										...profile,
-										avatar: urlAvatar,
-										firstname: updateProfile.firstname || profile.firstname,
-										lastname: updateProfile.lastname || profile.lastname,
-									}
-									const res = await api.post('/users/update-profile', body)
-									if (isSuccess(res)) {
-										console.log(res.data)
-									} else {
-										console.log(res.data)
-									}
-								} catch (error) {
-									console.log(error)
-								}
-							})
-							.catch((err) => console.log(err))
-					})
-					.catch((err) => console.log(err))
-			} else {
-				const body = {
-					...profile,
-					firstname: updateProfile.firstname || profile.firstname,
-					lastname: updateProfile.lastname || profile.lastname,
-				}
-
-				const res = await api.post('/users/update-profile', body)
-				console.log(res)
+		if (avatarFile || JSON.stringify(updateProfileData) !== '{}') {
+			if (await refreshProfile(avatarFile, updateProfileData)) {
+				handleShowModalProfile()
 			}
-		} catch (error) {
-			console.log(error)
 		}
 	}
 
@@ -148,7 +104,7 @@ const ProfilePage = () => {
 				<ModalUpdateProfile
 					handleShowModalProfile={handleShowModalProfile}
 					profile={profile}
-					updateProfile={updateProfile}
+					updateProfile={updateProfileData}
 					avatarFile={avatarFile}
 					handleChangeAvatar={handleChangeAvatar}
 					handleSaveProfile={handleSaveProfile}
@@ -208,4 +164,7 @@ const ProfilePage = () => {
 	)
 }
 
-export default ProfilePage
+const actionCreators = {
+	refreshProfile,
+}
+export default connect(null, actionCreators)(ProfilePage)
