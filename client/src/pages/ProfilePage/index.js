@@ -13,8 +13,8 @@ import Highlights from 'pages/ProfilePage/containers/Hightlights'
 import MediaLinks from 'pages/ProfilePage/containers/MediaLinks'
 import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
-import ModalUpdateProfile from 'pages/ProfilePage/containers/ModalUpdateProfile'
-
+import ModalUpdateProfile from 'pages/ProfilePage/containers/Modal/UpdateProfile'
+import ModalCreateBlog from 'pages/ProfilePage/containers/Modal/CreateBlog'
 import { refreshProfile } from 'redux/services/profile'
 import './style.scss'
 
@@ -68,6 +68,10 @@ const ProfilePage = ({ refreshProfile }) => {
 	const [openModalProfile, setOpenModalProfile] = useState(false)
 	const [updateProfileData, setUpdateProfileData] = useMergeState({})
 
+	const [coverFile, setCoverFile] = useState(null)
+	const [openModalBlog, setOpenModalBlog] = useState(false)
+	const [createBlogData, setCreateBlogData] = useMergeState({})
+
 	const handleShowModalProfile = () => {
 		setOpenModalProfile(!openModalProfile)
 	}
@@ -86,6 +90,22 @@ const ProfilePage = ({ refreshProfile }) => {
 				handleShowModalProfile()
 			}
 		}
+	}
+
+	const handleShowModalBlog = () => {
+		setOpenModalBlog(!openModalBlog)
+	}
+
+	const handleChangeCover = (e) => {
+		setCoverFile(e.target.files[0])
+	}
+
+	const handleChangeTextBlog = (e) => {
+		setCreateBlogData({ [e.target.name]: e.target.value })
+	}
+
+	const handleSaveBlog = async () => {
+		console.log(createBlogData)
 	}
 
 	if (!isAuthenticated) {
@@ -111,6 +131,14 @@ const ProfilePage = ({ refreshProfile }) => {
 					handleChangeText={handleChangeText}
 				/>
 			)}
+			<ModalCreateBlog
+				handleShowModalProfile={handleShowModalBlog}
+				createBlogData={createBlogData}
+				coverFile={coverFile}
+				handleChangeCover={handleChangeCover}
+				handleSaveBlog={handleSaveBlog}
+				handleChangeText={handleChangeTextBlog}
+			/>
 			<Scrollspy
 				items={['career', 'skills', 'programs', 'clients', 'medialinks']}
 				currentClassName='active'

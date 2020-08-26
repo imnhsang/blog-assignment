@@ -24,7 +24,12 @@ const FormSingupCompany = ({ signup }) => {
 	const [errors, setErrors] = useMergeState({})
 	const history = useHistory()
 	const loading = useSelector((state) => state.auth.loading)
-	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
+	const dataCountry = [
+		{ title: 'Lorem 1' },
+		{ title: 'Lorem 2' },
+		{ title: 'Lorem 3' },
+		{ title: 'Lorem 4' },
+	]
 
 	const validateInputEmail = (value) => {
 		if (validateEmail(value)) {

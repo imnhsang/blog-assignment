@@ -1,0 +1,67 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.modal-create-blog {
+	// width: 300px;
+	padding: 1.5rem;
+	position: fixed;
+	top: 7.675rem;
+	background: $white;
+	border-radius: 4px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	box-shadow: 0 0 7px 1px $gray;
+	z-index: 8;
+	@include responsive(tablet) {
+		top: 5.125rem;
+	}
+	&__title {
+		font-weight: 700;
+		font-size: 1.25rem;
+	}
+	&__form-blog {
+		&__cover {
+			background: $gray;
+			margin: auto;
+			max-width: 270px;
+			height: 180px;
+			border-radius: 4px;
+			margin-bottom: 2rem;
+			position: relative;
+			img {
+				width: 100%;
+				height: 100%;
+				border-radius: 4px;
+			}
+			label {
+				position: absolute;
+				cursor: pointer;
+				bottom: 7px;
+				right: 7px;
+				padding: 8px 9px;
+				border: 2px solid $white;
+				border-radius: 50%;
+				background: $secondary-gray;
+				i {
+					margin: 0 !important;
+				}
+				input {
+					position: absolute;
+					left: 1px;
+					width: 0;
+					opacity: 0;
+				}
+			}
+		}
+		&__firstname {
+			padding-bottom: 1rem;
+		}
+		&__lastname {
+			padding-bottom: 1rem;
+		}
+		&__actions {
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
+}
