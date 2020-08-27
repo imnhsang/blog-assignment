@@ -109,7 +109,7 @@ const BlogCategoryPage = ({
 
 			<div className='items-center flex flex-column mb-3 mt-4'>
 				<div className='blog-category-page__list-article'>
-					<Loader active={loadingGetBlog} inline='centered' />
+				
 					{listBlogByCategory[category] &&
 						listBlogByCategory[category].data.length !== 0 ?
 						listBlogByCategory[category].data.map((e, inx) => (
@@ -132,6 +132,7 @@ const BlogCategoryPage = ({
             )}
 
 				</div>
+        <Loader active={loadingGetBlog} inline='centered' />
 				{listBlogByCategory[category] &&
 					listBlogByCategory[category].isLoadMore && (
 						<Button text='MORE ARTICLES' onClick={handleLoadMoreArticle} />
