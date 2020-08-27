@@ -98,3 +98,5 @@ export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
 		return false
 	}
 }
+
+// export const editBlog = (coverFile, editBlogData) => async (dispatch) => {}

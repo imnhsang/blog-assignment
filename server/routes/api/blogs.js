@@ -38,7 +38,7 @@ router.get('/list-blog/:category/:page', async (req, res) => {
 
 		const snapshotCurrent = await db
 			.collection('blogs')
-      .where('category', '==', category)
+			.where('category', '==', category)
 			.limit(page * 6)
 			.get()
 
@@ -85,8 +85,7 @@ router.post('/create-blog', async (req, res) => {
 	try {
 		const { uid, cover, title, category, created_at } = req.body
 
-		const test = db
-			.collection('blogs')
+		db.collection('blogs')
 			.add({
 				uid,
 				cover: cover || '',
@@ -107,6 +106,39 @@ router.post('/create-blog', async (req, res) => {
 					},
 				})
 			})
+	} catch (err) {
+		console.log(err)
+
+		res.status(500).send('Server error...')
+	}
+})
+
+// @route     POST /api/blogs/create-blog
+// @desc      Edit blog
+// @access    Public
+router.post('/edit-blog', async (req, res) => {
+	try {
+		const { id, uid, cover, title, category, created_at } = req.body
+
+		db.collection('blogs').doc(id).set({
+				uid,
+				cover,
+				title,
+				category,
+				created_at,
+		})
+
+		res.status(200).send({
+			msg: 'Blog edited successfully!!!',
+			data: {
+				id,
+				uid,
+				cover,
+				title,
+				category,
+				created_at,
+			},
+		})
 	} catch (err) {
 		console.log(err)
 

@@ -5,6 +5,7 @@ const initialState = {
 	listBlogByCategory: {},
 	loadingGetBlogByCategory: false,
 	loadingCreateBlog: false,
+	loadingUpdateBlog: false,
 }
 
 const blog = (state = initialState, action) => {
@@ -52,12 +53,17 @@ const blog = (state = initialState, action) => {
 					loadingCreateBlog: false,
 				}
 			}
+		case Blog.REQUEST_UPDATE_BLOG:
+			return { ...state, loadingUpdateBlog: true }
+		case Blog.UPDATE_BLOG:
+			return { ...state, loadingUpdateBlog: false }
 		case Blog.BLOG_ERROR:
 			failToastify(action.payload.err)
 			return {
 				...state,
 				loadingGetBlogByCategory: false,
 				loadingCreateBlog: false,
+				loadingUpdateBlog: false,
 			}
 		default:
 			return { ...state }

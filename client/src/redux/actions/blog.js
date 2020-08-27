@@ -18,6 +18,15 @@ export const postBlog = (blog) => ({
 	payload: { blog },
 })
 
+export const requestUpdateBlog = () => ({
+	type: Blog.REQUEST_UPDATE_BLOG,
+})
+
+export const updateBlog = (blog) => ({
+	type: Blog.UPDATE_BLOG,
+	payload: { blog },
+})
+
 export const failRequestBlog = (err) => ({
 	type: Blog.BLOG_ERROR,
 	payload: { err },
