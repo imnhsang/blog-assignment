@@ -158,7 +158,7 @@ function HeaderPage({
 							}`}
 						>
 							<li>
-								<a href='/'>REQUESTS</a>
+								<span onClick={() => handleRedirect('/')}>REQUESTS</span>
 							</li>
 							<li>
 								<a href='/'>MESSAGES</a>

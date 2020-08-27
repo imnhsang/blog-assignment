@@ -20,6 +20,8 @@ const blog = (state = initialState, action) => {
 					[action.payload.category]: {
 						isInitialized: true,
 						data: action.payload.data,
+						page: action.payload.page,
+						isLoadMore: action.payload.isLoadMore,
 					},
 				},
 			}
@@ -27,7 +29,6 @@ const blog = (state = initialState, action) => {
 			return { ...state, loadingCreateBlog: true }
 		case Blog.POST_BLOG:
 			successToastify('Blog posted successfully!!!')
-			// const { blog } = action.payload
 			if (
 				state.listBlogByCategory[action.payload.blog.category] !== undefined
 			) {
@@ -39,8 +40,8 @@ const blog = (state = initialState, action) => {
 						[action.payload.blog.category]: {
 							...state.listBlogByCategory[action.payload.blog.category],
 							data: [
-								...state.listBlogByCategory[action.payload.blog.category].data,
 								action.payload.blog,
+								...state.listBlogByCategory[action.payload.blog.category].data,
 							],
 						},
 					},

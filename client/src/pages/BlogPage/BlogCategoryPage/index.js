@@ -8,11 +8,17 @@ import CoverBlog from 'components/CoverBlog'
 import ArticleItem from 'components/Card/Article'
 import Button from 'components/Button/TransparentArrowDown'
 
-import { fetchListBlogByCategoryIfNeeded } from 'redux/services/blog'
+import {
+	fetchListBlogByCategoryIfNeeded,
+	fetchListBlogByCategory,
+} from 'redux/services/blog'
 
 import './style.scss'
 
-const BlogCategoryPage = ({ fetchListBlogByCategoryIfNeeded }) => {
+const BlogCategoryPage = ({
+	fetchListBlogByCategoryIfNeeded,
+	fetchListBlogByCategory,
+}) => {
 	const location = useLocation()
 	const category = location.pathname.split('/')[2]
 
@@ -24,6 +30,10 @@ const BlogCategoryPage = ({ fetchListBlogByCategoryIfNeeded }) => {
 	const listBlogByCategory = useSelector(
 		(state) => state.blog.listBlogByCategory
 	)
+
+	const handleLoadMoreArticle = () => {
+		fetchListBlogByCategory(category)
+	}
 
 	const categoryData =
 		listCategory && listCategory.find((e) => e.id === category)
@@ -47,7 +57,10 @@ const BlogCategoryPage = ({ fetchListBlogByCategoryIfNeeded }) => {
 							</div>
 						))}
 				</div>
-				<Button text='MORE ARTICLES' />
+				{listBlogByCategory[category] &&
+					listBlogByCategory[category].isLoadMore && (
+						<Button text='MORE ARTICLES' onClick={handleLoadMoreArticle} />
+					)}
 			</div>
 			<SubscribePage
 				title='WANT TO GET AHEAD OF THE REST?'
@@ -61,5 +74,6 @@ const BlogCategoryPage = ({ fetchListBlogByCategoryIfNeeded }) => {
 
 const actionCreators = {
 	fetchListBlogByCategoryIfNeeded,
+	fetchListBlogByCategory,
 }
 export default connect(null, actionCreators)(BlogCategoryPage)

@@ -4,9 +4,9 @@ export const requestGetListBlogByCategory = () => ({
 	type: Blog.REQUEST_GET_LIST_BLOG_BY_CATEGORY,
 })
 
-export const getListBlogByCategory = (category, data) => ({
+export const getListBlogByCategory = (category, data, page, isLoadMore) => ({
 	type: Blog.GET_LIST_BLOG_BY_CATEGORY,
-	payload: { category, data },
+	payload: { category, data, page, isLoadMore },
 })
 
 export const requestPostBlog = () => ({

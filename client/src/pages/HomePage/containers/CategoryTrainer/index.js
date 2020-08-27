@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ItemCategoryTrainer from 'pages/HomePage/components/Item/CategoryTrainer'
-import Button from 'components/Button/TransparentArrowDown'
+// import Button from 'components/Button/TransparentArrowDown'
 
 import './style.scss'
 
@@ -23,7 +23,7 @@ const AreaCategoryTrainer = ({ data }) => {
 						/>
 					))}
 			</div>
-			<Button text='VIEW MORE CATEGORIES' />
+			{/* <Button text='VIEW MORE CATEGORIES' /> */}
 		</div>
 	)
 }

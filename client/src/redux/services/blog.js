@@ -11,19 +11,37 @@ import api from '../../api'
 import { isSuccess } from 'helpers'
 import fire from 'config/fire'
 import { getUIDFromStorage } from 'utils'
-const fetchListBlogByCategory = (category) => async (dispatch) => {
+
+export const fetchListBlogByCategory = (category) => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch(requestGetListBlogByCategory())
-		const res = await api.get(`/blogs/list-blog/${category}`)
+		const page =
+			JSON.stringify(getState().blog.listBlogByCategory) === '{}'
+				? 0
+				: !getState().blog.listBlogByCategory[category]
+				? 0
+				: getState().blog.listBlogByCategory[category].page
+
+		const res = await api.get(`/blogs/list-blog/${category}/${page + 1}`)
 		if (isSuccess(res)) {
 			const { data } = res
-			dispatch(getListBlogByCategory(category, data.data))
+			dispatch(
+				getListBlogByCategory(
+					category,
+					data.data.listBlog,
+					page + 1,
+					data.data.isLoadMore
+				)
+			)
 		} else {
 			const { errors } = res.data
 			dispatch(failRequestBlog(errors[0].msg))
 		}
 	} catch (error) {
-		dispatch(failRequestBlog(error.response.data.errors[0].msg))
+		dispatch(failRequestBlog('Something wrong happened ...'))
 	}
 }
 
@@ -37,7 +55,7 @@ export const fetchListBlogByCategoryIfNeeded = (category) => (
 	getState
 ) => {
 	if (shouldFetchListBlogByCategory(getState().blog, category)) {
-		return dispatch(fetchListBlogByCategory(category))
+		return dispatch(fetchListBlogByCategory(category, getState().blog))
 	}
 	return true
 }
@@ -66,7 +84,8 @@ export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
 
 		const res = await api.post('/blogs/create-blog', body)
 		if (isSuccess(res)) {
-			dispatch(postBlog(body))
+			const { data } = res
+			dispatch(postBlog(data.data))
 			return true
 		} else {
 			const { errors } = res.data
@@ -75,7 +94,7 @@ export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
 		}
 	} catch (error) {
 		console.log(error)
-		dispatch(failRequestBlog(error.response.data.errors[0].msg))
+		dispatch(failRequestBlog('Something wrong happened ...'))
 		return false
 	}
 }

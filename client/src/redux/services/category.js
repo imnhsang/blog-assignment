@@ -20,7 +20,7 @@ const fetchListCategory = () => async (dispatch) => {
 			dispatch(failRequestCategory(errors[0].msg))
 		}
 	} catch (error) {
-		dispatch(failRequestCategory(error.response.data.errors[0].msg))
+		dispatch(failRequestCategory('Something wrong happened ...'))
 	}
 }
 
