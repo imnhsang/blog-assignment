@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../../configs/db')
-
+const fire = require('../../configs/fire')
 // @route     GET /api/blogs/list-blog
 // @desc      Get all blog
 // @access    Public
@@ -121,11 +121,11 @@ router.post('/edit-blog', async (req, res) => {
 		const { id, uid, cover, title, category, created_at } = req.body
 
 		db.collection('blogs').doc(id).set({
-				uid,
-				cover,
-				title,
-				category,
-				created_at,
+			uid,
+			cover,
+			title,
+			category,
+			created_at,
 		})
 
 		res.status(200).send({
@@ -137,6 +137,28 @@ router.post('/edit-blog', async (req, res) => {
 				title,
 				category,
 				created_at,
+			},
+		})
+	} catch (err) {
+		console.log(err)
+
+		res.status(500).send('Server error...')
+	}
+})
+
+// @route     POST /api/blogs/remove-blog
+// @desc      Delete blog
+// @access    Public
+router.post('/remove-blog', async (req, res) => {
+	try {
+		const { id } = req.body
+
+		fire.firestore().collection('blogs').doc(id).delete()
+
+		res.status(200).send({
+			msg: 'Blog edited successfully!!!',
+			data: {
+				id,
 			},
 		})
 	} catch (err) {

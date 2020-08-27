@@ -74,6 +74,7 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 	const [coverFile, setCoverFile] = useState(null)
 	const [openModalBlog, setOpenModalBlog] = useState(false)
 	const [createBlogData, setCreateBlogData] = useMergeState({})
+	const loading = useSelector((state) => state.blog.loadingCreateBlog)
 
 	const handleShowModalProfile = () => {
 		setAvatarFile(null)
@@ -147,12 +148,14 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 			)}
 			{openModalBlog && (
 				<ModalCreateBlog
+					title='Create blog'
 					handleShowModalBlog={handleShowModalBlog}
 					createBlogData={createBlogData}
 					coverFile={coverFile}
 					handleChangeCover={handleChangeCover}
 					handleSaveBlog={handleSaveBlog}
 					handleChangeText={handleChangeTextBlog}
+					loading={loading}
 				/>
 			)}
 			<Scrollspy

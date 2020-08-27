@@ -5,6 +5,10 @@ import {
 	getListBlogByCategory,
 	requestPostBlog,
 	postBlog,
+	requestUpdateBlog,
+	updateBlog,
+	requestDeleteBlog,
+	deleteBlog,
 	failRequestBlog,
 } from '../actions/blog'
 import api from '../../api'
@@ -99,4 +103,66 @@ export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
 	}
 }
 
-// export const editBlog = (coverFile, editBlogData) => async (dispatch) => {}
+export const editBlog = (coverFile, editBlogData) => async (dispatch) => {
+	try {
+		dispatch(requestUpdateBlog())
+
+		let urlCover = ''
+
+		if (coverFile) {
+			const refCover = 'blogs/' + uuidv4()
+
+			await fire.storage().ref(refCover).put(coverFile)
+
+			urlCover = await fire.storage().ref(refCover).getDownloadURL()
+		}
+
+		const body = {
+			id: editBlogData.id,
+			uid: getUIDFromStorage(),
+			title: editBlogData.title,
+			category: editBlogData.category,
+			created_at: parseInt(editBlogData.created_at),
+			cover: urlCover || editBlogData.cover,
+		}
+
+		const res = await api.post('/blogs/edit-blog', body)
+		if (isSuccess(res)) {
+			const { data } = res
+			dispatch(updateBlog(data.data))
+			return true
+		} else {
+			const { errors } = res.data
+			dispatch(failRequestBlog(errors[0].msg))
+			return false
+		}
+	} catch (error) {
+		console.log(error)
+		dispatch(failRequestBlog('Something wrong happened ...'))
+		return false
+	}
+}
+
+export const removeBlog = (blog) => async (dispatch) => {
+	try {
+		dispatch(requestDeleteBlog())
+
+		const body = {
+			id: blog.id,
+		}
+
+		const res = await api.post('/blogs/remove-blog', body)
+		if (isSuccess(res)) {
+			dispatch(deleteBlog(blog))
+			return true
+		} else {
+			const { errors } = res.data
+			dispatch(failRequestBlog(errors[0].msg))
+			return false
+		}
+	} catch (error) {
+		console.log(error)
+		dispatch(failRequestBlog('Something wrong happened ...'))
+		return false
+	}
+}

@@ -27,6 +27,17 @@ export const updateBlog = (blog) => ({
 	payload: { blog },
 })
 
+export const requestDeleteBlog = () => ({
+	type: Blog.REQUEST_DELETE_BLOG,
+})
+
+export const deleteBlog = (blog) => {
+	return {
+		type: Blog.DELETE_BLOG,
+		payload: { blog },
+	}
+}
+
 export const failRequestBlog = (err) => ({
 	type: Blog.BLOG_ERROR,
 	payload: { err },

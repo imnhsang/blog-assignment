@@ -1,13 +1,64 @@
 import React from 'react'
 
-import { getDayMonthYear, uppercaseLetter } from 'utils'
+import { getDayMonthYear, uppercaseLetter, getUIDFromStorage } from 'utils'
 import './style.scss'
 
 import imageCover from 'assets/images/background/home_welcome.jpg'
+import { Icon, Grid, Popup, Button } from 'semantic-ui-react'
 
-const ArticleCard = ({ item, category }) => {
+const ArticleCard = ({
+	item,
+	category,
+	openModalEditBlog,
+	handleDeleteBlog,
+	handleShowModalBlog,
+}) => {
 	return (
 		<div className='article-card'>
+			{!openModalEditBlog && item.uid === getUIDFromStorage() && (
+				<Popup
+					wide
+					trigger={
+						<div className='article-card__action-edit'>
+							<Icon circular name='options' inverted color='blue' />
+						</div>
+					}
+					on='click'
+				>
+					<Grid divided columns='equal'>
+						<Grid.Column>
+							<Popup
+								trigger={
+									<Button
+										color='blue'
+										content='Edit'
+										onClick={() => handleShowModalBlog(item)}
+										fluid
+									/>
+								}
+								content='Edit blog'
+								size='tiny'
+								inverted
+							/>
+						</Grid.Column>
+						<Grid.Column>
+							<Popup
+								trigger={
+									<Button
+										color='red'
+										content='Delete'
+										fluid
+										onClick={() => handleDeleteBlog(item)}
+									/>
+								}
+								content='Remove blog'
+								size='tiny'
+								inverted
+							/>
+						</Grid.Column>
+					</Grid>
+				</Popup>
+			)}
 			<img
 				src={(item && item.cover) || imageCover}
 				alt=''

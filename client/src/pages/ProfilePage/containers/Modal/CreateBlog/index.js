@@ -19,19 +19,28 @@ const ModalCreateBlog = ({
 	handleChangeCover,
 	handleSaveBlog,
 	handleChangeText,
+	title,
+	editBlog,
+	loading,
 }) => {
 	useEffect(() => {
 		fetchListCategoryIfNeeded()
 	}, [fetchListCategoryIfNeeded])
 
 	const listCategory = useSelector((state) => state.category.listCategory)
-	const loading = useSelector((state) => state.blog.loadingCreateBlog)
 	return (
 		<div className='modal-create-blog'>
-			<p className='modal-create-blog__title'>Create blog</p>
+			<p className='modal-create-blog__title'>{title}</p>
 			<div className='modal-create-blog__form-blog'>
 				<div className='modal-create-blog__form-blog__cover'>
-					<img src={coverFile && URL.createObjectURL(coverFile)} alt='' />
+					<img
+						src={
+              (coverFile && URL.createObjectURL(coverFile))||
+							(createBlogData && createBlogData.cover)
+						
+						}
+						alt=''
+					/>
 					<label>
 						<Icon name='camera' />
 						<input type='file' name='cover' onChange={handleChangeCover} />
@@ -46,15 +55,17 @@ const ModalCreateBlog = ({
 						placeholder='Title'
 					/>
 				</div>
-				<div className='modal-create-blog__form-blog__lastname'>
-					<Select
-						value={createBlogData.category}
-						data={listCategory}
-						handleOnChange={handleChangeText}
-						placeholder='Category'
-						name='category'
-					/>
-				</div>
+				{!editBlog && (
+					<div className='modal-create-blog__form-blog__lastname'>
+						<Select
+							value={createBlogData.category}
+							data={listCategory}
+							handleOnChange={handleChangeText}
+							placeholder='Category'
+							name='category'
+						/>
+					</div>
+				)}
 				<div className='modal-create-blog__form-blog__actions'>
 					<div className='p-05'>
 						<ButtonTransparent
