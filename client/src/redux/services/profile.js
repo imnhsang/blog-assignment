@@ -74,7 +74,6 @@ export const refreshProfile = (avatarFile, updateProfileData) => async (
 			return false
 		}
 	} catch (error) {
-		console.log(error)
 		dispatch(failRequestProfile('Something wrong happened ...'))
 		return false
 	}

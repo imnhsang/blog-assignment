@@ -97,7 +97,6 @@ export const createBlog = (coverFile, createBlogData) => async (dispatch) => {
 			return false
 		}
 	} catch (error) {
-		console.log(error)
 		dispatch(failRequestBlog('Something wrong happened ...'))
 		return false
 	}
@@ -137,7 +136,6 @@ export const editBlog = (coverFile, editBlogData) => async (dispatch) => {
 			return false
 		}
 	} catch (error) {
-		console.log(error)
 		dispatch(failRequestBlog('Something wrong happened ...'))
 		return false
 	}
@@ -161,7 +159,6 @@ export const removeBlog = (blog) => async (dispatch) => {
 			return false
 		}
 	} catch (error) {
-		console.log(error)
 		dispatch(failRequestBlog('Something wrong happened ...'))
 		return false
 	}
