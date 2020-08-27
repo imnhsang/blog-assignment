@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
+import { Loader } from 'semantic-ui-react'
 import { useLocation } from 'react-router-dom'
 import Header from 'components/HeaderPage'
 import Footer from 'components/FooterPage'
@@ -81,7 +82,12 @@ const BlogCategoryPage = ({
 	const handleDeleteBlog = (item) => {
 		removeBlog(item)
 	}
-	const loading = useSelector((state) => state.blog.loadingUpdateBlog)
+
+	const loadingUpdateBlog = useSelector((state) => state.blog.loadingUpdateBlog)
+	const loadingGetBlog = useSelector(
+		(state) => state.blog.loadingGetBlogByCategory
+	)
+
 	return (
 		<div className='blog-category-page'>
 			<Header type='blog' />
@@ -97,12 +103,15 @@ const BlogCategoryPage = ({
 					handleSaveBlog={handleSaveBlog}
 					handleChangeText={handleChangeTextBlog}
 					editBlog
-					loading={loading}
+					loading={loadingUpdateBlog}
 				/>
 			)}
+
 			<div className='items-center flex flex-column mb-3 mt-4'>
 				<div className='blog-category-page__list-article'>
+					<Loader active={loadingGetBlog} inline='centered' />
 					{listBlogByCategory[category] &&
+						listBlogByCategory[category].data.length !== 0 ?
 						listBlogByCategory[category].data.map((e, inx) => (
 							<div
 								key={inx}
@@ -116,13 +125,19 @@ const BlogCategoryPage = ({
 									category={categoryData && categoryData.title}
 								/>
 							</div>
-						))}
+						)) : !loadingGetBlog && (
+              <p className='blog-category-page__list-article--empty'>
+                No have any blog.
+              </p>
+            )}
+
 				</div>
 				{listBlogByCategory[category] &&
 					listBlogByCategory[category].isLoadMore && (
 						<Button text='MORE ARTICLES' onClick={handleLoadMoreArticle} />
 					)}
 			</div>
+
 			<SubscribePage
 				title='WANT TO GET AHEAD OF THE REST?'
 				subcription='Get tips and tricks for your company right in your inbox!'

@@ -23,7 +23,8 @@ const ArticleCard = ({
 							<Icon circular name='options' inverted color='blue' />
 						</div>
 					}
-					on='click'
+          on='click'
+          position='top right'
 				>
 					<Grid divided columns='equal'>
 						<Grid.Column>

@@ -83,6 +83,7 @@ const blog = (state = initialState, action) => {
 		case Blog.REQUEST_DELETE_BLOG:
 			return { ...state }
 		case Blog.DELETE_BLOG:
+      successToastify('Blog deleted successfully!!!')
 			return {
 				...state,
 				listBlogByCategory: {
