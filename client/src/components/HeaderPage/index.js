@@ -18,6 +18,7 @@ function HeaderPage({
 	signout,
 	fetchProfileIfNeeded,
 	fetchListCategoryIfNeeded,
+	handleOpenModalBlog,
 }) {
 	const [classNameHeader, setClassNameHeader] = useState('')
 	const [classNameHamburger, setClassNameHamburger] = useState('')
@@ -111,7 +112,7 @@ function HeaderPage({
 							`}
 						>
 							<li>
-								<a href='/'>BLOG</a>
+								<span onClick={() => handleRedirect('/blog')}>BLOG</span>
 							</li>
 							<li>
 								<a href='/'>FEATURED</a>
@@ -124,7 +125,13 @@ function HeaderPage({
 									<Dropdown.Menu>
 										{listCategory &&
 											listCategory.map((e, inx) => (
-												<Dropdown.Item key={inx} text={e.title} />
+												<Dropdown.Item
+													key={inx}
+													text={e.title}
+													onClick={() =>
+														handleRedirect(`/blog/category/${e.id}`)
+													}
+												/>
 											))}
 									</Dropdown.Menu>
 								</Dropdown>
@@ -136,7 +143,10 @@ function HeaderPage({
 							}
 							`}
 						>
-							<ButtonRequest name='SIGN UP' />
+							<ButtonRequest
+								onClick={() => handleRedirect('/signup')}
+								name='SIGN UP'
+							/>
 						</div>
 					</div>
 				</div>
@@ -154,7 +164,7 @@ function HeaderPage({
 							}`}
 						>
 							<li>
-								<a href='/'>REQUESTS</a>
+								<span onClick={() => handleRedirect('/')}>REQUESTS</span>
 							</li>
 							<li>
 								<a href='/'>MESSAGES</a>
@@ -165,7 +175,7 @@ function HeaderPage({
 								!classNameHamburger ? 'hide' : ''
 							}`}
 						>
-							<ButtonRequest name='NEW REQUEST' />
+							<ButtonRequest name='NEW REQUEST' onClick={handleOpenModalBlog} />
 							<div
 								className='profile-nav'
 								onClick={() => setSignoutOpen(!signoutOpen)}

@@ -42,6 +42,9 @@ router.get('/:uid', async (req, res) => {
 	}
 })
 
+// @route     POST /users/update-profile
+// @desc      Update information user
+// @access    Public
 router.post('/update-profile', async (req, res) => {
 	try {
 		const { uid, avatar, firstname, lastname, id, country, email } = req.body

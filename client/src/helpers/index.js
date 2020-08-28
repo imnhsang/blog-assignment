@@ -14,7 +14,7 @@ export const isSuccess = (res) => {
 export const failToastify = (err) =>
 	toast.error(err, {
 		position: 'top-right',
-		autoClose: 3000,
+		autoClose: 1500,
 		hideProgressBar: false,
 		closeOnClick: true,
 		pauseOnHover: true,
@@ -25,7 +25,7 @@ export const failToastify = (err) =>
 export const successToastify = (text) =>
 	toast.success(text, {
 		position: 'top-right',
-		autoClose: 5000,
+		autoClose: 1500,
 		hideProgressBar: false,
 		closeOnClick: true,
 		pauseOnHover: true,

@@ -11,7 +11,7 @@ const SelectDefault = ({
 	name,
 	error,
 }) => {
-  const [focus, setFocus] = useState(false)
+	const [focus, setFocus] = useState(false)
 	return (
 		<div className='select-default'>
 			<div className='angle-down'>
@@ -27,9 +27,12 @@ const SelectDefault = ({
 				onChange={handleOnChange}
 			>
 				<option>{placeholder}</option>
-				{data.map((e, inx) => (
-					<option key={inx}>{e}</option>
-				))}
+				{data &&
+					data.map((e, inx) => (
+						<option key={inx} value={e.id}>
+							{e.title}
+						</option>
+					))}
 			</select>
 		</div>
 	)

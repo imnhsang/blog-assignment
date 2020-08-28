@@ -8,7 +8,12 @@ import ButtonSign from 'components/Button/ArrowRight'
 import './style.scss'
 
 const FormSingupIndividual = () => {
-	const dataCountry = ['Lorem 1', 'Lorem 2', 'Lorem 3', 'Lorem 4']
+	const dataCountry = [
+		{ title: 'Lorem 1' },
+		{ title: 'Lorem 2' },
+		{ title: 'Lorem 3' },
+		{ title: 'Lorem 4' },
+	]
 
 	return (
 		<div className='form-signup-company'>

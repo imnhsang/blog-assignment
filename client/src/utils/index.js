@@ -32,3 +32,19 @@ export const uppercaseFirstLetter = (letter) => {
 export const convertContentToURL = (content) => {
 	return content.toLowerCase().replace(/\s/g, '-')
 }
+
+export const getDayMonthYear = (time) => {
+	return new Date(time).toLocaleDateString('en-GB', {
+		day: '2-digit',
+		month: '2-digit',
+		year: '2-digit',
+	})
+}
+
+export const uppercaseLetter = (text) => {
+	return text.toUpperCase()
+}
+
+export const convertCategoryIdToTitle = (listCategory, id) => {
+	return listCategory.filter((e) => e.id === id)[0].title
+}

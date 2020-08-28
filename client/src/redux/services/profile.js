@@ -22,7 +22,7 @@ const fetchProfile = (uid) => async (dispatch) => {
 			dispatch(failRequestProfile(errors[0].msg))
 		}
 	} catch (error) {
-		dispatch(failRequestProfile(error.response.data.errors[0].msg))
+		dispatch(failRequestProfile('Something wrong happened ...'))
 	}
 }
 
@@ -74,8 +74,7 @@ export const refreshProfile = (avatarFile, updateProfileData) => async (
 			return false
 		}
 	} catch (error) {
-		console.log(error)
-		dispatch(failRequestProfile(error.response.data.errors[0].msg))
+		dispatch(failRequestProfile('Something wrong happened ...'))
 		return false
 	}
 }

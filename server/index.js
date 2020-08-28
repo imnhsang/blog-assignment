@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/categories', require('./routes/api/categories'))
-
+app.use('/api/blogs', require('./routes/api/blogs'))
 //start app
 const port = process.env.PORT || 5000
 

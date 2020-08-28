@@ -13,12 +13,15 @@ import Highlights from 'pages/ProfilePage/containers/Hightlights'
 import MediaLinks from 'pages/ProfilePage/containers/MediaLinks'
 import RecommendedPrograms from 'pages/ProfilePage/containers/RecommendPrograms'
 import ButtonEngage from 'components/Button/Default'
-import ModalUpdateProfile from 'pages/ProfilePage/containers/ModalUpdateProfile'
+import ModalUpdateProfile from 'pages/ProfilePage/containers/Modal/UpdateProfile'
+import ModalCreateBlog from 'pages/ProfilePage/containers/Modal/CreateBlog'
 
 import { refreshProfile } from 'redux/services/profile'
+import { createBlog } from 'redux/services/blog'
+
 import './style.scss'
 
-const ProfilePage = ({ refreshProfile }) => {
+const ProfilePage = ({ refreshProfile, createBlog }) => {
 	const careers = [
 		{
 			subscription:
@@ -68,7 +71,17 @@ const ProfilePage = ({ refreshProfile }) => {
 	const [openModalProfile, setOpenModalProfile] = useState(false)
 	const [updateProfileData, setUpdateProfileData] = useMergeState({})
 
+	const [coverFile, setCoverFile] = useState(null)
+	const [openModalBlog, setOpenModalBlog] = useState(false)
+	const [createBlogData, setCreateBlogData] = useMergeState({})
+	const loadingCreateBlog = useSelector((state) => state.blog.loadingCreateBlog)
+	const loadingGetProfile = useSelector(
+		(state) => state.profile.loadingGetProfile
+	)
+
 	const handleShowModalProfile = () => {
+		setAvatarFile(null)
+		setUpdateProfileData({ firstname: undefined, lastname: undefined })
 		setOpenModalProfile(!openModalProfile)
 	}
 
@@ -80,10 +93,40 @@ const ProfilePage = ({ refreshProfile }) => {
 		setUpdateProfileData({ [e.target.name]: e.target.value })
 	}
 
+	const validateFormProfile = () => {
+		return updateProfileData.firstname || updateProfileData.lastname
+	}
+
 	const handleSaveProfile = async () => {
-		if (avatarFile || JSON.stringify(updateProfileData) !== '{}') {
+		if (avatarFile || validateFormProfile()) {
 			if (await refreshProfile(avatarFile, updateProfileData)) {
 				handleShowModalProfile()
+			}
+		}
+	}
+
+	const handleShowModalBlog = () => {
+		setCoverFile(null)
+		setCreateBlogData({ title: undefined, category: undefined })
+		setOpenModalBlog(!openModalBlog)
+	}
+
+	const handleChangeCover = (e) => {
+		setCoverFile(e.target.files[0])
+	}
+
+	const handleChangeTextBlog = (e) => {
+		setCreateBlogData({ [e.target.name]: e.target.value })
+	}
+
+	const validateFormBlog = () => {
+		return createBlogData.title && createBlogData.category
+	}
+
+	const handleSaveBlog = async () => {
+		if (coverFile && validateFormBlog()) {
+			if (await createBlog(coverFile, createBlogData)) {
+				handleShowModalBlog()
 			}
 		}
 	}
@@ -94,21 +137,35 @@ const ProfilePage = ({ refreshProfile }) => {
 
 	return (
 		<div className='profile-page'>
-			<Header type='member' />
+			<Header type='member' handleOpenModalBlog={handleShowModalBlog} />
 			<CoverProfile
 				profile={profile}
 				handleShowModalProfile={handleShowModalProfile}
 				openModalProfile={openModalProfile}
+				loading={loadingGetProfile}
 			/>
 			{openModalProfile && (
 				<ModalUpdateProfile
+					openModalProfile={openModalProfile}
 					handleShowModalProfile={handleShowModalProfile}
 					profile={profile}
-					updateProfile={updateProfileData}
+					updateProfileData={updateProfileData}
 					avatarFile={avatarFile}
 					handleChangeAvatar={handleChangeAvatar}
 					handleSaveProfile={handleSaveProfile}
 					handleChangeText={handleChangeText}
+				/>
+			)}
+			{openModalBlog && (
+				<ModalCreateBlog
+					title='Create blog'
+					handleShowModalBlog={handleShowModalBlog}
+					createBlogData={createBlogData}
+					coverFile={coverFile}
+					handleChangeCover={handleChangeCover}
+					handleSaveBlog={handleSaveBlog}
+					handleChangeText={handleChangeTextBlog}
+					loading={loadingCreateBlog}
 				/>
 			)}
 			<Scrollspy
@@ -166,5 +223,6 @@ const ProfilePage = ({ refreshProfile }) => {
 
 const actionCreators = {
 	refreshProfile,
+	createBlog,
 }
 export default connect(null, actionCreators)(ProfilePage)

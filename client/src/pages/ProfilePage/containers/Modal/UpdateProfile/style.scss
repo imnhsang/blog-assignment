@@ -1,0 +1,65 @@
+@import 'src/assets/stylesheets/variables';
+@import 'src/assets/stylesheets/mixins';
+
+.modal-update-profile {
+	position: fixed;
+	top: 7.675rem;
+	background: $white;
+	border-radius: 4px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	box-shadow: 0 0 7px 1px $gray;
+	z-index: 8;
+	@include responsive(tablet) {
+		top: 5.125rem;
+	}
+	&__title {
+		font-weight: 700;
+		font-size: 1.25rem;
+	}
+	&__form-profile {
+		&__avatar {
+			background: $gray;
+			margin: auto;
+			width: 180px;
+			height: 180px;
+			border-radius: 50%;
+			margin-bottom: 2rem;
+			position: relative;
+			img {
+				width: 180px;
+				height: 180px;
+				border-radius: 50%;
+			}
+			label {
+				position: absolute;
+				cursor: pointer;
+				bottom: 7px;
+				right: 7px;
+				padding: 8px 9px;
+				border: 2px solid $white;
+				border-radius: 50%;
+				background: $secondary-gray;
+				i {
+					margin: 0 !important;
+				}
+				input {
+					position: absolute;
+					left: 1px;
+					width: 0;
+					opacity: 0;
+				}
+			}
+		}
+		&__firstname {
+			padding-bottom: 1rem;
+		}
+		&__lastname {
+			padding-bottom: 1rem;
+		}
+		&__actions {
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
+}
