@@ -380,8 +380,13 @@
 					overflow: auto;
 				}
 				li {
-					a {
+					a,
+					span {
+						cursor: pointer;
 						color: $blue-black;
+						&:hover {
+							text-decoration: underline;
+						}
 						@include responsive(tablet) {
 							color: $white;
 						}

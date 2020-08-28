@@ -112,7 +112,7 @@ function HeaderPage({
 							`}
 						>
 							<li>
-								<a href='/'>BLOG</a>
+								<span onClick={() => handleRedirect('/blog')}>BLOG</span>
 							</li>
 							<li>
 								<a href='/'>FEATURED</a>
@@ -125,7 +125,13 @@ function HeaderPage({
 									<Dropdown.Menu>
 										{listCategory &&
 											listCategory.map((e, inx) => (
-												<Dropdown.Item key={inx} text={e.title} />
+												<Dropdown.Item
+													key={inx}
+													text={e.title}
+													onClick={() =>
+														handleRedirect(`/blog/category/${e.id}`)
+													}
+												/>
 											))}
 									</Dropdown.Menu>
 								</Dropdown>

@@ -27,7 +27,7 @@ const BlogCategoryPage = ({
 	removeBlog,
 }) => {
 	const location = useLocation()
-	const category = location.pathname.split('/')[2]
+	const category = location.pathname.split('/')[3]
 
 	useEffect(() => {
 		fetchListBlogByCategoryIfNeeded(category)
