@@ -6,21 +6,42 @@ const fire = require('../../configs/fire')
 // @route     GET /api/blogs/list-blog
 // @desc      Get all blog
 // @access    Public
-router.get('/list-blog', async (req, res) => {
+router.get('/list-blog/:page', async (req, res) => {
 	try {
-		const snapshot = await db.collection('blogs').limit(6).get()
+		const { page } = req.params
 
-		let blogs = []
+		const snapshot = await db
+			.collection('blogs')
+			.limit(page * 6)
+			.get()
+
+		let blogsCurrent = []
 		snapshot.forEach((doc) => {
 			let id = doc.id
 			let data = doc.data()
 
-			blogs.push({ id, ...data })
+			blogsCurrent.push({ id, ...data })
+		})
+
+		const snapshotNext = await db
+			.collection('blogs')
+			.limit(page * 6 + 1)
+			.get()
+
+		let blogsNext = []
+		snapshotNext.forEach((doc) => {
+			let id = doc.id
+			let data = doc.data()
+
+			blogsNext.push({ id, ...data })
 		})
 
 		res.status(200).send({
 			msg: 'Blogs got successfully!!!',
-			data: blogs,
+			data: {
+				listBlog: blogsCurrent,
+				isLoadMore: !(blogsNext.length === blogsCurrent.length),
+			},
 		})
 	} catch (error) {
 		console.log(error)

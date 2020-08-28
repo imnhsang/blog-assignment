@@ -66,7 +66,8 @@ const ModalUpdateProfile = ({
 								<ButtonTransparent
 									onClick={handleShowModalProfile}
 									text='CANCEL'
-									fitWidth
+                  fitWidth
+                  disabled={loading}
 								/>
 							</div>
 							<div className='p-05'>

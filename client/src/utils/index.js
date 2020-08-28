@@ -44,3 +44,7 @@ export const getDayMonthYear = (time) => {
 export const uppercaseLetter = (text) => {
 	return text.toUpperCase()
 }
+
+export const convertCategoryIdToTitle = (listCategory, id) => {
+	return listCategory.filter((e) => e.id === id)[0].title
+}

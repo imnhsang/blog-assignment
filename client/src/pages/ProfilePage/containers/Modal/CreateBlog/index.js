@@ -78,6 +78,7 @@ const ModalCreateBlog = ({
 									text='CANCEL'
 									fitWidth
 									onClick={handleShowModalBlog}
+									disabled={loading}
 								/>
 							</div>
 							<div className='p-05'>

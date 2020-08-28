@@ -37,10 +37,10 @@ const BlogCategoryPage = ({
 	const listBlogByCategory = useSelector(
 		(state) => state.blog.listBlogByCategory
 	)
-
-	const handleLoadMoreArticle = () => {
-		fetchListBlogByCategory(category)
-	}
+	const loadingUpdateBlog = useSelector((state) => state.blog.loadingUpdateBlog)
+	const loadingGetBlogByCategory = useSelector(
+		(state) => state.blog.loadingGetBlogByCategory
+	)
 
 	const categoryData =
 		listCategory && listCategory.find((e) => e.id === category)
@@ -51,6 +51,10 @@ const BlogCategoryPage = ({
 		isSave: false,
 	})
 	const [coverFile, setCoverFile] = useState(null)
+
+	const handleLoadMoreArticle = () => {
+		fetchListBlogByCategory(category)
+	}
 
 	const handleShowModalEditBlog = (item) => {
 		setOpenModalEditBlog(!openModalEditBlog)
@@ -83,11 +87,6 @@ const BlogCategoryPage = ({
 		removeBlog(item)
 	}
 
-	const loadingUpdateBlog = useSelector((state) => state.blog.loadingUpdateBlog)
-	const loadingGetBlog = useSelector(
-		(state) => state.blog.loadingGetBlogByCategory
-	)
-
 	return (
 		<div className='blog-category-page'>
 			<Header type='blog' />
@@ -109,30 +108,27 @@ const BlogCategoryPage = ({
 
 			<div className='items-center flex flex-column mb-3 mt-4'>
 				<div className='blog-category-page__list-article'>
-				
 					{listBlogByCategory[category] &&
-						listBlogByCategory[category].data.length !== 0 ?
-						listBlogByCategory[category].data.map((e, inx) => (
-							<div
-								key={inx}
-								className='col-4 col-lg-6 col-sm-12 p-15 py-sm-1 p-sm-0'
-							>
-								<ArticleItem
-									openModalEditBlog={openModalEditBlog}
-									handleDeleteBlog={handleDeleteBlog}
-									handleShowModalBlog={handleShowModalEditBlog}
-									item={e}
-									category={categoryData && categoryData.title}
-								/>
-							</div>
-						)) : !loadingGetBlog && (
-              <p className='blog-category-page__list-article--empty'>
-                No have any blog.
-              </p>
-            )}
-
+					listBlogByCategory[category].data.length !== 0
+						? listBlogByCategory[category].data.map((e, inx) => (
+								<div
+									key={inx}
+									className='col-4 col-lg-6 col-sm-12 p-15 py-sm-1 p-sm-0'
+								>
+									<ArticleItem
+										actions
+										openModalEditBlog={openModalEditBlog}
+										handleDeleteBlog={handleDeleteBlog}
+										handleShowModalBlog={handleShowModalEditBlog}
+										item={e}
+										category={categoryData && categoryData.title}
+									/>
+								</div>)) : !loadingGetBlogByCategory && (
+								<p className='blog-category-page__list-article--empty'>
+									No have any blog.
+								</p> )}
 				</div>
-        <Loader active={loadingGetBlog} inline='centered' />
+				<Loader active={loadingGetBlogByCategory} inline='centered' />
 				{listBlogByCategory[category] &&
 					listBlogByCategory[category].isLoadMore && (
 						<Button text='MORE ARTICLES' onClick={handleLoadMoreArticle} />

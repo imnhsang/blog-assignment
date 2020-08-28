@@ -1,5 +1,14 @@
 import { Blog } from '../../constants/actionTypes'
 
+export const requestGetListBlog = () => ({
+	type: Blog.REQUEST_GET_LIST_BLOG,
+})
+
+export const getListBlog = (data, page, isLoadMore) => ({
+	type: Blog.GET_LIST_BLOG,
+	payload: { data, page, isLoadMore },
+})
+
 export const requestGetListBlogByCategory = () => ({
 	type: Blog.REQUEST_GET_LIST_BLOG_BY_CATEGORY,
 })

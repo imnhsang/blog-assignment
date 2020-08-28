@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from 'uuid'
 
 import {
+	requestGetListBlog,
+	getListBlog,
 	requestGetListBlogByCategory,
 	getListBlogByCategory,
 	requestPostBlog,
@@ -16,18 +18,47 @@ import { isSuccess } from 'helpers'
 import fire from 'config/fire'
 import { getUIDFromStorage } from 'utils'
 
+export const fetchListBlog = () => async (dispatch, getState) => {
+	try {
+		dispatch(requestGetListBlog())
+
+		const { blog: blogState } = getState()
+
+		const page =
+			JSON.stringify(blogState.listBlog) === '{}'
+				? 0
+				: !blogState.listBlog
+				? 0
+				: blogState.listBlog.page
+
+		const res = await api.get(`/blogs/list-blog/${page + 1}`)
+		if (isSuccess(res)) {
+			const { data } = res
+			dispatch(getListBlog(data.data.listBlog, page + 1, data.data.isLoadMore))
+		} else {
+			const { errors } = res.data
+			dispatch(failRequestBlog(errors[0].msg))
+		}
+	} catch (error) {
+		dispatch(failRequestBlog('Something wrong happened ...'))
+	}
+}
+
 export const fetchListBlogByCategory = (category) => async (
 	dispatch,
 	getState
 ) => {
 	try {
 		dispatch(requestGetListBlogByCategory())
+
+		const { blog: blogState } = getState()
+
 		const page =
-			JSON.stringify(getState().blog.listBlogByCategory) === '{}'
+			JSON.stringify(blogState.listBlogByCategory) === '{}'
 				? 0
-				: !getState().blog.listBlogByCategory[category]
+				: !blogState.listBlogByCategory[category]
 				? 0
-				: getState().blog.listBlogByCategory[category].page
+				: blogState.listBlogByCategory[category].page
 
 		const res = await api.get(`/blogs/list-blog/${category}/${page + 1}`)
 		if (isSuccess(res)) {
