@@ -8,6 +8,7 @@ const CoverProfile = ({
 	profile,
 	handleShowModalProfile,
 	openModalProfile,
+  loading,
 }) => {
 	return (
 		<div className='cover-profile'>
@@ -21,7 +22,7 @@ const CoverProfile = ({
 				<span>Public Speaking and Professional Stage Presence</span>
 			</div>
 			<ButtonEngage name='ENGAGE NOW' />
-			{!openModalProfile && (
+			{!openModalProfile && !loading && (
 				<div
 					className='cover-profile__action-profile'
 					onClick={handleShowModalProfile}

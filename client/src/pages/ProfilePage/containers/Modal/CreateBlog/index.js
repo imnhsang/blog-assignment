@@ -32,8 +32,10 @@ const ModalCreateBlog = ({
 		<div className='modal-create-blog'>
 			<Modal
 				size='tiny'
+				closeIcon
 				open={true}
-				// onClose={handleShowModalBlog}
+				onClose={handleShowModalBlog}
+				closeOnDimmerClick={false}
 			>
 				<Modal.Content>
 					<p className='modal-create-blog__title'>{title}</p>

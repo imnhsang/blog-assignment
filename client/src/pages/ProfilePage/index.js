@@ -74,7 +74,10 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 	const [coverFile, setCoverFile] = useState(null)
 	const [openModalBlog, setOpenModalBlog] = useState(false)
 	const [createBlogData, setCreateBlogData] = useMergeState({})
-	const loading = useSelector((state) => state.blog.loadingCreateBlog)
+	const loadingCreateBlog = useSelector((state) => state.blog.loadingCreateBlog)
+	const loadingGetProfile = useSelector(
+		(state) => state.profile.loadingGetProfile
+	)
 
 	const handleShowModalProfile = () => {
 		setAvatarFile(null)
@@ -139,6 +142,7 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 				profile={profile}
 				handleShowModalProfile={handleShowModalProfile}
 				openModalProfile={openModalProfile}
+				loading={loadingGetProfile}
 			/>
 			{openModalProfile && (
 				<ModalUpdateProfile
@@ -161,7 +165,7 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 					handleChangeCover={handleChangeCover}
 					handleSaveBlog={handleSaveBlog}
 					handleChangeText={handleChangeTextBlog}
-					loading={loading}
+					loading={loadingCreateBlog}
 				/>
 			)}
 			<Scrollspy

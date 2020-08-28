@@ -22,8 +22,10 @@ const ModalUpdateProfile = ({
 		<div className='modal-update-profile'>
 			<Modal
 				size='tiny'
-				open={openModalProfile}
-				// onClose={handleShowModalProfile}
+        open={openModalProfile}      
+        closeIcon
+        onClose={handleShowModalProfile}
+        closeOnDimmerClick={false}
 			>
 				<Modal.Content>
 					<p className='modal-update-profile__title'>Edit your profile</p>
