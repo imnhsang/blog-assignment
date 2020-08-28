@@ -10,19 +10,20 @@ import './style.scss'
 const ModalUpdateProfile = ({
 	profile,
 	avatarFile,
+	updateProfileData,
 	handleSaveProfile,
 	handleChangeAvatar,
 	handleChangeText,
 	handleShowModalProfile,
+	openModalProfile,
 }) => {
 	const loading = useSelector((state) => state.profile.loadingUpdateProfile)
 	return (
 		<div className='modal-update-profile'>
 			<Modal
 				size='tiny'
-				dimmer='blurring'
-				open={true}
-				onClose={handleShowModalProfile}
+				open={openModalProfile}
+				// onClose={handleShowModalProfile}
 			>
 				<Modal.Content>
 					<p className='modal-update-profile__title'>Edit your profile</p>
@@ -51,6 +52,12 @@ const ModalUpdateProfile = ({
 								type='text'
 								placeholder='First name'
 								handleOnChange={handleChangeText}
+								value={
+									(JSON.stringify(updateProfileData) !== '{}' &&
+										updateProfileData.firstname &&
+										updateProfileData.firstname) ||
+									(profile && profile.firstname)
+								}
 							/>
 						</div>
 						<div className='modal-update-profile__form-profile__lastname'>
@@ -59,6 +66,12 @@ const ModalUpdateProfile = ({
 								type='text'
 								placeholder='Last name'
 								handleOnChange={handleChangeText}
+								value={
+									(JSON.stringify(updateProfileData) !== '{}' &&
+										updateProfileData.lastname &&
+										updateProfileData.lastname) ||
+									(profile && profile.lastname)
+								}
 							/>
 						</div>
 						<div className='modal-update-profile__form-profile__actions'>
@@ -66,8 +79,8 @@ const ModalUpdateProfile = ({
 								<ButtonTransparent
 									onClick={handleShowModalProfile}
 									text='CANCEL'
-                  fitWidth
-                  disabled={loading}
+									fitWidth
+									disabled={loading}
 								/>
 							</div>
 							<div className='p-05'>

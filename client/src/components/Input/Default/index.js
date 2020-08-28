@@ -24,7 +24,7 @@ const InputDefault = ({
 				type={type}
 				placeholder={!focus ? placeholder : ''}
 				onKeyDown={onKeyDown}
-				// value={value}
+				value={value || ''}
 			/>
 		</div>
 	)

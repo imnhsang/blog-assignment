@@ -78,6 +78,7 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 
 	const handleShowModalProfile = () => {
 		setAvatarFile(null)
+		setUpdateProfileData({ firstname: undefined, lastname: undefined })
 		setOpenModalProfile(!openModalProfile)
 	}
 
@@ -89,8 +90,12 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 		setUpdateProfileData({ [e.target.name]: e.target.value })
 	}
 
+	const validateFormProfile = () => {
+		return updateProfileData.firstname || updateProfileData.lastname
+	}
+
 	const handleSaveProfile = async () => {
-		if (avatarFile || JSON.stringify(updateProfileData) !== '{}') {
+		if (avatarFile || validateFormProfile()) {
 			if (await refreshProfile(avatarFile, updateProfileData)) {
 				handleShowModalProfile()
 			}
@@ -99,7 +104,7 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 
 	const handleShowModalBlog = () => {
 		setCoverFile(null)
-		setCreateBlogData({})
+		setCreateBlogData({ title: undefined, category: undefined })
 		setOpenModalBlog(!openModalBlog)
 	}
 
@@ -137,9 +142,10 @@ const ProfilePage = ({ refreshProfile, createBlog }) => {
 			/>
 			{openModalProfile && (
 				<ModalUpdateProfile
+					openModalProfile={openModalProfile}
 					handleShowModalProfile={handleShowModalProfile}
 					profile={profile}
-					updateProfile={updateProfileData}
+					updateProfileData={updateProfileData}
 					avatarFile={avatarFile}
 					handleChangeAvatar={handleChangeAvatar}
 					handleSaveProfile={handleSaveProfile}
